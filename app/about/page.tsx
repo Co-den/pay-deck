@@ -20,7 +20,7 @@ export default function AboutPage() {
           {/* Mission, Vision, Values */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             <div className="space-y-4">
-              <Target className="w-12 h-12 text-primary" />
+              <Target className="w-12 h-12 text-green-500" />
               <h3 className="text-2xl font-bold">Our Mission</h3>
               <p className="text-muted-foreground">
                 To empower merchants with simple, secure, and innovative payment solutions that help them grow their
@@ -28,7 +28,7 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="space-y-4">
-              <Heart className="w-12 h-12 text-primary" />
+              <Heart className="w-12 h-12 text-green-500" />
               <h3 className="text-2xl font-bold">Our Values</h3>
               <p className="text-muted-foreground">
                 We believe in transparency, security, innovation, and customer success. We're committed to doing the
@@ -36,7 +36,7 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="space-y-4">
-              <Users className="w-12 h-12 text-primary" />
+              <Users className="w-12 h-12 text-green-500" />
               <h3 className="text-2xl font-bold">Our Team</h3>
               <p className="text-muted-foreground">
                 Our team brings together experts in payments, technology, security, and customer service from companies
@@ -79,19 +79,19 @@ export default function AboutPage() {
           {/* Stats */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-4xl font-bold text-primary mb-2">$50B+</div>
+              <div className="text-4xl font-bold text-green-500 mb-2">$50B+</div>
               <p className="text-muted-foreground">Transaction Volume</p>
             </div>
             <div>
-              <div className="text-4xl font-bold text-primary mb-2">10K+</div>
+              <div className="text-4xl font-bold text-green-500 mb-2">10K+</div>
               <p className="text-muted-foreground">Merchants</p>
             </div>
             <div>
-              <div className="text-4xl font-bold text-primary mb-2">190+</div>
+              <div className="text-4xl font-bold text-green-500 mb-2">190+</div>
               <p className="text-muted-foreground">Countries</p>
             </div>
             <div>
-              <div className="text-4xl font-bold text-primary mb-2">99.9%</div>
+              <div className="text-4xl font-bold text-green-500 mb-2">99.9%</div>
               <p className="text-muted-foreground">Uptime</p>
             </div>
           </div>

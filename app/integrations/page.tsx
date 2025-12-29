@@ -112,7 +112,7 @@ export default function IntegrationsPage() {
                       <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary font-bold text-lg">
                         {integration.image.slice(0, 1)}
                       </div>
-                      <Badge variant={integration.status === "Available" ? "default" : "secondary"}>
+                      <Badge variant={integration.status === "Available" ? "default":"secondary"}>
                         {integration.status}
                       </Badge>
                     </div>

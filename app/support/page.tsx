@@ -1,14 +1,20 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { Mail, MessageSquare, Headphones, FileText, ChevronDown } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
+import { useState } from "react";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import {
+  Mail,
+  MessageSquare,
+  Headphones,
+  FileText,
+  ChevronDown,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 const faqItems = [
   {
@@ -79,7 +85,7 @@ const faqItems = [
       },
     ],
   },
-]
+];
 
 const supportChannels = [
   {
@@ -106,39 +112,50 @@ const supportChannels = [
     description: "Browse detailed documentation",
     detail: "docs.paydeck.io",
   },
-]
+];
 
 export default function SupportPage() {
-  const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>({})
-  const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" })
-  const [submitted, setSubmitted] = useState(false)
+  const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>(
+    {}
+  );
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [submitted, setSubmitted] = useState(false);
 
   const toggleFAQ = (id: string) => {
-    setExpandedItems((prev) => ({ ...prev, [id]: !prev[id] }))
-  }
+    setExpandedItems((prev) => ({ ...prev, [id]: !prev[id] }));
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    setSubmitted(true)
-    setFormData({ name: "", email: "", subject: "", message: "" })
-    setTimeout(() => setSubmitted(false), 3000)
-  }
+    e.preventDefault();
+    setSubmitted(true);
+    setFormData({ name: "", email: "", subject: "", message: "" });
+    setTimeout(() => setSubmitted(false), 3000);
+  };
 
   return (
     <>
       <Header />
       <div className="min-h-screen bg-background">
-        <div className="container py-12">
+        <div className="container-centered py-12">
           {/* Header */}
           <div className="mb-12 text-center">
-            <h1 className="text-4xl font-bold tracking-tight mb-4">Support Center</h1>
-            <p className="text-lg text-muted-foreground">How can we help you today?</p>
+            <h1 className="text-4xl font-bold tracking-tight mb-4">
+              Support Center
+            </h1>
+            <p className="text-lg text-muted-foreground">
+              How can we help you today?
+            </p>
           </div>
 
           {/* Support Channels */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
             {supportChannels.map((channel) => {
-              const Icon = channel.icon
+              const Icon = channel.icon;
               return (
                 <div
                   key={channel.title}
@@ -146,10 +163,14 @@ export default function SupportPage() {
                 >
                   <Icon className="w-8 h-8 text-primary mx-auto mb-4" />
                   <h3 className="font-semibold mb-2">{channel.title}</h3>
-                  <p className="text-sm text-muted-foreground mb-3">{channel.description}</p>
-                  <p className="text-sm font-medium text-primary">{channel.detail}</p>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    {channel.description}
+                  </p>
+                  <p className="text-sm font-medium text-primary">
+                    {channel.detail}
+                  </p>
                 </div>
-              )
+              );
             })}
           </div>
 
@@ -160,39 +181,55 @@ export default function SupportPage() {
                 <h2 className="text-2xl font-bold mb-6">Send us a Message</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <label className="text-sm font-medium block mb-2">Name</label>
+                    <label className="text-sm font-medium block mb-2">
+                      Name
+                    </label>
                     <Input
                       placeholder="Your name"
                       value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, name: e.target.value })
+                      }
                       required
                     />
                   </div>
                   <div>
-                    <label className="text-sm font-medium block mb-2">Email</label>
+                    <label className="text-sm font-medium block mb-2">
+                      Email
+                    </label>
                     <Input
                       type="email"
                       placeholder="your@email.com"
                       value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, email: e.target.value })
+                      }
                       required
                     />
                   </div>
                   <div>
-                    <label className="text-sm font-medium block mb-2">Subject</label>
+                    <label className="text-sm font-medium block mb-2">
+                      Subject
+                    </label>
                     <Input
                       placeholder="How can we help?"
                       value={formData.subject}
-                      onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, subject: e.target.value })
+                      }
                       required
                     />
                   </div>
                   <div>
-                    <label className="text-sm font-medium block mb-2">Message</label>
+                    <label className="text-sm font-medium block mb-2">
+                      Message
+                    </label>
                     <Textarea
                       placeholder="Tell us more..."
                       value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, message: e.target.value })
+                      }
                       rows={5}
                       required
                     />
@@ -201,7 +238,9 @@ export default function SupportPage() {
                     Send Message
                   </Button>
                   {submitted && (
-                    <p className="text-sm text-green-600 dark:text-green-400">Message sent successfully!</p>
+                    <p className="text-sm text-green-600 dark:text-green-400">
+                      Message sent successfully!
+                    </p>
                   )}
                 </form>
               </div>
@@ -209,15 +248,19 @@ export default function SupportPage() {
 
             {/* FAQ */}
             <div className="lg:col-span-2">
-              <h2 className="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
+              <h2 className="text-2xl font-bold mb-6">
+                Frequently Asked Questions
+              </h2>
               <div className="space-y-4">
                 {faqItems.map((category) => (
                   <div key={category.category}>
-                    <h3 className="font-semibold text-lg mb-4 text-primary">{category.category}</h3>
+                    <h3 className="font-semibold text-lg mb-4 text-primary">
+                      {category.category}
+                    </h3>
                     <div className="space-y-3 mb-6">
                       {category.items.map((item, index) => {
-                        const itemId = `${category.category}-${index}`
-                        const isExpanded = expandedItems[itemId]
+                        const itemId = `${category.category}-${index}`;
+                        const isExpanded = expandedItems[itemId];
 
                         return (
                           <div
@@ -237,11 +280,13 @@ export default function SupportPage() {
                             </button>
                             {isExpanded && (
                               <div className="px-4 pb-4 pt-0 border-t border-border bg-muted/30">
-                                <p className="text-muted-foreground">{item.a}</p>
+                                <p className="text-muted-foreground">
+                                  {item.a}
+                                </p>
                               </div>
                             )}
                           </div>
-                        )
+                        );
                       })}
                     </div>
                   </div>
@@ -253,5 +298,5 @@ export default function SupportPage() {
       </div>
       <Footer />
     </>
-  )
+  );
 }

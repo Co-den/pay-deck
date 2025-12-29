@@ -1,9 +1,9 @@
-"use client"
-import { Suspense, useState } from "react"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { Search, Clock, User, ArrowRight } from "lucide-react"
-import { Input } from "@/components/ui/input"
+"use client";
+import { Suspense, useState } from "react";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import { Search, Clock, User, ArrowRight } from "lucide-react";
+import { Input } from "@/components/ui/input";
 
 const blogPosts = [
   {
@@ -31,7 +31,8 @@ const blogPosts = [
   {
     id: 3,
     title: "PayDeck Security: Protecting Your Customer Data",
-    excerpt: "An in-depth look at how PayDeck implements bank-level security to protect sensitive payment information.",
+    excerpt:
+      "An in-depth look at how PayDeck implements bank-level security to protect sensitive payment information.",
     author: "Emma Williams",
     date: "2024-12-22",
     readTime: "7 min read",
@@ -41,7 +42,8 @@ const blogPosts = [
   {
     id: 4,
     title: "Global Payment Methods: A Complete Guide",
-    excerpt: "Understand the different payment methods available globally and how to optimize for each region.",
+    excerpt:
+      "Understand the different payment methods available globally and how to optimize for each region.",
     author: "David Rodriguez",
     date: "2024-12-19",
     readTime: "10 min read",
@@ -51,7 +53,8 @@ const blogPosts = [
   {
     id: 5,
     title: "Integrating PayDeck: Step-by-Step Tutorial",
-    excerpt: "A comprehensive guide to integrating PayDeck into your e-commerce platform in under 30 minutes.",
+    excerpt:
+      "A comprehensive guide to integrating PayDeck into your e-commerce platform in under 30 minutes.",
     author: "Lisa Anderson",
     date: "2024-12-16",
     readTime: "9 min read",
@@ -61,38 +64,52 @@ const blogPosts = [
   {
     id: 6,
     title: "Case Study: How TechStore Increased Revenue by 40%",
-    excerpt: "Learn how TechStore optimized their payment experience and increased transaction value.",
+    excerpt:
+      "Learn how TechStore optimized their payment experience and increased transaction value.",
     author: "James Wilson",
     date: "2024-12-13",
     readTime: "11 min read",
     category: "Case Studies",
     featured: false,
   },
-]
+];
 
-const categories = ["All", "Industry", "Best Practices", "Security", "Guides", "Tutorials", "Case Studies"]
+const categories = [
+  "All",
+  "Industry",
+  "Best Practices",
+  "Security",
+  "Guides",
+  "Tutorials",
+  "Case Studies",
+];
 
 function BlogContent() {
-  const [searchTerm, setSearchTerm] = useState("")
-  const [selectedCategory, setSelectedCategory] = useState("All")
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
   const filteredPosts = blogPosts.filter((post) => {
     const matchesSearch =
       post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      post.excerpt.toLowerCase().includes(searchTerm.toLowerCase())
-    const matchesCategory = selectedCategory === "All" || post.category === selectedCategory
-    return matchesSearch && matchesCategory
-  })
+      post.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory =
+      selectedCategory === "All" || post.category === selectedCategory;
+    return matchesSearch && matchesCategory;
+  });
 
-  const featuredPosts = filteredPosts.filter((post) => post.featured).slice(0, 3)
-  const otherPosts = filteredPosts.filter((post) => !post.featured)
+  const featuredPosts = filteredPosts
+    .filter((post) => post.featured)
+    .slice(0, 3);
+  const otherPosts = filteredPosts.filter((post) => !post.featured);
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container py-12">
+      <div className="container-centered py-12">
         {/* Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-2">PayDeck Blog</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-2">
+            PayDeck Blog
+          </h1>
           <p className="text-lg text-muted-foreground">
             Industry insights, best practices, and updates from the PayDeck team
           </p>
@@ -141,8 +158,12 @@ function BlogContent() {
                         {post.category}
                       </span>
                     </div>
-                    <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">{post.title}</h3>
-                    <p className="text-muted-foreground mb-4 line-clamp-2">{post.excerpt}</p>
+                    <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
+                      {post.title}
+                    </h3>
+                    <p className="text-muted-foreground mb-4 line-clamp-2">
+                      {post.excerpt}
+                    </p>
                     <div className="flex items-center justify-between text-sm text-muted-foreground">
                       <div className="flex items-center gap-4">
                         <span className="flex items-center gap-1">
@@ -166,7 +187,9 @@ function BlogContent() {
         {/* Other Posts */}
         {otherPosts.length > 0 && (
           <div>
-            <h2 className="text-2xl font-bold mb-6">{featuredPosts.length > 0 ? "More Articles" : "Articles"}</h2>
+            <h2 className="text-2xl font-bold mb-6">
+              {featuredPosts.length > 0 ? "More Articles" : "Articles"}
+            </h2>
             <div className="space-y-4">
               {otherPosts.map((post) => (
                 <article
@@ -183,7 +206,9 @@ function BlogContent() {
                       <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">
                         {post.title}
                       </h3>
-                      <p className="text-muted-foreground mb-3">{post.excerpt}</p>
+                      <p className="text-muted-foreground mb-3">
+                        {post.excerpt}
+                      </p>
                       <div className="flex items-center gap-6 text-sm text-muted-foreground">
                         <span className="flex items-center gap-1">
                           <User className="w-4 h-4" />
@@ -206,12 +231,14 @@ function BlogContent() {
 
         {filteredPosts.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-muted-foreground text-lg">No articles found. Try adjusting your search or filters.</p>
+            <p className="text-muted-foreground text-lg">
+              No articles found. Try adjusting your search or filters.
+            </p>
           </div>
         )}
       </div>
     </div>
-  )
+  );
 }
 
 export default function BlogPage() {
@@ -223,5 +250,5 @@ export default function BlogPage() {
       </Suspense>
       <Footer />
     </>
-  )
+  );
 }

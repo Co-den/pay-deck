@@ -133,4 +133,37 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Ensure all sections have proper horizontal spacing */
+  section {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+}
+
+/* Add component utilities for common patterns */
+@layer components {
+  /* Centered container with max-width */
+  .container-centered {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Section with centered content */
+  .section-centered {
+    @apply flex flex-col items-center justify-center text-center;
+  }
+
+  /* CTA section wrapper */
+  .cta-section {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+
+  /* CTA content container */
+  .cta-content {
+    @apply max-w-4xl mx-auto space-y-6;
+  }
+
+  /* CTA buttons container */
+  .cta-buttons {
+    @apply flex flex-col sm:flex-row gap-4 justify-center items-center mt-8;
+  }
 }

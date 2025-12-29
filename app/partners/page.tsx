@@ -1,13 +1,13 @@
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export const metadata = {
   title: "Partner Directory - PayDeck",
   description: "Find certified PayDeck service partners and agencies",
-}
+};
 
 export default function PartnerDirectoryPage() {
   const partners = [
@@ -71,17 +71,20 @@ export default function PartnerDirectoryPage() {
       rating: 4.8,
       projects: 67,
     },
-  ]
+  ];
 
   return (
     <>
       <Header />
       <main className="min-h-screen bg-background">
-        <div className="container py-12 md:py-20">
+        <div className="container-centered py-12 md:py-20">
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Partner Directory</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              Partner Directory
+            </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Find certified PayDeck partners and agencies to help with your implementation
+              Find certified PayDeck partners and agencies to help with your
+              implementation
             </p>
           </div>
 
@@ -114,10 +117,18 @@ export default function PartnerDirectoryPage() {
                   <div className="flex items-start justify-between mb-4">
                     <div>
                       <div className="flex items-center gap-2 mb-2">
-                        <h3 className="text-lg font-semibold">{partner.name}</h3>
-                        {partner.verified && <Badge className="bg-green-100 text-green-800">Verified</Badge>}
+                        <h3 className="text-lg font-semibold">
+                          {partner.name}
+                        </h3>
+                        {partner.verified && (
+                          <Badge className="bg-green-100 text-green-800">
+                            Verified
+                          </Badge>
+                        )}
                       </div>
-                      <p className="text-sm text-muted-foreground mb-2">{partner.description}</p>
+                      <p className="text-sm text-muted-foreground mb-2">
+                        {partner.description}
+                      </p>
                       <div className="flex items-center gap-4 text-sm text-muted-foreground">
                         <span>{partner.location}</span>
                         <span>Rating: {partner.rating}/5</span>
@@ -126,7 +137,9 @@ export default function PartnerDirectoryPage() {
                     </div>
                     <div className="text-right">
                       <Badge variant="secondary">{partner.category}</Badge>
-                      <p className="text-sm font-medium mt-2 text-primary">{partner.specialty}</p>
+                      <p className="text-sm font-medium mt-2 text-primary">
+                        {partner.specialty}
+                      </p>
                     </div>
                   </div>
 
@@ -143,9 +156,12 @@ export default function PartnerDirectoryPage() {
             </div>
 
             <div className="mt-16 p-8 rounded-lg bg-accent/5 border border-accent/20 text-center">
-              <h2 className="text-2xl font-bold mb-2">Become a PayDeck Partner</h2>
+              <h2 className="text-2xl font-bold mb-2">
+                Become a PayDeck Partner
+              </h2>
               <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                Join our partner program and help merchants implement PayDeck solutions while growing your business.
+                Join our partner program and help merchants implement PayDeck
+                solutions while growing your business.
               </p>
               <Button asChild>
                 <Link href="/contact">Apply Now</Link>
@@ -156,5 +172,5 @@ export default function PartnerDirectoryPage() {
       </main>
       <Footer />
     </>
-  )
+  );
 }

@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { Code, BookOpen, Zap, Shield } from "lucide-react"
+import { useState } from "react";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import { Code, BookOpen, Zap, Shield } from "lucide-react";
 
 const docSections = [
   {
@@ -48,7 +48,7 @@ const docSections = [
       { title: "Data Protection", id: "data-protection" },
     ],
   },
-]
+];
 
 const contentMap: Record<string, { title: string; content: string }> = {
   introduction: {
@@ -293,20 +293,22 @@ Compliance:
 - SOC 2 Type II certified
 - ISO 27001 certified`,
   },
-}
+};
 
 export default function DocsPage() {
-  const [activeSection, setActiveSection] = useState<string>("introduction")
+  const [activeSection, setActiveSection] = useState<string>("introduction");
 
-  const currentContent = contentMap[activeSection] || contentMap.introduction
+  const currentContent = contentMap[activeSection] || contentMap.introduction;
 
   return (
     <>
       <Header />
       <div className="min-h-screen bg-background">
-        <div className="container py-8">
+        <div className="container-centered py-8">
           <div className="mb-8">
-            <h1 className="text-4xl font-bold tracking-tight mb-2">Documentation</h1>
+            <h1 className="text-4xl font-bold tracking-tight mb-2">
+              Documentation
+            </h1>
             <p className="text-lg text-muted-foreground">
               Everything you need to integrate PayDeck into your application
             </p>
@@ -317,12 +319,14 @@ export default function DocsPage() {
             <div className="lg:col-span-1">
               <div className="sticky top-20 space-y-8">
                 {docSections.map((section) => {
-                  const Icon = section.icon
+                  const Icon = section.icon;
                   return (
                     <div key={section.id}>
                       <div className="flex items-center gap-2 mb-4">
                         <Icon className="w-5 h-5 text-green-500" />
-                        <h3 className="font-semibold text-sm">{section.title}</h3>
+                        <h3 className="font-semibold text-sm">
+                          {section.title}
+                        </h3>
                       </div>
                       <nav className="space-y-2">
                         {section.items.map((item) => (
@@ -340,7 +344,7 @@ export default function DocsPage() {
                         ))}
                       </nav>
                     </div>
-                  )
+                  );
                 })}
               </div>
             </div>
@@ -348,7 +352,9 @@ export default function DocsPage() {
             {/* Main Content */}
             <div className="lg:col-span-3">
               <div className="prose prose-invert max-w-none">
-                <h2 className="text-3xl font-bold mb-4">{currentContent.title}</h2>
+                <h2 className="text-3xl font-bold mb-4">
+                  {currentContent.title}
+                </h2>
                 <div className="text-base leading-relaxed whitespace-pre-wrap text-muted-foreground bg-card p-6 rounded-lg border border-border">
                   {currentContent.content}
                 </div>
@@ -359,5 +365,5 @@ export default function DocsPage() {
       </div>
       <Footer />
     </>
-  )
+  );
 }

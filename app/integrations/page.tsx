@@ -1,13 +1,13 @@
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export const metadata = {
   title: "Integrations - PayDeck",
   description: "Pre-built integrations and plugins for PayDeck payment gateway",
-}
+};
 
 export default function IntegrationsPage() {
   const integrations = [
@@ -30,7 +30,8 @@ export default function IntegrationsPage() {
     {
       name: "Stripe Connect",
       category: "Payments",
-      description: "Connect your Stripe account with PayDeck for unified reporting",
+      description:
+        "Connect your Stripe account with PayDeck for unified reporting",
       image: "Stripe",
       status: "Available",
       link: "#",
@@ -75,19 +76,31 @@ export default function IntegrationsPage() {
       status: "Available",
       link: "#",
     },
-  ]
+  ];
 
-  const categories = ["All", "E-commerce", "Payments", "Automation", "Accounting", "CRM", "Communication", "Data"]
+  const categories = [
+    "All",
+    "E-commerce",
+    "Payments",
+    "Automation",
+    "Accounting",
+    "CRM",
+    "Communication",
+    "Data",
+  ];
 
   return (
     <>
       <Header />
       <main className="min-h-screen bg-background">
-        <div className="container py-12 md:py-20">
+        <div className="container-centered py-12 md:py-20">
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Integrations</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              Integrations
+            </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Connect PayDeck with your favorite tools and platforms to streamline your payment workflow
+              Connect PayDeck with your favorite tools and platforms to
+              streamline your payment workflow
             </p>
           </div>
 
@@ -112,7 +125,13 @@ export default function IntegrationsPage() {
                       <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary font-bold text-lg">
                         {integration.image.slice(0, 1)}
                       </div>
-                      <Badge variant={integration.status === "Available" ? "default":"secondary"}>
+                      <Badge
+                        variant={
+                          integration.status === "Available"
+                            ? "default"
+                            : "secondary"
+                        }
+                      >
                         {integration.status}
                       </Badge>
                     </div>
@@ -120,11 +139,21 @@ export default function IntegrationsPage() {
                     <h3 className="text-lg font-semibold mb-1 group-hover:text-primary transition-colors">
                       {integration.name}
                     </h3>
-                    <p className="text-xs text-muted-foreground mb-3 uppercase tracking-wide">{integration.category}</p>
-                    <p className="text-sm text-muted-foreground mb-6">{integration.description}</p>
+                    <p className="text-xs text-muted-foreground mb-3 uppercase tracking-wide">
+                      {integration.category}
+                    </p>
+                    <p className="text-sm text-muted-foreground mb-6">
+                      {integration.description}
+                    </p>
 
-                    <Button variant="outline" size="sm" className="w-full bg-transparent">
-                      {integration.status === "Available" ? "Install" : "Notify Me"}
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="w-full bg-transparent"
+                    >
+                      {integration.status === "Available"
+                        ? "Install"
+                        : "Notify Me"}
                     </Button>
                   </div>
                 </Link>
@@ -132,10 +161,12 @@ export default function IntegrationsPage() {
             </div>
 
             <div className="mt-16 p-8 rounded-lg bg-accent/5 border border-accent/20 text-center">
-              <h2 className="text-2xl font-bold mb-2">Build Your Own Integration</h2>
+              <h2 className="text-2xl font-bold mb-2">
+                Build Your Own Integration
+              </h2>
               <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                Our comprehensive REST API and webhooks make it easy to build custom integrations tailored to your
-                needs.
+                Our comprehensive REST API and webhooks make it easy to build
+                custom integrations tailored to your needs.
               </p>
               <Button asChild>
                 <Link href="/api-reference">View API Documentation</Link>
@@ -146,5 +177,5 @@ export default function IntegrationsPage() {
       </main>
       <Footer />
     </>
-  )
+  );
 }

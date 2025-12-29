@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Lock, Zap } from "lucide-react"
+import Link from "next/link"
 
 export function Hero() {
   return (
@@ -9,7 +10,7 @@ export function Hero() {
         <div className="absolute bottom-20 left-1/4 w-96 h-96 bg-gradient-to-t from-accent/10 to-transparent rounded-full blur-3xl" />
       </div>
 
-      <div className="container">
+      <div className="container-centered">
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">
             <Zap className="w-4 h-4" />
@@ -27,12 +28,16 @@ export function Hero() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="gap-2">
-              Get Started Free <ArrowRight className="w-4 h-4" />
-            </Button>
-            <Button size="lg" variant="outline">
-              View Documentation
-            </Button>
+            <Link href="/auth/signup">
+              <Button size="lg" className="gap-2">
+                Get Started Free <ArrowRight className="w-4 h-4" />
+              </Button>
+            </Link>
+            <Link href="/docs">
+              <Button size="lg" variant="outline">
+                View Documentation
+              </Button>
+            </Link>
           </div>
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">

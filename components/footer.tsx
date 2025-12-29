@@ -8,7 +8,7 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
           <div className="col-span-2 md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-green-500 text-primary-foreground flex items-center justify-center font-bold text-lg">
+              <div className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center font-bold text-lg">
                 P
               </div>
               <span className="font-bold">PayDeck</span>
@@ -20,22 +20,22 @@ export function Footer() {
             <h4 className="font-semibold mb-4 text-sm">Product</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
-                <Link href="/features" className="hover:text-foreground transition-colors">
+                <Link href="#" className="hover:text-foreground transition-colors">
                   Features
                 </Link>
               </li>
               <li>
-                <Link href="/pricing" className="hover:text-foreground transition-colors">
+                <Link href="#" className="hover:text-foreground transition-colors">
                   Pricing
                 </Link>
               </li>
               <li>
-                <Link href="/security" className="hover:text-foreground transition-colors">
+                <Link href="#" className="hover:text-foreground transition-colors">
                   Security
                 </Link>
               </li>
               <li>
-                <Link href="/status" className="hover:text-foreground transition-colors">
+                <Link href="#" className="hover:text-foreground transition-colors">
                   Status
                 </Link>
               </li>
@@ -46,22 +46,22 @@ export function Footer() {
             <h4 className="font-semibold mb-4 text-sm">Resources</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
-                <Link href="/docs" className="hover:text-foreground transition-colors">
+                <Link href="#" className="hover:text-foreground transition-colors">
                   Documentation
                 </Link>
               </li>
               <li>
-                <Link href="/docs/api-reference" className="hover:text-foreground transition-colors">
+                <Link href="#" className="hover:text-foreground transition-colors">
                   API Reference
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="hover:text-foreground transition-colors">
+                <Link href="#" className="hover:text-foreground transition-colors">
                   Blog
                 </Link>
               </li>
               <li>
-                <Link href="/support" className="hover:text-foreground transition-colors">
+                <Link href="#" className="hover:text-foreground transition-colors">
                   Support
                 </Link>
               </li>
@@ -72,22 +72,22 @@ export function Footer() {
             <h4 className="font-semibold mb-4 text-sm">Company</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
-                <Link href="/about" className="hover:text-foreground transition-colors">
+                <Link href="#" className="hover:text-foreground transition-colors">
                   About
                 </Link>
               </li>
               <li>
-                <Link href="/careers" className="hover:text-foreground transition-colors">
+                <Link href="#" className="hover:text-foreground transition-colors">
                   Careers
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="hover:text-foreground transition-colors">
+                <Link href="#" className="hover:text-foreground transition-colors">
                   Privacy
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="hover:text-foreground transition-colors">
+                <Link href="#" className="hover:text-foreground transition-colors">
                   Terms
                 </Link>
               </li>

@@ -1,11 +1,16 @@
-import { CreditCard, Settings, BarChart3, Zap, Shield, Globe } from "lucide-react"
+import { CreditCard, Settings, BarChart3, Zap, Shield, Coins } from "lucide-react"
 
 export function Features() {
   const features = [
     {
       icon: CreditCard,
       title: "Multiple Payment Methods",
-      description: "Accept credit cards, digital wallets, bank transfers, and more in one unified gateway",
+      description: "Accept credit cards, digital wallets, bank transfers, crypto, and more in one unified gateway",
+    },
+    {
+      icon: Coins,
+      title: "Cryptocurrency Payments",
+      description: "Accept Bitcoin, Ethereum, USDC, and other cryptocurrencies with instant settlement options",
     },
     {
       icon: Zap,
@@ -27,11 +32,6 @@ export function Features() {
       title: "Easy Integration",
       description: "Simple API with comprehensive documentation and SDKs for all major platforms",
     },
-    {
-      icon: Globe,
-      title: "Global Support",
-      description: "Accept payments from 195+ countries with built-in currency conversion",
-    },
   ]
 
   return (
@@ -52,7 +52,7 @@ export function Features() {
                 key={idx}
                 className="p-6 rounded-xl border border-border bg-card hover:bg-accent/5 transition-colors"
               >
-                <Icon className="w-10 h-10 text-green-500 mb-4" />
+                <Icon className="w-10 h-10 text-primary mb-4" />
                 <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
                 <p className="text-muted-foreground">{feature.description}</p>
               </div>

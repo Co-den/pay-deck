@@ -6,7 +6,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { CreditCard, Wallet, Building2, Apple, ArrowLeft } from "lucide-react"
+import { CreditCard, Wallet, Building2, Apple, ArrowLeft, Coins } from "lucide-react"
 
 interface CheckoutFormProps {
   onStepChange: (step: number) => void
@@ -19,6 +19,11 @@ export function CheckoutForm({ onStepChange, currentStep }: CheckoutFormProps) {
   const [cvv, setCvv] = useState("")
   const [expiryMonth, setExpiryMonth] = useState("")
   const [expiryYear, setExpiryYear] = useState("")
+  const [fullName, setFullName] = useState("")
+  const [email, setEmail] = useState("")
+  const [address, setAddress] = useState("")
+  const [city, setCity] = useState("")
+  const [zipCode, setZipCode] = useState("")
   const [errors, setErrors] = useState<Record<string, string>>({})
 
   const formatCardNumber = (value: string) => {
@@ -53,7 +58,21 @@ export function CheckoutForm({ onStepChange, currentStep }: CheckoutFormProps) {
         }
       }
     } else if (step === 2) {
-      // Billing address validation would go here
+      if (!fullName.trim()) {
+        newErrors.fullName = "Full name is required"
+      }
+      if (!email.trim()) {
+        newErrors.email = "Email is required"
+      }
+      if (!address.trim()) {
+        newErrors.address = "Address is required"
+      }
+      if (!city.trim()) {
+        newErrors.city = "City is required"
+      }
+      if (!zipCode.trim()) {
+        newErrors.zipCode = "ZIP code is required"
+      }
     }
 
     setErrors(newErrors)
@@ -124,6 +143,24 @@ export function CheckoutForm({ onStepChange, currentStep }: CheckoutFormProps) {
                 <div>
                   <p className="font-semibold">Bank Transfer</p>
                   <p className="text-xs text-muted-foreground">Direct bank transfer, ACH</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Cryptocurrency */}
+            <div
+              onClick={() => setSelectedPaymentMethod("crypto")}
+              className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
+                selectedPaymentMethod === "crypto"
+                  ? "border-primary bg-primary/5"
+                  : "border-border hover:border-primary/50"
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <Coins className="w-5 h-5" />
+                <div>
+                  <p className="font-semibold">Cryptocurrency</p>
+                  <p className="text-xs text-muted-foreground">Bitcoin, Ethereum, USDC, and more</p>
                 </div>
               </div>
             </div>
@@ -231,6 +268,34 @@ export function CheckoutForm({ onStepChange, currentStep }: CheckoutFormProps) {
               </p>
             </div>
           )}
+
+          {selectedPaymentMethod === "crypto" && (
+            <div className="mt-6 space-y-3">
+              <p className="text-sm text-muted-foreground mb-3">Select your preferred cryptocurrency:</p>
+              <Button variant="outline" className="w-full justify-center gap-2 disabled:opacity-50 bg-transparent">
+                <Coins className="w-4 h-4" />
+                Bitcoin (BTC)
+              </Button>
+              <Button variant="outline" className="w-full justify-center gap-2 disabled:opacity-50 bg-transparent">
+                <Coins className="w-4 h-4" />
+                Ethereum (ETH)
+              </Button>
+              <Button variant="outline" className="w-full justify-center gap-2 disabled:opacity-50 bg-transparent">
+                <Coins className="w-4 h-4" />
+                USDC (Stablecoin)
+              </Button>
+              <Button variant="outline" className="w-full justify-center gap-2 disabled:opacity-50 bg-transparent">
+                <Coins className="w-4 h-4" />
+                Other Assets
+              </Button>
+              <div className="mt-4 p-3 rounded-lg bg-accent/10 border border-accent/20">
+                <p className="text-xs text-muted-foreground">
+                  You'll receive a unique wallet address and QR code. Send the specified amount to complete your
+                  payment.
+                </p>
+              </div>
+            </div>
+          )}
         </div>
       )}
 
@@ -244,21 +309,46 @@ export function CheckoutForm({ onStepChange, currentStep }: CheckoutFormProps) {
               <Label htmlFor="name" className="mb-2 block">
                 Full Name
               </Label>
-              <Input id="name" placeholder="John Doe" disabled={currentStep !== 2} />
+              <Input
+                id="name"
+                placeholder="John Doe"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                disabled={currentStep !== 2}
+                className={errors.fullName ? "border-destructive" : ""}
+              />
+              {errors.fullName && <p className="text-xs text-destructive mt-1">{errors.fullName}</p>}
             </div>
 
             <div>
               <Label htmlFor="email" className="mb-2 block">
                 Email Address
               </Label>
-              <Input id="email" type="email" placeholder="john@example.com" disabled={currentStep !== 2} />
+              <Input
+                id="email"
+                type="email"
+                placeholder="john@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={currentStep !== 2}
+                className={errors.email ? "border-destructive" : ""}
+              />
+              {errors.email && <p className="text-xs text-destructive mt-1">{errors.email}</p>}
             </div>
 
             <div>
               <Label htmlFor="address" className="mb-2 block">
                 Address
               </Label>
-              <Input id="address" placeholder="123 Main Street" disabled={currentStep !== 2} />
+              <Input
+                id="address"
+                placeholder="123 Main Street"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                disabled={currentStep !== 2}
+                className={errors.address ? "border-destructive" : ""}
+              />
+              {errors.address && <p className="text-xs text-destructive mt-1">{errors.address}</p>}
             </div>
 
             <div className="grid grid-cols-2 gap-4">
@@ -266,13 +356,29 @@ export function CheckoutForm({ onStepChange, currentStep }: CheckoutFormProps) {
                 <Label htmlFor="city" className="mb-2 block">
                   City
                 </Label>
-                <Input id="city" placeholder="New York" disabled={currentStep !== 2} />
+                <Input
+                  id="city"
+                  placeholder="New York"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  disabled={currentStep !== 2}
+                  className={errors.city ? "border-destructive" : ""}
+                />
+                {errors.city && <p className="text-xs text-destructive mt-1">{errors.city}</p>}
               </div>
               <div>
                 <Label htmlFor="zip" className="mb-2 block">
                   ZIP Code
                 </Label>
-                <Input id="zip" placeholder="10001" disabled={currentStep !== 2} />
+                <Input
+                  id="zip"
+                  placeholder="10001"
+                  value={zipCode}
+                  onChange={(e) => setZipCode(e.target.value)}
+                  disabled={currentStep !== 2}
+                  className={errors.zipCode ? "border-destructive" : ""}
+                />
+                {errors.zipCode && <p className="text-xs text-destructive mt-1">{errors.zipCode}</p>}
               </div>
             </div>
           </div>

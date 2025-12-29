@@ -10,7 +10,7 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "PayDeck - Modern Payment Gateway",
   description: "Secure, fast, and easy payment processing for merchants",
-  generator: "Next.js",
+  generator: "v0.app",
   icons: {
     icon: [
       {

@@ -304,7 +304,7 @@ export default function DocsPage() {
     <>
       <Header />
       <div className="min-h-screen bg-background">
-        <div className="container py-9">
+        <div className="container py-8">
           <div className="mb-8">
             <h1 className="text-4xl font-bold tracking-tight mb-2">Documentation</h1>
             <p className="text-lg text-muted-foreground">
@@ -331,7 +331,7 @@ export default function DocsPage() {
                             onClick={() => setActiveSection(item.id)}
                             className={`w-full text-left text-sm px-3 py-2 rounded-lg transition-colors ${
                               activeSection === item.id
-                                ? "bg-green-500 text-primary-foreground font-medium"
+                                ? "bg-primary text-primary-foreground font-medium"
                                 : "text-muted-foreground hover:text-foreground hover:bg-muted"
                             }`}
                           >

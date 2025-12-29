@@ -52,7 +52,7 @@ export function Features() {
                 key={idx}
                 className="p-6 rounded-xl border border-border bg-card hover:bg-accent/5 transition-colors"
               >
-                <Icon className="w-10 h-10 text-primary mb-4" />
+                <Icon className="w-10 h-10 text-green-500 mb-4" />
                 <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
                 <p className="text-muted-foreground">{feature.description}</p>
               </div>

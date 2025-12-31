@@ -6,7 +6,7 @@ export function Pricing() {
     {
       name: "Starter",
       description: "Perfect for new businesses",
-      price: "$29",
+      price: "$10",
       period: "/month",
       features: [
         "Up to 1,000 transactions/month",
@@ -22,7 +22,7 @@ export function Pricing() {
     {
       name: "Business",
       description: "For growing companies",
-      price: "$99",
+      price: "$30",
       period: "/month",
       features: [
         "Up to 100,000 transactions/month",
@@ -78,7 +78,7 @@ export function Pricing() {
               }`}
             >
               {plan.highlighted && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-primary text-primary-foreground text-xs font-semibold rounded-full">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-green-500 text-primary-foreground text-xs font-semibold rounded-full">
                   Most Popular
                 </div>
               )}

@@ -135,7 +135,7 @@ function BlogContent() {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                   selectedCategory === category
-                    ? "bg-primary text-primary-foreground"
+                    ? "bg-green-500 text-primary-foreground"
                     : "bg-muted text-muted-foreground hover:bg-muted/80"
                 }`}
               >
@@ -154,7 +154,7 @@ function BlogContent() {
                 <article key={post.id} className="group cursor-pointer">
                   <div className="bg-gradient-to-br from-primary/10 to-accent/10 rounded-lg p-6 h-full hover:shadow-lg transition-shadow">
                     <div className="flex items-center gap-2 mb-3">
-                      <span className="inline-block px-3 py-1 bg-primary/20 text-primary rounded-full text-xs font-semibold">
+                      <span className="inline-block px-3 py-1 bg-green-500 text-white rounded-full text-xs font-semibold">
                         {post.category}
                       </span>
                     </div>

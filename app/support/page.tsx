@@ -161,12 +161,12 @@ export default function SupportPage() {
                   key={channel.title}
                   className="border border-border rounded-lg p-6 text-center hover:border-primary transition-colors"
                 >
-                  <Icon className="w-8 h-8 text-primary mx-auto mb-4" />
+                  <Icon className="w-8 h-8 text-green-500 mx-auto mb-4" />
                   <h3 className="font-semibold mb-2">{channel.title}</h3>
                   <p className="text-sm text-muted-foreground mb-3">
                     {channel.description}
                   </p>
-                  <p className="text-sm font-medium text-primary">
+                  <p className="text-sm font-medium text-green-500">
                     {channel.detail}
                   </p>
                 </div>
@@ -254,7 +254,7 @@ export default function SupportPage() {
               <div className="space-y-4">
                 {faqItems.map((category) => (
                   <div key={category.category}>
-                    <h3 className="font-semibold text-lg mb-4 text-primary">
+                    <h3 className="font-semibold text-lg mb-4 text-green-500">
                       {category.category}
                     </h3>
                     <div className="space-y-3 mb-6">

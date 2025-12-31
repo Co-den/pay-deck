@@ -99,7 +99,7 @@ export default function Login() {
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <Label htmlFor="password">Password</Label>
-              <Link href="/auth/forgot-password" className="text-sm text-primary hover:underline">
+              <Link href="/auth/forgot-password" className="text-sm text-green-500 hover:underline">
                 Forgot?
               </Link>
             </div>
@@ -132,7 +132,7 @@ export default function Login() {
         <div className="mt-6 text-center text-sm">
           <p className="text-muted-foreground">
             Don't have an account?{" "}
-            <Link href="/auth/signup" className="font-semibold text-primary hover:underline">
+            <Link href="/auth/signup" className="font-semibold text-green-500 hover:underline">
               Sign up
             </Link>
           </p>

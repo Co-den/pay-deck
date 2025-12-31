@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { Copy, Check } from "lucide-react"
+import { useState } from "react";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import { Copy, Check } from "lucide-react";
 
 const apiEndpoints = [
   {
@@ -20,7 +20,7 @@ const apiEndpoints = [
         description: "Order #12345",
       },
       null,
-      2,
+      2
     ),
     response: JSON.stringify(
       {
@@ -31,7 +31,7 @@ const apiEndpoints = [
         created_at: "2024-12-28T10:30:00Z",
       },
       null,
-      2,
+      2
     ),
   },
   {
@@ -52,7 +52,7 @@ const apiEndpoints = [
         updated_at: "2024-12-28T10:30:15Z",
       },
       null,
-      2,
+      2
     ),
   },
   {
@@ -77,7 +77,7 @@ const apiEndpoints = [
         offset: 0,
       },
       null,
-      2,
+      2
     ),
   },
   {
@@ -91,7 +91,7 @@ const apiEndpoints = [
         reason: "customer_request",
       },
       null,
-      2,
+      2
     ),
     response: JSON.stringify(
       {
@@ -102,7 +102,7 @@ const apiEndpoints = [
         created_at: "2024-12-28T10:35:00Z",
       },
       null,
-      2,
+      2
     ),
   },
   {
@@ -120,7 +120,7 @@ const apiEndpoints = [
         },
       },
       null,
-      2,
+      2
     ),
     response: JSON.stringify(
       {
@@ -131,7 +131,7 @@ const apiEndpoints = [
         created_at: "2024-12-28T10:25:00Z",
       },
       null,
-      2,
+      2
     ),
   },
   {
@@ -150,24 +150,24 @@ const apiEndpoints = [
         updated_at: "2024-12-28T10:30:00Z",
       },
       null,
-      2,
+      2
     ),
   },
-]
+];
 
 interface CodeBlockProps {
-  code: string
-  label: string
+  code: string;
+  label: string;
 }
 
 function CodeBlock({ code, label }: CodeBlockProps) {
-  const [copied, setCopied] = useState(false)
+  const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(code)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
+    navigator.clipboard.writeText(code);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
     <div className="bg-slate-900 rounded-lg overflow-hidden border border-slate-700">
@@ -194,24 +194,28 @@ function CodeBlock({ code, label }: CodeBlockProps) {
         <code className="text-sm text-slate-300 font-mono">{code}</code>
       </pre>
     </div>
-  )
+  );
 }
 
 export default function APIReferencePage() {
-  const [selectedEndpoint, setSelectedEndpoint] = useState(0)
-  const endpoint = apiEndpoints[selectedEndpoint]
+  const [selectedEndpoint, setSelectedEndpoint] = useState(0);
+  const endpoint = apiEndpoints[selectedEndpoint];
 
   return (
     <>
       <Header />
       <div className="min-h-screen bg-background">
-        <div className="container py-12">
+        <div className="container-centered py-12">
           {/* Header */}
           <div className="mb-12">
-            <h1 className="text-4xl font-bold tracking-tight mb-4">API Reference</h1>
+            <h1 className="text-4xl font-bold tracking-tight mb-4">
+              API Reference
+            </h1>
             <p className="text-lg text-muted-foreground">
               Complete documentation for the PayDeck REST API. Base URL:{" "}
-              <code className="bg-muted px-2 py-1 rounded">https://api.paydeck.io/v1</code>
+              <code className="bg-muted px-2 py-1 rounded">
+                https://api.paydeck.io/v1
+              </code>
             </p>
           </div>
 
@@ -219,10 +223,13 @@ export default function APIReferencePage() {
           <div className="bg-card border border-border rounded-lg p-6 mb-12">
             <h2 className="text-2xl font-bold mb-4">Authentication</h2>
             <p className="text-muted-foreground mb-4">
-              All API requests require authentication using your API key. Include your API key in the Authorization
-              header:
+              All API requests require authentication using your API key.
+              Include your API key in the Authorization header:
             </p>
-            <CodeBlock code="Authorization: Bearer YOUR_API_KEY" label="Authorization Header" />
+            <CodeBlock
+              code="Authorization: Bearer YOUR_API_KEY"
+              label="Authorization Header"
+            />
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
@@ -235,7 +242,7 @@ export default function APIReferencePage() {
                     onClick={() => setSelectedEndpoint(index)}
                     className={`w-full text-left px-4 py-3 rounded-lg transition-colors text-sm ${
                       selectedEndpoint === index
-                        ? "bg-primary text-primary-foreground"
+                        ? "bg-green-500 text-primary-foreground"
                         : "bg-muted text-muted-foreground hover:bg-muted/80"
                     }`}
                   >
@@ -255,16 +262,20 @@ export default function APIReferencePage() {
                       endpoint.method === "POST"
                         ? "bg-blue-500/20 text-blue-400"
                         : endpoint.method === "GET"
-                          ? "bg-green-500/20 text-green-400"
-                          : "bg-orange-500/20 text-orange-400"
+                        ? "bg-green-500/20 text-green-400"
+                        : "bg-orange-500/20 text-orange-400"
                     }`}
                   >
                     {endpoint.method}
                   </span>
-                  <code className="bg-muted px-3 py-1 rounded text-sm font-mono">{endpoint.endpoint}</code>
+                  <code className="bg-muted px-3 py-1 rounded text-sm font-mono">
+                    {endpoint.endpoint}
+                  </code>
                 </div>
                 <h2 className="text-3xl font-bold mb-2">{endpoint.title}</h2>
-                <p className="text-muted-foreground text-lg">{endpoint.description}</p>
+                <p className="text-muted-foreground text-lg">
+                  {endpoint.description}
+                </p>
               </div>
 
               {/* Request Body */}
@@ -285,7 +296,9 @@ export default function APIReferencePage() {
               <div>
                 <h3 className="text-xl font-bold mb-4">Example Request</h3>
                 <CodeBlock
-                  code={`curl -X ${endpoint.method} https://api.paydeck.io${endpoint.endpoint} \\
+                  code={`curl -X ${endpoint.method} https://api.paydeck.io${
+                    endpoint.endpoint
+                  } \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json"${
     endpoint.requestBody
@@ -302,5 +315,5 @@ export default function APIReferencePage() {
       </div>
       <Footer />
     </>
-  )
+  );
 }

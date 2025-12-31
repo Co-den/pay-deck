@@ -38,7 +38,8 @@ export function ChatbotMessages() {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex-1 overflow-y-auto space-y-4 mb-4">
+      {/* Messages */}
+      <div className="flex-1 overflow-y-auto space-y-4 p-4">
         {messages.map((msg, index) => (
           <div
             key={index}
@@ -59,28 +60,31 @@ export function ChatbotMessages() {
         ))}
       </div>
 
-      <div className="flex gap-2">
-        <Textarea
-          placeholder="Type your message..."
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" && !e.shiftKey) {
-              e.preventDefault();
-              handleSend();
-            }
-          }}
-          className="resize-none h-10 min-h-10"
-          rows={1}
-        />
-        <Button
-          onClick={handleSend}
-          size="icon"
-          className="flex-shrink-0"
-          disabled={!input.trim()}
-        >
-          <Send className="w-4 h-4" />
-        </Button>
+      {/* Input — pinned to bottom */}
+      <div className="border-t p-3">
+        <div className="flex gap-2">
+          <Textarea
+            placeholder="Type your message..."
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                handleSend();
+              }
+            }}
+            className="resize-none h-10 min-h-10"
+            rows={1}
+          />
+          <Button
+            onClick={handleSend}
+            size="icon"
+            className="flex-shrink-0"
+            disabled={!input.trim()}
+          >
+            <Send className="w-4 h-4" />
+          </Button>
+        </div>
       </div>
     </div>
   );

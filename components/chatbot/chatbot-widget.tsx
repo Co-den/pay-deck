@@ -38,11 +38,11 @@ export function ChatbotWidget() {
 
       {/* Chatbot Window */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 z-40 w-96 max-w-[calc(100vw-24px)] bg-card border border-border rounded-lg shadow-xl flex flex-col h-[600px] overflow-hidden">
+        <div className="fixed bottom-24 right-6 w-[400px] h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col z-50 overflow-hidden">
           {/* Header */}
           <div className="p-4 border-b border-border bg-primary/5">
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold">
+              <div className="w-8 h-8 rounded-full bg-green-500 text-primary-foreground flex items-center justify-center text-sm font-bold">
                 P
               </div>
               <h3 className="font-semibold">PayDeck Support</h3>
@@ -75,11 +75,7 @@ export function ChatbotWidget() {
               </div>
             )}
 
-            {activeTab === "messages" && (
-              <div className="p-4">
-                <ChatbotMessages />
-              </div>
-            )}
+            {activeTab === "messages" && <ChatbotMessages />}
 
             {activeTab === "help" && (
               <div className="p-4 space-y-3">

@@ -4,7 +4,7 @@
  * Handles authentication, error handling, and request formatting
  */
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://pay-deck-api.onrender.com/api";
 
 /**
  * Get authentication token from localStorage

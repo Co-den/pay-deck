@@ -40,14 +40,14 @@ export function ChatbotWidget() {
       {isOpen && (
         <div className="fixed bottom-24 right-6 w-[400px] h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col z-50 overflow-hidden">
           {/* Header */}
-          <div className="p-4 border-b border-border bg-primary/5">
+          <div className="p-4 border-b border-border bg-green-900 text-primary-foreground">
             <div className="flex items-center gap-2 mb-3">
               <div className="w-8 h-8 rounded-full bg-green-500 text-primary-foreground flex items-center justify-center text-sm font-bold">
                 P
               </div>
               <h3 className="font-semibold">PayDeck Support</h3>
             </div>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-white text-muted-foreground">
               Hello! How can we help?
             </p>
           </div>

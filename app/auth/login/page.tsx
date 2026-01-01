@@ -9,7 +9,9 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { CheckCircle, Eye, EyeOff } from "lucide-react"
+import { CheckCircle, Eye, EyeOff, AlertCircle } from "lucide-react"
+import { Alert, AlertDescription } from "@/components/ui/alert"
+import { login } from "@/lib/api/auth";
 
 export default function Login() {
   const router = useRouter()
@@ -21,6 +23,7 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
+  const [apiError, setApiError] = useState<string | null>(null)
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {}
@@ -51,15 +54,23 @@ export default function Login() {
     }
 
     setLoading(true)
-    // Simulate login
-    setTimeout(() => {
+    setApiError(null)
+
+    try {
+      const response = await login(formData)
+
+      // Success! Token is automatically stored
       setSuccess(true)
-      setLoading(false)
+
       // Redirect to dashboard after 1.5 seconds
       setTimeout(() => {
         router.push("/dashboard")
       }, 1500)
-    }, 1500)
+    } catch (error: any) {
+      console.error("Login error:", error)
+      setApiError(error.message || "Failed to sign in. Please check your credentials.")
+      setLoading(false)
+    }
   }
 
   if (success) {
@@ -82,6 +93,14 @@ export default function Login() {
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
+          {/* API Error Alert */}
+          {apiError && (
+            <Alert variant="destructive">
+              <AlertCircle className="h-4 w-4" />
+              <AlertDescription>{apiError}</AlertDescription>
+            </Alert>
+          )}
+
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
             <Input

@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import {
   LayoutDashboard,
   CreditCard,
@@ -16,10 +16,21 @@ import {
   Menu,
   X,
 } from "lucide-react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { ChatbotWidget } from "@/components/chatbot/chatbot-widget"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { getMerchantData, clearAuthToken } from "@/lib/api/client"
+import { logout } from "@/lib/api/auth"
+
+interface Merchant {
+  id: string
+  businessName: string
+  email: string
+  tier: string
+  accountStatus: string
+  businessType: string
+}
 
 interface DashboardLayoutProps {
   children: React.ReactNode
@@ -38,7 +49,71 @@ const navigation = [
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const pathname = usePathname()
+  const router = useRouter()
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [merchant, setMerchant] = useState<Merchant | null>(null)
+  const [loggingOut, setLoggingOut] = useState(false)
+  const [authChecking, setAuthChecking] = useState(true)
+
+  // Load merchant data and check authentication on mount
+  useEffect(() => {
+    const checkAuth = () => {
+      const merchantData = getMerchantData()
+      const token = localStorage.getItem("paydeck_token")
+      
+      if (!token || !merchantData) {
+        // Not authenticated, redirect to login
+        router.push('/auth/login')
+        return
+      }
+      
+      setMerchant(merchantData)
+      setAuthChecking(false)
+    }
+
+    checkAuth()
+  }, [router])
+
+  // Show loading while checking authentication
+  if (authChecking) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    )
+  }
+
+  // Handle logout
+  const handleLogout = async () => {
+    try {
+      setLoggingOut(true)
+      await logout()
+      router.push('/auth/login')
+    } catch (error) {
+      console.error('Logout error:', error)
+      // Even if logout fails, clear local data and redirect
+      clearAuthToken()
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("paydeck_merchant")
+      }
+      router.push('/auth/login')
+    } finally {
+      setLoggingOut(false)
+    }
+  }
+
+  // Get user initials for avatar
+  const getUserInitials = (name: string) => {
+    return name
+      .split(' ')
+      .map(word => word.charAt(0))
+      .join('')
+      .toUpperCase()
+      .slice(0, 2)
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -102,16 +177,28 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           <div className="p-4 border-t border-border">
             <div className="flex items-center gap-3 mb-3">
               <Avatar>
-                <AvatarFallback>JD</AvatarFallback>
+                <AvatarFallback>
+                  {merchant?.businessName ? getUserInitials(merchant.businessName) : 'U'}
+                </AvatarFallback>
               </Avatar>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium truncate">John Doe</p>
-                <p className="text-xs text-muted-foreground truncate">john@example.com</p>
+                <p className="text-sm font-medium truncate">
+                  {merchant?.businessName || 'User'}
+                </p>
+                <p className="text-xs text-muted-foreground truncate">
+                  {merchant?.email || 'user@example.com'}
+                </p>
               </div>
             </div>
-            <Button variant="outline" size="sm" className="w-full gap-2">
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="w-full gap-2"
+              onClick={handleLogout}
+              disabled={loggingOut}
+            >
               <LogOut className="w-4 h-4" />
-              Sign Out
+              {loggingOut ? 'Signing Out...' : 'Sign Out'}
             </Button>
           </div>
         </div>

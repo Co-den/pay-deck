@@ -10,7 +10,7 @@ export function CTA() {
           Ready to get started?
         </h2>
         <p className="text-lg opacity-90 mb-8 text-balance">
-          Join thousands of merchants already using PayDeck to process payments
+          Join thousands of merchants already using SettleMe to process payments
           securely and reliably.
         </p>
         <div className="cta-buttons">

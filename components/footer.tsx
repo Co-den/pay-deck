@@ -9,9 +9,9 @@ export function Footer() {
           <div className="col-span-2 md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 rounded-lg bg-green-500 text-primary-foreground flex items-center justify-center font-bold text-lg">
-                P
+                S
               </div>
-              <span className="font-bold">PayDeck</span>
+              <span className="font-bold">SettleMe</span>
             </div>
             <p className="text-sm text-muted-foreground">
               Modern payment processing for merchants worldwide.

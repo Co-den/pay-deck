@@ -23,7 +23,7 @@ export function Hero() {
           </h1>
 
           <p className="text-xl text-muted-foreground mb-8 text-balance">
-            PayDeck makes it effortless to accept payments from anywhere in the world. Secure, reliable, and built for
+            SettleMe makes it effortless to accept payments from anywhere in the world. Secure, reliable, and built for
             modern merchants.
           </p>
 

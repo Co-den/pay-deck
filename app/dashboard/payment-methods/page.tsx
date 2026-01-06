@@ -50,16 +50,21 @@ export default function PaymentMethodsPage() {
   const [paymentMethods, setPaymentMethods] = useState<PaymentMethod[]>([]);
   const [stats, setStats] = useState<PaymentMethodStats | null>(null);
   const [loading, setLoading] = useState(true);
-  const [selectedMethod, setSelectedMethod] = useState<PaymentMethod | null>(null);
+  const [selectedMethod, setSelectedMethod] = useState<PaymentMethod | null>(
+    null
+  );
   const [showConfigDialog, setShowConfigDialog] = useState(false);
   const [configuring, setConfiguring] = useState(false);
   const [testing, setTesting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  
+
   // Configuration form state
   const [configForm, setConfigForm] = useState({
     publicKey: "",
     secretKey: "",
+    apiKey: "",
+    merchantId: "",
+    webhookSecret: "",
     testMode: true,
   });
 
@@ -74,7 +79,7 @@ export default function PaymentMethodsPage() {
       setError(null);
       const methods = await getPaymentMethods();
       setPaymentMethods(methods);
-      
+
       // If no payment methods, initialize defaults
       if (methods.length === 0) {
         await handleInitialize();
@@ -125,12 +130,12 @@ export default function PaymentMethodsPage() {
 
   async function handleConfigure(e: React.FormEvent) {
     e.preventDefault();
-    
+
     if (!selectedMethod) return;
 
     try {
       setConfiguring(true);
-      
+
       const updatedMethod = await updatePaymentMethod(
         selectedMethod.id || selectedMethod._id!,
         {
@@ -148,8 +153,15 @@ export default function PaymentMethodsPage() {
 
       setShowConfigDialog(false);
       setSelectedMethod(null);
-      setConfigForm({ publicKey: "", secretKey: "", testMode: true });
-      
+      setConfigForm({
+        publicKey: "",
+        secretKey: "",
+        apiKey: "",
+        merchantId: "",
+        webhookSecret: "",
+        testMode: true,
+      });
+
       alert("Payment method configured successfully!");
     } catch (err: any) {
       alert(err.message || "Failed to configure payment method");
@@ -161,9 +173,9 @@ export default function PaymentMethodsPage() {
   async function handleTest(method: PaymentMethod) {
     try {
       setTesting(true);
-      
+
       const result = await testPaymentMethod(method.id || method._id!);
-      
+
       if (result.success) {
         alert(`✅ ${result.message}`);
       } else {
@@ -181,6 +193,9 @@ export default function PaymentMethodsPage() {
     setConfigForm({
       publicKey: method.configuration.publicKey || "",
       secretKey: "",
+      apiKey: method.configuration.apiKey || "",
+      merchantId: method.configuration.merchantId || "",
+      webhookSecret: "",
       testMode: method.configuration.testMode ?? true,
     });
     setShowConfigDialog(true);
@@ -327,7 +342,7 @@ export default function PaymentMethodsPage() {
           {paymentMethods.map((method) => {
             const Icon = getMethodIcon(method.type);
             const methodId = method.id || method._id!;
-            
+
             return (
               <Card key={methodId}>
                 <CardHeader>
@@ -350,7 +365,9 @@ export default function PaymentMethodsPage() {
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
-                          <CardTitle className="text-lg">{method.name}</CardTitle>
+                          <CardTitle className="text-lg">
+                            {method.name}
+                          </CardTitle>
                           {method.enabled && (
                             <Badge className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
                               <CheckCircle className="w-3 h-3 mr-1" />
@@ -401,7 +418,9 @@ export default function PaymentMethodsPage() {
                       </p>
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">Settlement</p>
+                      <p className="text-sm text-muted-foreground">
+                        Settlement
+                      </p>
                       <p className="font-medium">{method.settlementPeriod}</p>
                     </div>
                   </div>
@@ -456,7 +475,7 @@ export default function PaymentMethodsPage() {
                       <SettingsIcon className="w-4 h-4" />
                       {method.setupComplete ? "Reconfigure" : "Setup"}
                     </Button>
-                    
+
                     {method.setupComplete && (
                       <Button
                         variant="outline"
@@ -496,54 +515,172 @@ export default function PaymentMethodsPage() {
             <Alert>
               <AlertCircle className="h-4 w-4" />
               <AlertDescription>
-                Get your API keys from your {selectedMethod?.provider} dashboard.
+                Get your API keys from your {selectedMethod?.provider}{" "}
+                dashboard.
                 {selectedMethod?.provider === "Paystack" && (
-                  <> Visit: https://dashboard.paystack.com/#/settings/developer</>
+                  <>
+                    {" "}
+                    Visit: https://dashboard.paystack.com/#/settings/developer
+                  </>
                 )}
                 {selectedMethod?.provider === "Flutterwave" && (
                   <> Visit: https://dashboard.flutterwave.com/settings/apis</>
+                )}
+                {selectedMethod?.provider === "Coinbase Commerce" && (
+                  <> Visit: https://commerce.coinbase.com/dashboard/settings</>
+                )}
+                {selectedMethod?.provider === "Yellow Card" && (
+                  <> Visit: https://business.yellowcard.io/settings/api</>
+                )}
+                {selectedMethod?.provider === "Binance Pay" && (
+                  <>
+                    {" "}
+                    Visit:
+                    https://merchant.binance.com/en/dashboard/account-management/api-management
+                  </>
                 )}
               </AlertDescription>
             </Alert>
 
             <div className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="publicKey">Public Key *</Label>
-                <Input
-                  id="publicKey"
-                  placeholder="pk_test_..."
-                  value={configForm.publicKey}
-                  onChange={(e) =>
-                    setConfigForm({ ...configForm, publicKey: e.target.value })
-                  }
-                  required
-                  disabled={configuring}
-                />
-              </div>
+              {/* Card/Bank providers (Paystack, Flutterwave) */}
+              {(selectedMethod?.type === "card" ||
+                selectedMethod?.type === "bank_transfer" ||
+                selectedMethod?.type === "ussd" ||
+                selectedMethod?.type === "mobile_money") && (
+                <>
+                  <div className="space-y-2">
+                    <Label htmlFor="publicKey">Public Key *</Label>
+                    <Input
+                      id="publicKey"
+                      placeholder="pk_test_..."
+                      value={configForm.publicKey}
+                      onChange={(e) =>
+                        setConfigForm({
+                          ...configForm,
+                          publicKey: e.target.value,
+                        })
+                      }
+                      required
+                      disabled={configuring}
+                    />
+                  </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="secretKey">Secret Key *</Label>
-                <Input
-                  id="secretKey"
-                  type="password"
-                  placeholder="sk_test_..."
-                  value={configForm.secretKey}
-                  onChange={(e) =>
-                    setConfigForm({ ...configForm, secretKey: e.target.value })
-                  }
-                  required
-                  disabled={configuring}
-                />
-                <p className="text-xs text-muted-foreground">
-                  Your secret key is encrypted and stored securely
-                </p>
-              </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="secretKey">Secret Key *</Label>
+                    <Input
+                      id="secretKey"
+                      type="password"
+                      placeholder="sk_test_..."
+                      value={configForm.secretKey}
+                      onChange={(e) =>
+                        setConfigForm({
+                          ...configForm,
+                          secretKey: e.target.value,
+                        })
+                      }
+                      required
+                      disabled={configuring}
+                    />
+                    <p className="text-xs text-muted-foreground">
+                      Your secret key is encrypted and stored securely
+                    </p>
+                  </div>
+                </>
+              )}
 
+              {/* Crypto providers */}
+              {selectedMethod?.type === "crypto" && (
+                <>
+                  <div className="space-y-2">
+                    <Label htmlFor="apiKey">API Key *</Label>
+                    <Input
+                      id="apiKey"
+                      type="password"
+                      placeholder="Enter your API key..."
+                      value={configForm.apiKey}
+                      onChange={(e) =>
+                        setConfigForm({ ...configForm, apiKey: e.target.value })
+                      }
+                      required
+                      disabled={configuring}
+                    />
+                    <p className="text-xs text-muted-foreground">
+                      Your API key is encrypted and stored securely
+                    </p>
+                  </div>
+
+                  {(selectedMethod?.provider === "Yellow Card" ||
+                    selectedMethod?.provider === "Binance Pay") && (
+                    <>
+                      <div className="space-y-2">
+                        <Label htmlFor="secretKey">Secret Key *</Label>
+                        <Input
+                          id="secretKey"
+                          type="password"
+                          placeholder="Enter your secret key..."
+                          value={configForm.secretKey}
+                          onChange={(e) =>
+                            setConfigForm({
+                              ...configForm,
+                              secretKey: e.target.value,
+                            })
+                          }
+                          required
+                          disabled={configuring}
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="merchantId">Merchant ID</Label>
+                        <Input
+                          id="merchantId"
+                          placeholder="Your merchant ID..."
+                          value={configForm.merchantId}
+                          onChange={(e) =>
+                            setConfigForm({
+                              ...configForm,
+                              merchantId: e.target.value,
+                            })
+                          }
+                          disabled={configuring}
+                        />
+                      </div>
+                    </>
+                  )}
+
+                  {selectedMethod?.provider === "Coinbase Commerce" && (
+                    <div className="space-y-2">
+                      <Label htmlFor="webhookSecret">Webhook Secret</Label>
+                      <Input
+                        id="webhookSecret"
+                        type="password"
+                        placeholder="Optional - for webhook verification"
+                        value={configForm.webhookSecret}
+                        onChange={(e) =>
+                          setConfigForm({
+                            ...configForm,
+                            webhookSecret: e.target.value,
+                          })
+                        }
+                        disabled={configuring}
+                      />
+                      <p className="text-xs text-muted-foreground">
+                        Used to verify webhook signatures
+                      </p>
+                    </div>
+                  )}
+                </>
+              )}
+
+              {/* Test Mode Toggle */}
               <div className="flex items-center justify-between">
                 <div>
                   <Label>Test Mode</Label>
                   <p className="text-sm text-muted-foreground">
-                    Use test credentials for development
+                    {selectedMethod?.type === "crypto"
+                      ? "Use testnet/sandbox for crypto testing"
+                      : "Use test credentials for development"}
                   </p>
                 </div>
                 <Switch
@@ -554,6 +691,28 @@ export default function PaymentMethodsPage() {
                   disabled={configuring}
                 />
               </div>
+
+              {/* Crypto Info Alert */}
+              {selectedMethod?.type === "crypto" && (
+                <Alert className="bg-blue-50 dark:bg-blue-950 border-blue-200 dark:border-blue-800">
+                  <AlertCircle className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                  <AlertDescription className="text-blue-800 dark:text-blue-200">
+                    <strong>Crypto Payment Benefits:</strong>
+                    <ul className="list-disc list-inside mt-2 text-sm space-y-1">
+                      <li>Instant settlement (T+0)</li>
+                      <li>Low fees (0-1%)</li>
+                      <li>Global payments</li>
+                      <li>No chargebacks</li>
+                      <li>
+                        Auto-convert to{" "}
+                        {selectedMethod?.provider === "Yellow Card"
+                          ? "NGN"
+                          : "fiat"}
+                      </li>
+                    </ul>
+                  </AlertDescription>
+                </Alert>
+              )}
             </div>
 
             <div className="flex gap-3">

@@ -136,9 +136,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           <div className="flex items-center justify-between p-4 border-b border-border">
             <Link href="/dashboard" className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-lg bg-green-500 text-white flex items-center justify-center font-bold">
-                P
+                S
               </div>
-              <span className="font-bold text-lg">PayDeck</span>
+              <span className="font-bold text-lg">SettleMe</span>
             </Link>
             <Button
               variant="ghost"

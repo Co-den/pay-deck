@@ -29,9 +29,9 @@ export function DashboardNav() {
         <div className="p-6 border-b border-border">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-green-500 text-primary-foreground flex items-center justify-center font-bold">
-              P
+              S
             </div>
-            <span className="font-bold text-lg">PayDeck</span>
+            <span className="font-bold text-lg">SettleMe</span>
           </div>
         </div>
 

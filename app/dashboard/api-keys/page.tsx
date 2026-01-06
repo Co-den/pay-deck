@@ -368,7 +368,7 @@ export default function APIKeysPage() {
         <div>
           <h1 className="text-3xl font-bold">API Keys</h1>
           <p className="text-muted-foreground">
-            Manage your API keys for integrating with PayDeck
+            Manage your API keys for integrating with SettleMe
           </p>
         </div>
         <div className="flex items-center gap-4">

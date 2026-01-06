@@ -183,8 +183,8 @@ export function CheckoutForm({ onStepChange, currentStep }: CheckoutFormProps) {
                 {errors.cardNumber && <p className="text-xs text-destructive mt-1">{errors.cardNumber}</p>}
               </div>
 
-              <div className="grid grid-cols-3 gap-4">
-                <div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                <div className="sm:col-span-1">
                   <Label htmlFor="month" className="mb-2 block text-sm">
                     Month
                   </Label>
@@ -203,7 +203,7 @@ export function CheckoutForm({ onStepChange, currentStep }: CheckoutFormProps) {
                     ))}
                   </select>
                 </div>
-                <div>
+                <div className="sm:col-span-1">
                   <Label htmlFor="year" className="mb-2 block text-sm">
                     Year
                   </Label>
@@ -225,7 +225,7 @@ export function CheckoutForm({ onStepChange, currentStep }: CheckoutFormProps) {
                     })}
                   </select>
                 </div>
-                <div>
+                <div className="col-span-2 sm:col-span-1">
                   <Label htmlFor="cvv" className="mb-2 block text-sm">
                     CVV
                   </Label>

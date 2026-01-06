@@ -132,7 +132,54 @@ export function TransactionTable({ selectedTransactions, onSelectionChange }: Tr
 
   return (
     <>
-      <div className="rounded-lg border border-border overflow-hidden">
+      {/* Mobile Card View */}
+      <div className="md:hidden space-y-4">
+        {transactions.map((txn) => (
+          <div key={txn.id} className="p-4 rounded-lg border border-border bg-card">
+            <div className="flex items-start justify-between mb-3">
+              <div className="flex items-center gap-2">
+                <Checkbox checked={selectedTransactions.includes(txn.id)} onChange={() => toggleSelect(txn.id)} />
+                <span className="font-medium text-primary cursor-pointer hover:underline">{txn.id}</span>
+              </div>
+              <Badge variant={getStatusColor(txn.status)}>{txn.status}</Badge>
+            </div>
+            <div className="space-y-2">
+              <div className="flex justify-between">
+                <span className="text-sm text-muted-foreground">Customer:</span>
+                <span className="text-sm font-medium">{txn.customer}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-sm text-muted-foreground">Amount:</span>
+                <span className="text-sm font-semibold">{txn.amount}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-sm text-muted-foreground">Method:</span>
+                <span className="text-sm">{txn.method}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-sm text-muted-foreground">Date:</span>
+                <span className="text-sm">{txn.date} {txn.time}</span>
+              </div>
+            </div>
+            <div className="mt-3 pt-3 border-t border-border">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => {
+                  setSelectedTransaction(txn)
+                  setDetailsOpen(true)
+                }}
+                className="w-full"
+              >
+                View Details
+              </Button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop Table View */}
+      <div className="hidden md:block rounded-lg border border-border overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead className="bg-muted/50 border-b border-border">

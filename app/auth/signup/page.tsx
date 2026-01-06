@@ -74,9 +74,9 @@ export default function SignUp() {
     confirmPassword: "",
     businessType: "",
     phone: "",
-    rcNumber: "", // RC Number (Nigerian CAC Registration)
-    nin: "", // National Identity Number
-    taxId: "", // Tax Identification Number (TIN)
+    rcNumber: "",
+    nin: "",
+    taxId: "",
     accountType: "business",
   });
 
@@ -185,7 +185,7 @@ export default function SignUp() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validate based on account type
+    // Validation based on account type
     const newErrors =
       accountType === "individual"
         ? validateIndividualForm()
@@ -242,7 +242,7 @@ export default function SignUp() {
       <Card className="border-0 shadow-xl">
         <CardContent className="pt-8 text-center">
           <CheckCircle className="w-16 h-16 text-primary mx-auto mb-4" />
-          <h2 className="text-2xl font-bold mb-2">Welcome to PayDeck!</h2>
+          <h2 className="text-2xl font-bold mb-2">Welcome to SettleMe!</h2>
           <p className="text-muted-foreground mb-6">
             {accountType === "business"
               ? "Your business account has been created. We'll verify your documents and activate your account within 24-48 hours."
@@ -258,7 +258,7 @@ export default function SignUp() {
       <CardHeader>
         <CardTitle>Create your account</CardTitle>
         <CardDescription>
-          Join PayDeck and start accepting payments in minutes
+          Join SettleMe and start accepting payments in minutes
         </CardDescription>
       </CardHeader>
       <CardContent>

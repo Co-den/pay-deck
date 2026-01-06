@@ -88,7 +88,7 @@ export default function Login() {
   return (
     <Card className="border-0 shadow-xl">
       <CardHeader>
-        <CardTitle>Sign in to PayDeck</CardTitle>
+        <CardTitle>Sign in to SettleMe</CardTitle>
         <CardDescription>Enter your credentials to access your account</CardDescription>
       </CardHeader>
       <CardContent>

@@ -57,16 +57,14 @@ export default function PaymentSuccessPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 p-4">
         <Card className="max-w-md w-full">
-          <CardContent className="pt-6">
-            <div className="text-center space-y-4">
-              <CheckCircle className="w-16 h-16 text-red-500 mx-auto" />
-              <div>
-                <h3 className="text-xl font-bold mb-2">Payment Verification Failed</h3>
-                <p className="text-muted-foreground">
-                  {error || "Unable to verify payment status."}
-                </p>
-              </div>
-            </div>
+          <CardHeader className="text-center">
+            <CheckCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
+            <CardTitle className="text-xl">Payment Verification Failed</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground">
+              {error || "Unable to verify payment status."}
+            </p>
           </CardContent>
         </Card>
       </div>
@@ -76,28 +74,26 @@ export default function PaymentSuccessPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 p-4">
       <Card className="max-w-md w-full">
-        <CardContent className="pt-6">
-          <div className="text-center space-y-4">
-            <CheckCircle className="w-16 h-16 text-green-500 mx-auto" />
-            <div>
-              <h3 className="text-2xl font-bold mb-2">Payment Successful!</h3>
-              <p className="text-muted-foreground mb-4">
-                Your payment has been processed successfully.
-              </p>
-              <div className="p-4 bg-muted rounded-lg mb-4">
-                <p className="text-sm text-muted-foreground">Amount Paid</p>
-                <p className="text-2xl font-bold">
-                  {paymentDetails.currency} {paymentDetails.amount.toLocaleString()}
-                </p>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                A confirmation email has been sent to {paymentDetails.customerEmail}
-              </p>
-            </div>
-            <Button onClick={() => window.location.href = '/'} className="w-full">
-              Return to Home
-            </Button>
+        <CardHeader className="text-center">
+          <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
+          <CardTitle className="text-2xl">Payment Successful!</CardTitle>
+        </CardHeader>
+        <CardContent className="text-center space-y-4">
+          <p className="text-muted-foreground mb-4">
+            Your payment has been processed successfully.
+          </p>
+          <div className="p-4 bg-muted rounded-lg mb-4">
+            <p className="text-sm text-muted-foreground">Amount Paid</p>
+            <p className="text-2xl font-bold">
+              {paymentDetails.currency} {paymentDetails.amount.toLocaleString()}
+            </p>
           </div>
+          <p className="text-sm text-muted-foreground">
+            A confirmation email has been sent to {paymentDetails.customerEmail}
+          </p>
+          <Button onClick={() => window.location.href = '/'} className="w-full">
+            Return to Home
+          </Button>
         </CardContent>
       </Card>
     </div>

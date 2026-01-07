@@ -86,3 +86,19 @@ export async function confirmPayment(data: {
 
   return response.data;
 }
+
+/**
+ * Process Payment (for payment links)
+ * POST /api/payments/process
+ */
+export async function processPayment(
+  data: PaymentRequest
+): Promise<PaymentResponse> {
+  const response = await api.post<PaymentResponse>("/payments/process", data);
+
+  if (response.status !== "success" || !response.data) {
+    throw new Error(response.message || "Failed to process payment");
+  }
+
+  return response.data;
+}

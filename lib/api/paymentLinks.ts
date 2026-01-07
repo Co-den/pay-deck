@@ -122,7 +122,10 @@ export async function getPaymentLinks(params?: {
   const url = `/payment-links${
     queryParams.toString() ? `?${queryParams}` : ""
   }`;
-  const response = await api.get<{
+  const response: ApiResponse<{
+    paymentLinks: PaymentLink[];
+    total: number;
+  }> = await api.get<{
     paymentLinks: PaymentLink[];
     total: number;
   }>(url);
@@ -139,7 +142,7 @@ export async function getPaymentLinks(params?: {
  * GET /api/payment-links/:id
  */
 export async function getPaymentLink(id: string): Promise<PaymentLink> {
-  const response = await api.get<{ paymentLink: PaymentLink }>(
+  const response: ApiResponse<{ paymentLink: PaymentLink }> = await api.get<{ paymentLink: PaymentLink }>(
     `/payment-links/${id}`
   );
 
@@ -157,7 +160,7 @@ export async function getPaymentLink(id: string): Promise<PaymentLink> {
 export async function getPaymentLinkByCode(
   shortCode: string
 ): Promise<PaymentLink> {
-  const response = await api.get<{ paymentLink: PaymentLink }>(
+  const response: ApiResponse<{ paymentLink: PaymentLink }> = await api.get<{ paymentLink: PaymentLink }>(
     `/payment-links/public/${shortCode}`
   );
 
@@ -175,7 +178,7 @@ export async function getPaymentLinkByCode(
 export async function createPaymentLink(
   data: CreatePaymentLinkRequest
 ): Promise<PaymentLink> {
-  const response = await api.post<{ paymentLink: PaymentLink }>(
+  const response: ApiResponse<{ paymentLink: PaymentLink }> = await api.post<{ paymentLink: PaymentLink }>(
     "/payment-links",
     data
   );
@@ -195,7 +198,7 @@ export async function updatePaymentLink(
   id: string,
   data: UpdatePaymentLinkRequest
 ): Promise<PaymentLink> {
-  const response = await api.put<{ paymentLink: PaymentLink }>(
+  const response: ApiResponse<{ paymentLink: PaymentLink }> = await api.put<{ paymentLink: PaymentLink }>(
     `/payment-links/${id}`,
     data
   );
@@ -212,7 +215,7 @@ export async function updatePaymentLink(
  * DELETE /api/payment-links/:id
  */
 export async function deletePaymentLink(id: string): Promise<void> {
-  const response = await api.delete(`/payment-links/${id}`);
+  const response: ApiResponse = await api.delete(`/payment-links/${id}`);
 
   if (response.status !== "success") {
     throw new Error(response.message || "Failed to delete payment link");
@@ -224,7 +227,7 @@ export async function deletePaymentLink(id: string): Promise<void> {
  * POST /api/payment-links/:id/disable
  */
 export async function disablePaymentLink(id: string): Promise<PaymentLink> {
-  const response = await api.post<{ paymentLink: PaymentLink }>(
+  const response: ApiResponse<{ paymentLink: PaymentLink }> = await api.post<{ paymentLink: PaymentLink }>(
     `/payment-links/${id}/disable`
   );
 
@@ -240,7 +243,7 @@ export async function disablePaymentLink(id: string): Promise<PaymentLink> {
  * POST /api/payment-links/:id/enable
  */
 export async function enablePaymentLink(id: string): Promise<PaymentLink> {
-  const response = await api.post<{ paymentLink: PaymentLink }>(
+  const response: ApiResponse<{ paymentLink: PaymentLink }> = await api.post<{ paymentLink: PaymentLink }>(
     `/payment-links/${id}/enable`
   );
 
@@ -256,7 +259,7 @@ export async function enablePaymentLink(id: string): Promise<PaymentLink> {
  * GET /api/payment-links/stats
  */
 export async function getPaymentLinkStats(): Promise<PaymentLinkStats> {
-  const response = await api.get<{ stats: PaymentLinkStats }>(
+  const response: ApiResponse<{ stats: PaymentLinkStats }> = await api.get<{ stats: PaymentLinkStats }>(
     "/payment-links/stats"
   );
 
@@ -272,7 +275,7 @@ export async function getPaymentLinkStats(): Promise<PaymentLinkStats> {
  * GET /api/payment-links/:id/qr
  */
 export async function getPaymentLinkQR(id: string): Promise<string> {
-  const response = await api.get<{ qrCode: string }>(`/payment-links/${id}/qr`);
+  const response: ApiResponse<{ qrCode: string }> = await api.get<{ qrCode: string }>(`/payment-links/${id}/qr`);
 
   if (response.status !== "success" || !response.data) {
     throw new Error(response.message || "Failed to generate QR code");

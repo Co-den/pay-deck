@@ -39,7 +39,7 @@ interface DashboardLayoutProps {
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "Transactions", href: "/dashboard/transactions", icon: CreditCard },
-  { name: "Payment Links", href: "/dashboard/payment-links", icon: FileText },
+  { name: "Payment Links", href: "/dashboard/payment-link", icon: FileText },
   { name: "Reports", href: "/dashboard/reports-page", icon: BarChart3 },
   { name: "API Keys", href: "/dashboard/api-keys", icon: Key },
   { name: "Webhooks", href: "/dashboard/webhooks", icon: Webhook },

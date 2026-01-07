@@ -4,7 +4,7 @@
  * Handles authentication, error handling, and request formatting
  */
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://pay-deck-api.onrender.com/api";
+const API_URL = "https://pay-deck-api.onrender.com/api";
 
 /**
  * Get authentication token from localStorage
@@ -166,7 +166,7 @@ export const auth = {
     rcNumber?: string;
     nin?: string;
     taxId?: string;
-    accountType: 'individual' | 'business';
+    accountType: "individual" | "business";
   }) => {
     const response = await api.post("/auth/register", data);
 

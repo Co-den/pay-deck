@@ -25,7 +25,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getPaymentLinkByCode, type PaymentLink } from "@/lib/api/paymentLinks";
-import { processPayment, type PaymentRequest } from "@/lib/api/payments";
+import CustomCheckout from "@/components/custom-checkout";
 
 export default function PaymentLinkPage() {
   const params = useParams();
@@ -80,53 +80,54 @@ export default function PaymentLinkPage() {
       return;
     }
 
-    try {
-      setProcessing(true);
+    // For card payments, the custom checkout component handles everything
+    // For other methods, handle here
+    if (selectedMethod !== "card") {
+      try {
+        setProcessing(true);
 
-      // Prepare payment request
-      const paymentRequest: PaymentRequest = {
-        amount: paymentLink.amount,
-        currency: paymentLink.currency,
-        paymentMethod: selectedMethod,
-        customerData,
-        paymentLinkId: paymentLink.id,
-        metadata: {
-          title: paymentLink.title,
-          description: paymentLink.description,
-          shortCode: paymentLink.shortCode,
-        },
-      };
+        // TODO: Integrate with actual payment processors
+        // For now, simulate payment processing
+        await new Promise((resolve) => setTimeout(resolve, 2000));
 
-      // Process payment
-      const result = await processPayment(paymentRequest);
+        // Simulate random success/failure for demo
+        const isSuccess = Math.random() > 0.2; // 80% success rate
 
-      if (result.success) {
-        if (selectedMethod === 'card' && result.redirectUrl) {
-          // Redirect to Stripe Checkout immediately
-          window.location.href = result.redirectUrl;
-          return;
+        if (isSuccess) {
+          setSuccess(true);
+
+          // Redirect after 3 seconds if redirect URL is set
+          if (paymentLink.settings.redirectUrl) {
+            setTimeout(() => {
+              window.location.href = paymentLink.settings.redirectUrl!;
+            }, 3000);
+          }
+        } else {
+          throw new Error("Payment failed. Please try again.");
         }
-
-        setSuccess(true);
-
-        // Handle redirects for other payment methods
-        if (result.redirectUrl) {
-          setTimeout(() => {
-            router.push(result.redirectUrl!);
-          }, 3000);
-        } else if (paymentLink.settings.redirectUrl) {
-          setTimeout(() => {
-            router.push(paymentLink.settings.redirectUrl!);
-          }, 3000);
-        }
-      } else {
-        throw new Error(result.error || "Payment failed. Please try again.");
+      } catch (err: any) {
+        alert("Payment failed: " + (err.message || "Unknown error"));
+      } finally {
+        setProcessing(false);
       }
-    } catch (err: any) {
-      alert("Payment failed: " + (err.message || "Unknown error"));
-    } finally {
-      setProcessing(false);
     }
+  }
+
+  function handlePaymentSuccess() {
+    setSuccess(true);
+    setProcessing(false);
+
+    // Redirect after 3 seconds if redirect URL is set
+    if (paymentLink?.settings.redirectUrl) {
+      setTimeout(() => {
+        window.location.href = paymentLink.settings.redirectUrl!;
+      }, 3000);
+    }
+  }
+
+  function handlePaymentError(error: string) {
+    setProcessing(false);
+    alert("Payment failed: " + error);
   }
 
   if (loading) {
@@ -213,12 +214,7 @@ export default function PaymentLinkPage() {
             <CardContent className="space-y-4">
               <div>
                 <p className="text-sm text-muted-foreground">Item</p>
-                <div className="flex items-center justify-between">
-                  <p className="font-semibold">{paymentLink.title}</p>
-                  <Badge variant={paymentLink.status === 'active' ? 'default' : paymentLink.status === 'expired' ? 'destructive' : 'secondary'}>
-                    {paymentLink.status}
-                  </Badge>
-                </div>
+                <p className="font-semibold">{paymentLink.title}</p>
                 {paymentLink.description && (
                   <p className="text-sm text-muted-foreground mt-1">
                     {paymentLink.description}
@@ -350,12 +346,29 @@ export default function PaymentLinkPage() {
                     </TabsList>
 
                     <TabsContent value="card" className="space-y-4">
-                      <Alert>
-                        <AlertDescription>
-                          You'll be redirected to complete your card payment
-                          securely
-                        </AlertDescription>
-                      </Alert>
+                      {customerData.email && customerData.name ? (
+                        <CustomCheckout
+                          amount={paymentLink.amount}
+                          currency={paymentLink.currency}
+                          customerData={customerData}
+                          paymentLinkId={paymentLink.id || paymentLink._id}
+                          shortCode={shortCode}
+                          metadata={{
+                            title: paymentLink.title,
+                            description: paymentLink.description,
+                            shortCode: shortCode,
+                          }}
+                          onSuccess={handlePaymentSuccess}
+                          onError={handlePaymentError}
+                        />
+                      ) : (
+                        <Alert>
+                          <AlertDescription>
+                            Please fill in your name and email above to continue
+                            with card payment
+                          </AlertDescription>
+                        </Alert>
+                      )}
                     </TabsContent>
 
                     <TabsContent value="bank" className="space-y-4">
@@ -384,25 +397,27 @@ export default function PaymentLinkPage() {
                   </Tabs>
                 </div>
 
-                {/* Submit Button */}
-                <Button
-                  type="submit"
-                  className="w-full"
-                  size="lg"
-                  disabled={processing}
-                >
-                  {processing ? (
-                    <>
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      Processing Payment...
-                    </>
-                  ) : (
-                    <>
-                      Pay {paymentLink.currency}{" "}
-                      {paymentLink.amount.toLocaleString()}
-                    </>
-                  )}
-                </Button>
+                {/* Submit Button - Only show for non-card payments */}
+                {selectedMethod !== "card" && (
+                  <Button
+                    type="submit"
+                    className="w-full"
+                    size="lg"
+                    disabled={processing}
+                  >
+                    {processing ? (
+                      <>
+                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        Processing Payment...
+                      </>
+                    ) : (
+                      <>
+                        Pay {paymentLink.currency}{" "}
+                        {paymentLink.amount.toLocaleString()}
+                      </>
+                    )}
+                  </Button>
+                )}
 
                 {/* Security Badge */}
                 <div className="text-center">

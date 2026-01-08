@@ -88,7 +88,7 @@ export default function DashboardPage() {
           <h1 className="text-3xl font-bold">Dashboard</h1>
           <p className="text-muted-foreground">Welcome back! Here's your business overview.</p>
         </div>
-        <Link href="/dashboard/payment-link">
+        <Link href="/dashboard/payment-links">
           <Button className="gap-2">
             <CreditCard className="w-4 h-4" />
             Create Payment Link

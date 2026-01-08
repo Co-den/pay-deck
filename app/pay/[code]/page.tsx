@@ -215,7 +215,7 @@ export default function PaymentLinkPage() {
         {/* Order Summary */}
         <Card className="md:col-span-2">
           <CardHeader>
-            <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center mb-4">
+            <div className="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center mb-4">
               <span className="text-2xl font-bold text-primary-foreground">
                 S
               </span>
@@ -316,7 +316,7 @@ export default function PaymentLinkPage() {
                     />
                     <Label
                       htmlFor="card"
-                      className="flex flex-col items-center justify-center rounded-lg border-2 border-muted bg-background p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer transition-all"
+                      className="flex flex-col items-center justify-center rounded-lg border-2 border-muted bg-background p-4 hover:bg-green-500 hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer transition-all"
                     >
                       <CreditCard className="w-6 h-6 mb-2" />
                       <span className="text-sm font-medium">Credit Card</span>
@@ -331,7 +331,7 @@ export default function PaymentLinkPage() {
                     />
                     <Label
                       htmlFor="bank"
-                      className="flex flex-col items-center justify-center rounded-lg border-2 border-muted bg-background p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer transition-all"
+                      className="flex flex-col items-center justify-center rounded-lg border-2 border-muted bg-background p-4 hover:bg-green-500 hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer transition-all"
                     >
                       <Building2 className="w-6 h-6 mb-2" />
                       <span className="text-sm font-medium">Bank Transfer</span>
@@ -346,7 +346,7 @@ export default function PaymentLinkPage() {
                     />
                     <Label
                       htmlFor="ussd"
-                      className="flex flex-col items-center justify-center rounded-lg border-2 border-muted bg-background p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer transition-all"
+                      className="flex flex-col items-center justify-center rounded-lg border-2 border-muted bg-background p-4 hover:bg-green-500 hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer transition-all"
                     >
                       <Smartphone className="w-6 h-6 mb-2" />
                       <span className="text-sm font-medium">USSD</span>
@@ -361,7 +361,7 @@ export default function PaymentLinkPage() {
                     />
                     <Label
                       htmlFor="crypto"
-                      className="flex flex-col items-center justify-center rounded-lg border-2 border-muted bg-background p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer transition-all"
+                      className="flex flex-col items-center justify-center rounded-lg border-2 border-muted bg-background p-4 hover:bg-green-500 hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer transition-all"
                     >
                       <Bitcoin className="w-6 h-6 mb-2" />
                       <span className="text-sm font-medium">

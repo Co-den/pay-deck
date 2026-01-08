@@ -19,7 +19,6 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import {
   CreditCard,
@@ -220,10 +219,12 @@ export default function PaymentMethodsPage() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
+      <div className="flex items-center justify-center min-h-[400px] px-4">
         <div className="text-center space-y-4">
           <Loader2 className="w-8 h-8 animate-spin mx-auto text-primary" />
-          <p className="text-muted-foreground">Loading payment methods...</p>
+          <p className="text-sm text-muted-foreground">
+            Loading payment methods...
+          </p>
         </div>
       </div>
     );
@@ -231,17 +232,24 @@ export default function PaymentMethodsPage() {
 
   if (error && paymentMethods.length === 0) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <Card className="max-w-md">
+      <div className="flex items-center justify-center min-h-[400px] px-4">
+        <Card className="max-w-md w-full">
           <CardContent className="pt-6">
             <div className="text-center space-y-4">
               <AlertCircle className="w-12 h-12 text-red-500 mx-auto" />
               <div>
-                <h3 className="text-lg font-semibold mb-2">
+                <h3 className="text-base sm:text-lg font-semibold mb-2">
                   Failed to Load Payment Methods
                 </h3>
-                <p className="text-sm text-muted-foreground mb-4">{error}</p>
-                <Button onClick={loadPaymentMethods}>Try Again</Button>
+                <p className="text-xs sm:text-sm text-muted-foreground mb-4">
+                  {error}
+                </p>
+                <Button
+                  onClick={loadPaymentMethods}
+                  className="w-full sm:w-auto"
+                >
+                  Try Again
+                </Button>
               </div>
             </div>
           </CardContent>
@@ -251,17 +259,17 @@ export default function PaymentMethodsPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6 px-4 sm:px-0">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold">Payment Methods</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-2xl sm:text-3xl font-bold">Payment Methods</h1>
+          <p className="text-sm sm:text-base text-muted-foreground mt-1">
             Configure payment providers for your customers
           </p>
         </div>
         {paymentMethods.length === 0 && (
-          <Button onClick={handleInitialize} className="gap-2">
+          <Button onClick={handleInitialize} className="gap-2 w-full sm:w-auto">
             <Zap className="w-4 h-4" />
             Initialize Payment Methods
           </Button>
@@ -270,15 +278,17 @@ export default function PaymentMethodsPage() {
 
       {/* Summary */}
       {stats && (
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-3 sm:gap-4 sm:grid-cols-3">
           <Card>
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">
+              <CardTitle className="text-xs sm:text-sm font-medium text-muted-foreground">
                 Active Methods
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stats.activeMethods}</div>
+              <div className="text-xl sm:text-2xl font-bold">
+                {stats.activeMethods}
+              </div>
               <p className="text-xs text-muted-foreground">
                 of {stats.totalMethods} available
               </p>
@@ -287,12 +297,12 @@ export default function PaymentMethodsPage() {
 
           <Card>
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">
+              <CardTitle className="text-xs sm:text-sm font-medium text-muted-foreground">
                 Test Mode
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">Active</div>
+              <div className="text-xl sm:text-2xl font-bold">Active</div>
               <p className="text-xs text-muted-foreground">
                 Using test credentials
               </p>
@@ -301,12 +311,12 @@ export default function PaymentMethodsPage() {
 
           <Card>
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">
+              <CardTitle className="text-xs sm:text-sm font-medium text-muted-foreground">
                 Avg Processing Fee
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">
+              <div className="text-xl sm:text-2xl font-bold">
                 {stats.averageFee.toFixed(1)}%
               </div>
               <p className="text-xs text-muted-foreground">
@@ -320,15 +330,18 @@ export default function PaymentMethodsPage() {
       {/* Empty State */}
       {paymentMethods.length === 0 && (
         <Card>
-          <CardContent className="py-12 text-center">
-            <CreditCard className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
-            <h3 className="text-lg font-semibold mb-2">
+          <CardContent className="py-8 sm:py-12 text-center">
+            <CreditCard className="w-12 h-12 sm:w-16 sm:h-16 text-muted-foreground mx-auto mb-4" />
+            <h3 className="text-base sm:text-lg font-semibold mb-2">
               No Payment Methods Yet
             </h3>
-            <p className="text-muted-foreground mb-4">
+            <p className="text-sm text-muted-foreground mb-4 px-4">
               Initialize default payment methods to get started
             </p>
-            <Button onClick={handleInitialize} className="gap-2">
+            <Button
+              onClick={handleInitialize}
+              className="gap-2 w-full sm:w-auto"
+            >
               <Zap className="w-4 h-4" />
               Initialize Payment Methods
             </Button>
@@ -345,92 +358,102 @@ export default function PaymentMethodsPage() {
 
             return (
               <Card key={methodId}>
-                <CardHeader>
-                  <div className="flex items-start justify-between">
-                    <div className="flex gap-4">
+                <CardHeader className="pb-3">
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+                    <div className="flex gap-3 sm:gap-4">
                       <div
-                        className={`w-12 h-12 rounded-lg flex items-center justify-center ${
+                        className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center shrink-0 ${
                           method.enabled
                             ? "bg-green-100 dark:bg-green-900"
                             : "bg-muted"
                         }`}
                       >
                         <Icon
-                          className={`w-6 h-6 ${
+                          className={`w-5 h-5 sm:w-6 sm:h-6 ${
                             method.enabled
                               ? "text-green-600 dark:text-green-400"
                               : "text-muted-foreground"
                           }`}
                         />
                       </div>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-1">
-                          <CardTitle className="text-lg">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex flex-wrap items-center gap-2 mb-1">
+                          <CardTitle className="text-base sm:text-lg">
                             {method.name}
                           </CardTitle>
                           {method.enabled && (
-                            <Badge className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+                            <Badge className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 text-xs">
                               <CheckCircle className="w-3 h-3 mr-1" />
                               Active
                             </Badge>
                           )}
                           {method.setupComplete && (
-                            <Badge variant="outline">Configured</Badge>
+                            <Badge variant="outline" className="text-xs">
+                              Configured
+                            </Badge>
                           )}
                           {method.configuration.testMode && (
-                            <Badge variant="secondary">Test Mode</Badge>
+                            <Badge variant="secondary" className="text-xs">
+                              Test Mode
+                            </Badge>
                           )}
                         </div>
-                        <CardDescription>{method.description}</CardDescription>
+                        <CardDescription className="text-xs sm:text-sm">
+                          {method.description}
+                        </CardDescription>
                       </div>
                     </div>
                     <Switch
                       checked={method.enabled}
                       onCheckedChange={() => handleToggle(method)}
                       disabled={!method.setupComplete}
+                      className="shrink-0"
                     />
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {/* Details */}
-                  <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+                  <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
                     <div>
-                      <p className="text-sm text-muted-foreground">Provider</p>
-                      <p className="font-medium">{method.provider}</p>
+                      <p className="text-xs text-muted-foreground">Provider</p>
+                      <p className="text-sm font-medium truncate">
+                        {method.provider}
+                      </p>
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-xs text-muted-foreground">
                         Processing Fee
                       </p>
-                      <p className="font-medium">
+                      <p className="text-sm font-medium">
                         {method.fees.percentage}%
                         {method.fees.fixedAmount > 0 &&
                           ` + ₦${method.fees.fixedAmount}`}
-                        {method.fees.cap && ` (cap ₦${method.fees.cap})`}
                       </p>
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-xs text-muted-foreground">
                         Setup Status
                       </p>
-                      <p className="font-medium">
+                      <p className="text-sm font-medium">
                         {method.setupComplete ? "Complete" : "Not configured"}
                       </p>
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-xs text-muted-foreground">
                         Settlement
                       </p>
-                      <p className="font-medium">{method.settlementPeriod}</p>
+                      <p className="text-sm font-medium">
+                        {method.settlementPeriod}
+                      </p>
                     </div>
                   </div>
 
                   {/* Limits */}
                   <div>
-                    <p className="text-sm text-muted-foreground mb-1">
+                    <p className="text-xs text-muted-foreground mb-1">
                       Transaction Limits
                     </p>
-                    <p className="text-sm">
+                    <p className="text-xs sm:text-sm">
                       ₦{method.limits.min.toLocaleString()} - ₦
                       {method.limits.max.toLocaleString()}
                     </p>
@@ -438,12 +461,16 @@ export default function PaymentMethodsPage() {
 
                   {/* Supported Currencies */}
                   <div>
-                    <p className="text-sm text-muted-foreground mb-2">
+                    <p className="text-xs text-muted-foreground mb-2">
                       Supported Currencies
                     </p>
                     <div className="flex flex-wrap gap-2">
                       {method.supportedCurrencies.map((currency) => (
-                        <Badge key={currency} variant="outline">
+                        <Badge
+                          key={currency}
+                          variant="outline"
+                          className="text-xs"
+                        >
                           {currency}
                         </Badge>
                       ))}
@@ -452,12 +479,16 @@ export default function PaymentMethodsPage() {
 
                   {/* Features */}
                   <div>
-                    <p className="text-sm text-muted-foreground mb-2">
+                    <p className="text-xs text-muted-foreground mb-2">
                       Features
                     </p>
                     <div className="flex flex-wrap gap-2">
                       {method.features.map((feature) => (
-                        <Badge key={feature} variant="outline">
+                        <Badge
+                          key={feature}
+                          variant="outline"
+                          className="text-xs"
+                        >
                           {feature}
                         </Badge>
                       ))}
@@ -465,11 +496,11 @@ export default function PaymentMethodsPage() {
                   </div>
 
                   {/* Actions */}
-                  <div className="flex gap-2">
+                  <div className="flex flex-col sm:flex-row gap-2">
                     <Button
                       variant="outline"
                       size="sm"
-                      className="gap-2"
+                      className="gap-2 w-full sm:w-auto text-sm"
                       onClick={() => openConfigDialog(method)}
                     >
                       <SettingsIcon className="w-4 h-4" />
@@ -482,6 +513,7 @@ export default function PaymentMethodsPage() {
                         size="sm"
                         onClick={() => handleTest(method)}
                         disabled={testing}
+                        className="w-full sm:w-auto text-sm"
                       >
                         {testing ? (
                           <>
@@ -503,18 +535,20 @@ export default function PaymentMethodsPage() {
 
       {/* Configuration Dialog */}
       <Dialog open={showConfigDialog} onOpenChange={setShowConfigDialog}>
-        <DialogContent className="max-w-2xl">
+        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>Configure {selectedMethod?.name}</DialogTitle>
-            <DialogDescription>
+            <DialogTitle className="text-lg sm:text-xl">
+              Configure {selectedMethod?.name}
+            </DialogTitle>
+            <DialogDescription className="text-sm">
               Enter your {selectedMethod?.provider} credentials
             </DialogDescription>
           </DialogHeader>
 
-          <form onSubmit={handleConfigure} className="space-y-6">
+          <form onSubmit={handleConfigure} className="space-y-4 sm:space-y-6">
             <Alert>
               <AlertCircle className="h-4 w-4" />
-              <AlertDescription>
+              <AlertDescription className="text-xs sm:text-sm">
                 Get your API keys from your {selectedMethod?.provider}{" "}
                 dashboard.
                 {selectedMethod?.provider === "Paystack" && (
@@ -550,7 +584,9 @@ export default function PaymentMethodsPage() {
                 selectedMethod?.type === "mobile_money") && (
                 <>
                   <div className="space-y-2">
-                    <Label htmlFor="publicKey">Public Key *</Label>
+                    <Label htmlFor="publicKey" className="text-sm">
+                      Public Key *
+                    </Label>
                     <Input
                       id="publicKey"
                       placeholder="pk_test_..."
@@ -563,11 +599,14 @@ export default function PaymentMethodsPage() {
                       }
                       required
                       disabled={configuring}
+                      className="h-11"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="secretKey">Secret Key *</Label>
+                    <Label htmlFor="secretKey" className="text-sm">
+                      Secret Key *
+                    </Label>
                     <Input
                       id="secretKey"
                       type="password"
@@ -581,6 +620,7 @@ export default function PaymentMethodsPage() {
                       }
                       required
                       disabled={configuring}
+                      className="h-11"
                     />
                     <p className="text-xs text-muted-foreground">
                       Your secret key is encrypted and stored securely
@@ -593,7 +633,9 @@ export default function PaymentMethodsPage() {
               {selectedMethod?.type === "crypto" && (
                 <>
                   <div className="space-y-2">
-                    <Label htmlFor="apiKey">API Key *</Label>
+                    <Label htmlFor="apiKey" className="text-sm">
+                      API Key *
+                    </Label>
                     <Input
                       id="apiKey"
                       type="password"
@@ -604,6 +646,7 @@ export default function PaymentMethodsPage() {
                       }
                       required
                       disabled={configuring}
+                      className="h-11"
                     />
                     <p className="text-xs text-muted-foreground">
                       Your API key is encrypted and stored securely
@@ -614,7 +657,9 @@ export default function PaymentMethodsPage() {
                     selectedMethod?.provider === "Binance Pay") && (
                     <>
                       <div className="space-y-2">
-                        <Label htmlFor="secretKey">Secret Key *</Label>
+                        <Label htmlFor="secretKey" className="text-sm">
+                          Secret Key *
+                        </Label>
                         <Input
                           id="secretKey"
                           type="password"
@@ -628,11 +673,14 @@ export default function PaymentMethodsPage() {
                           }
                           required
                           disabled={configuring}
+                          className="h-11"
                         />
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="merchantId">Merchant ID</Label>
+                        <Label htmlFor="merchantId" className="text-sm">
+                          Merchant ID
+                        </Label>
                         <Input
                           id="merchantId"
                           placeholder="Your merchant ID..."
@@ -644,6 +692,7 @@ export default function PaymentMethodsPage() {
                             })
                           }
                           disabled={configuring}
+                          className="h-11"
                         />
                       </div>
                     </>
@@ -651,7 +700,9 @@ export default function PaymentMethodsPage() {
 
                   {selectedMethod?.provider === "Coinbase Commerce" && (
                     <div className="space-y-2">
-                      <Label htmlFor="webhookSecret">Webhook Secret</Label>
+                      <Label htmlFor="webhookSecret" className="text-sm">
+                        Webhook Secret
+                      </Label>
                       <Input
                         id="webhookSecret"
                         type="password"
@@ -664,6 +715,7 @@ export default function PaymentMethodsPage() {
                           })
                         }
                         disabled={configuring}
+                        className="h-11"
                       />
                       <p className="text-xs text-muted-foreground">
                         Used to verify webhook signatures
@@ -676,8 +728,8 @@ export default function PaymentMethodsPage() {
               {/* Test Mode Toggle */}
               <div className="flex items-center justify-between">
                 <div>
-                  <Label>Test Mode</Label>
-                  <p className="text-sm text-muted-foreground">
+                  <Label className="text-sm">Test Mode</Label>
+                  <p className="text-xs text-muted-foreground">
                     {selectedMethod?.type === "crypto"
                       ? "Use testnet/sandbox for crypto testing"
                       : "Use test credentials for development"}
@@ -696,9 +748,9 @@ export default function PaymentMethodsPage() {
               {selectedMethod?.type === "crypto" && (
                 <Alert className="bg-blue-50 dark:bg-blue-950 border-blue-200 dark:border-blue-800">
                   <AlertCircle className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-                  <AlertDescription className="text-blue-800 dark:text-blue-200">
+                  <AlertDescription className="text-blue-800 dark:text-blue-200 text-xs sm:text-sm">
                     <strong>Crypto Payment Benefits:</strong>
-                    <ul className="list-disc list-inside mt-2 text-sm space-y-1">
+                    <ul className="list-disc list-inside mt-2 text-xs space-y-1">
                       <li>Instant settlement (T+0)</li>
                       <li>Low fees (0-1%)</li>
                       <li>Global payments</li>
@@ -715,7 +767,16 @@ export default function PaymentMethodsPage() {
               )}
             </div>
 
-            <div className="flex gap-3">
+            <div className="flex flex-col-reverse sm:flex-row gap-2 sm:gap-3">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setShowConfigDialog(false)}
+                disabled={configuring}
+                className="flex-1"
+              >
+                Cancel
+              </Button>
               <Button type="submit" className="flex-1" disabled={configuring}>
                 {configuring ? (
                   <>
@@ -726,14 +787,6 @@ export default function PaymentMethodsPage() {
                   "Save Configuration"
                 )}
               </Button>
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => setShowConfigDialog(false)}
-                disabled={configuring}
-              >
-                Cancel
-              </Button>
             </div>
           </form>
         </DialogContent>
@@ -742,38 +795,44 @@ export default function PaymentMethodsPage() {
       {/* Additional Settings */}
       <Card>
         <CardHeader>
-          <CardTitle>Payment Settings</CardTitle>
-          <CardDescription>Configure global payment behavior</CardDescription>
+          <CardTitle className="text-base sm:text-lg">
+            Payment Settings
+          </CardTitle>
+          <CardDescription className="text-sm">
+            Configure global payment behavior
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-4">
             <div>
-              <Label>Save Customer Payment Methods</Label>
-              <p className="text-sm text-muted-foreground">
+              <Label className="text-sm">Save Customer Payment Methods</Label>
+              <p className="text-xs text-muted-foreground">
                 Allow customers to save cards for future payments
               </p>
             </div>
-            <Switch defaultChecked />
+            <Switch defaultChecked className="shrink-0" />
           </div>
 
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-4">
             <div>
-              <Label>Automatic Retry for Failed Payments</Label>
-              <p className="text-sm text-muted-foreground">
+              <Label className="text-sm">
+                Automatic Retry for Failed Payments
+              </Label>
+              <p className="text-xs text-muted-foreground">
                 Retry failed payments automatically
               </p>
             </div>
-            <Switch defaultChecked />
+            <Switch defaultChecked className="shrink-0" />
           </div>
 
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-4">
             <div>
-              <Label>Send Payment Receipts</Label>
-              <p className="text-sm text-muted-foreground">
+              <Label className="text-sm">Send Payment Receipts</Label>
+              <p className="text-xs text-muted-foreground">
                 Automatically email receipts to customers
               </p>
             </div>
-            <Switch defaultChecked />
+            <Switch defaultChecked className="shrink-0" />
           </div>
         </CardContent>
       </Card>

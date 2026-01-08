@@ -62,7 +62,9 @@ export default function APIKeysPage() {
   );
   const [creating, setCreating] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [accountStatusError, setAccountStatusError] = useState<string | null>(null);
+  const [accountStatusError, setAccountStatusError] = useState<string | null>(
+    null
+  );
   const [showLive, setShowLive] = useState(false);
 
   // Form state
@@ -77,9 +79,6 @@ export default function APIKeysPage() {
     loadApiKeys();
   }, []);
 
-  /**
-   * Load all API keys from backend
-   */
   async function loadApiKeys() {
     try {
       setLoading(true);
@@ -89,14 +88,15 @@ export default function APIKeysPage() {
       setApiKeys(keys);
     } catch (err: any) {
       console.error("Failed to load API keys:", err);
-      
-      // Check if this is an account status error
+
       const errorMessage = err.message || "Failed to load API keys";
-      if (errorMessage.toLowerCase().includes("account") && 
-          (errorMessage.toLowerCase().includes("not active") || 
-           errorMessage.toLowerCase().includes("pending") || 
-           errorMessage.toLowerCase().includes("suspended") ||
-           errorMessage.toLowerCase().includes("closed"))) {
+      if (
+        errorMessage.toLowerCase().includes("account") &&
+        (errorMessage.toLowerCase().includes("not active") ||
+          errorMessage.toLowerCase().includes("pending") ||
+          errorMessage.toLowerCase().includes("suspended") ||
+          errorMessage.toLowerCase().includes("closed"))
+      ) {
         setAccountStatusError(errorMessage);
       } else {
         setError(errorMessage);
@@ -106,9 +106,6 @@ export default function APIKeysPage() {
     }
   }
 
-  /**
-   * Create new API key
-   */
   async function handleCreateKey(e: React.FormEvent) {
     e.preventDefault();
 
@@ -123,11 +120,8 @@ export default function APIKeysPage() {
       setAccountStatusError(null);
 
       const response = await createApiKey(formData);
-
-      // Store the full key (only shown once)
       setNewKeyData(response);
 
-      // Add to list (use id or _id from backend)
       const newKey: ApiKey = {
         id: response.apiKey.id,
         _id: response.apiKey.id,
@@ -146,7 +140,6 @@ export default function APIKeysPage() {
 
       setApiKeys([newKey, ...apiKeys]);
 
-      // Reset form
       setFormData({
         name: "",
         type: "test",
@@ -156,29 +149,27 @@ export default function APIKeysPage() {
       showToast("API key created successfully!", "success");
     } catch (err: any) {
       console.error("Failed to create API key:", err);
-      
-      // Check if this is an account status error
+
       const errorMessage = err.message || "Failed to create API key";
-      if (errorMessage.toLowerCase().includes("account") && 
-          (errorMessage.toLowerCase().includes("not active") || 
-           errorMessage.toLowerCase().includes("pending") || 
-           errorMessage.toLowerCase().includes("suspended") ||
-           errorMessage.toLowerCase().includes("closed"))) {
+      if (
+        errorMessage.toLowerCase().includes("account") &&
+        (errorMessage.toLowerCase().includes("not active") ||
+          errorMessage.toLowerCase().includes("pending") ||
+          errorMessage.toLowerCase().includes("suspended") ||
+          errorMessage.toLowerCase().includes("closed"))
+      ) {
         setAccountStatusError(errorMessage);
-        setShowNewKeyDialog(false); // Close the dialog
+        setShowNewKeyDialog(false);
       } else {
         setError(errorMessage);
       }
-      
+
       showToast(errorMessage, "error");
     } finally {
       setCreating(false);
     }
   }
 
-  /**
-   * Delete API key
-   */
   async function handleDeleteKey(id: string, name: string) {
     if (
       !confirm(
@@ -198,9 +189,6 @@ export default function APIKeysPage() {
     }
   }
 
-  /**
-   * Rotate API key
-   */
   async function handleRotateKey(id: string, name: string) {
     if (
       !confirm(
@@ -212,20 +200,13 @@ export default function APIKeysPage() {
 
     try {
       const response = await rotateApiKey(id);
-
-      // Show new key in dialog
       setNewKeyData(response);
       setShowNewKeyDialog(true);
 
-      // Update key in list
       setApiKeys(
         apiKeys.map((key) =>
           key.id === id || key._id === id
-            ? {
-                ...key,
-                keyPrefix: response.apiKey.keyPrefix,
-                usageCount: 0,
-              }
+            ? { ...key, keyPrefix: response.apiKey.keyPrefix, usageCount: 0 }
             : key
         )
       );
@@ -237,9 +218,6 @@ export default function APIKeysPage() {
     }
   }
 
-  /**
-   * Copy to clipboard
-   */
   function handleCopy(text: string, id: string) {
     navigator.clipboard.writeText(text);
     setCopied(id);
@@ -247,9 +225,6 @@ export default function APIKeysPage() {
     showToast("Copied to clipboard!", "success");
   }
 
-  /**
-   * Toggle key visibility
-   */
   function toggleVisibility(id: string) {
     setVisibleKeys((prev) => {
       const newSet = new Set(prev);
@@ -262,9 +237,6 @@ export default function APIKeysPage() {
     });
   }
 
-  /**
-   * Handle permission checkbox change
-   */
   function handlePermissionChange(permission: string, checked: boolean) {
     setFormData((prev) => ({
       ...prev,
@@ -274,9 +246,6 @@ export default function APIKeysPage() {
     }));
   }
 
-  /**
-   * Close dialog and reset
-   */
   function closeDialog() {
     setShowNewKeyDialog(false);
     setNewKeyData(null);
@@ -288,45 +257,43 @@ export default function APIKeysPage() {
     setError(null);
   }
 
-  /**
-   * Show toast notification (simple implementation)
-   */
   function showToast(message: string, type: "success" | "error") {
-    // You can replace this with a proper toast library
     console.log(`[${type.toUpperCase()}]:`, message);
   }
 
-  // Loading state
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
+      <div className="flex items-center justify-center min-h-[400px] px-4">
         <div className="text-center space-y-4">
           <Loader2 className="w-8 h-8 animate-spin mx-auto text-primary" />
-          <p className="text-muted-foreground">Loading API keys...</p>
+          <p className="text-sm text-muted-foreground">Loading API keys...</p>
         </div>
       </div>
     );
   }
 
-  // Account Status Error state
   if (accountStatusError && apiKeys.length === 0) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <Card className="max-w-md">
+      <div className="flex items-center justify-center min-h-[400px] px-4">
+        <Card className="max-w-md w-full">
           <CardContent className="pt-6">
             <div className="text-center space-y-4">
               <AlertCircle className="w-12 h-12 text-orange-500 mx-auto" />
               <div>
-                <h3 className="text-lg font-semibold mb-2">
+                <h3 className="text-base sm:text-lg font-semibold mb-2">
                   Account Verification Required
                 </h3>
-                <p className="text-sm text-muted-foreground mb-4">
+                <p className="text-xs sm:text-sm text-muted-foreground mb-4">
                   {accountStatusError}
                 </p>
                 <p className="text-xs text-muted-foreground mb-4">
                   Please contact support if you believe this is an error.
                 </p>
-                <Button onClick={loadApiKeys} variant="outline">
+                <Button
+                  onClick={loadApiKeys}
+                  variant="outline"
+                  className="w-full sm:w-auto"
+                >
                   Check Status
                 </Button>
               </div>
@@ -337,20 +304,23 @@ export default function APIKeysPage() {
     );
   }
 
-  // Error state
   if (error && apiKeys.length === 0) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <Card className="max-w-md">
+      <div className="flex items-center justify-center min-h-[400px] px-4">
+        <Card className="max-w-md w-full">
           <CardContent className="pt-6">
             <div className="text-center space-y-4">
               <AlertCircle className="w-12 h-12 text-red-500 mx-auto" />
               <div>
-                <h3 className="text-lg font-semibold mb-2">
+                <h3 className="text-base sm:text-lg font-semibold mb-2">
                   Failed to Load API Keys
                 </h3>
-                <p className="text-sm text-muted-foreground mb-4">{error}</p>
-                <Button onClick={loadApiKeys}>Try Again</Button>
+                <p className="text-xs sm:text-sm text-muted-foreground mb-4">
+                  {error}
+                </p>
+                <Button onClick={loadApiKeys} className="w-full sm:w-auto">
+                  Try Again
+                </Button>
               </div>
             </div>
           </CardContent>
@@ -359,35 +329,46 @@ export default function APIKeysPage() {
     );
   }
 
-  const filteredKeys = showLive ? apiKeys.filter(key => key.type === "live") : apiKeys.filter(key => key.type === "test");
+  const filteredKeys = showLive
+    ? apiKeys.filter((key) => key.type === "live")
+    : apiKeys.filter((key) => key.type === "test");
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6 px-4 sm:px-0">
       {/* Header */}
-      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+      <div className="space-y-4">
         <div>
-          <h1 className="text-3xl font-bold">API Keys</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-2xl sm:text-3xl font-bold">API Keys</h1>
+          <p className="text-sm sm:text-base text-muted-foreground mt-1">
             Manage your API keys for integrating with SettleMe
           </p>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
           <div className="flex items-center gap-2">
-            <Label htmlFor="live-mode">Live Mode</Label>
-            <Switch id="live-mode" checked={showLive} onCheckedChange={setShowLive} />
+            <Label htmlFor="live-mode" className="text-sm">
+              Live Mode
+            </Label>
+            <Switch
+              id="live-mode"
+              checked={showLive}
+              onCheckedChange={setShowLive}
+            />
           </div>
           <Dialog open={showNewKeyDialog} onOpenChange={setShowNewKeyDialog}>
             <DialogTrigger asChild>
-              <Button className="gap-2">
+              <Button className="gap-2 w-full sm:w-auto">
                 <Plus className="w-4 h-4" />
                 Create API Key
               </Button>
             </DialogTrigger>
-            <DialogContent className="max-w-2xl">
+            <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
               <DialogHeader>
-                <DialogTitle>Create New API Key</DialogTitle>
-                <DialogDescription>
-                  Generate a new API key to authenticate your requests to PayDeck
+                <DialogTitle className="text-lg sm:text-xl">
+                  Create New API Key
+                </DialogTitle>
+                <DialogDescription className="text-sm">
+                  Generate a new API key to authenticate your requests to
+                  SettleMe
                 </DialogDescription>
               </DialogHeader>
 
@@ -395,23 +376,23 @@ export default function APIKeysPage() {
                 <div className="space-y-4">
                   <Alert>
                     <AlertCircle className="h-4 w-4" />
-                    <AlertDescription>
-                      <strong>Important:</strong> Copy your API key now. You won't
-                      be able to see it again!
+                    <AlertDescription className="text-sm">
+                      <strong>Important:</strong> Copy your API key now. You
+                      won't be able to see it again!
                     </AlertDescription>
                   </Alert>
 
                   <div className="space-y-2">
-                    <Label>Your New API Key</Label>
-                    <div className="flex items-center gap-2">
-                      <div className="flex-1 px-3 py-2 bg-muted rounded-lg font-mono text-sm break-all">
+                    <Label className="text-sm">Your New API Key</Label>
+                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                      <div className="flex-1 px-3 py-2 bg-muted rounded-lg font-mono text-xs sm:text-sm break-all">
                         {newKeyData.key}
                       </div>
                       <Button
                         variant="outline"
                         size="icon"
                         onClick={() => handleCopy(newKeyData.key, "new-key")}
-                        className="shrink-0"
+                        className="shrink-0 w-full sm:w-auto"
                       >
                         {copied === "new-key" ? (
                           <Check className="w-4 h-4" />
@@ -423,15 +404,15 @@ export default function APIKeysPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label>Key Details</Label>
-                    <div className="p-4 bg-muted rounded-lg space-y-2 text-sm">
-                      <div className="flex justify-between">
+                    <Label className="text-sm">Key Details</Label>
+                    <div className="p-3 sm:p-4 bg-muted rounded-lg space-y-2 text-xs sm:text-sm">
+                      <div className="flex justify-between gap-2">
                         <span className="text-muted-foreground">Name:</span>
-                        <span className="font-medium">
+                        <span className="font-medium text-right">
                           {newKeyData.apiKey.name}
                         </span>
                       </div>
-                      <div className="flex justify-between">
+                      <div className="flex justify-between gap-2">
                         <span className="text-muted-foreground">Type:</span>
                         <Badge
                           variant={
@@ -439,15 +420,16 @@ export default function APIKeysPage() {
                               ? "default"
                               : "secondary"
                           }
+                          className="text-xs"
                         >
                           {newKeyData.apiKey.type}
                         </Badge>
                       </div>
-                      <div className="flex justify-between">
+                      <div className="flex justify-between gap-2">
                         <span className="text-muted-foreground">
                           Permissions:
                         </span>
-                        <span className="font-medium">
+                        <span className="font-medium text-right">
                           {newKeyData.apiKey.permissions.join(", ")}
                         </span>
                       </div>
@@ -459,16 +441,23 @@ export default function APIKeysPage() {
                   </Button>
                 </div>
               ) : (
-                <form onSubmit={handleCreateKey} className="space-y-6">
+                <form
+                  onSubmit={handleCreateKey}
+                  className="space-y-4 sm:space-y-6"
+                >
                   {error && (
                     <Alert variant="destructive">
                       <AlertCircle className="h-4 w-4" />
-                      <AlertDescription>{error}</AlertDescription>
+                      <AlertDescription className="text-sm">
+                        {error}
+                      </AlertDescription>
                     </Alert>
                   )}
 
                   <div className="space-y-2">
-                    <Label htmlFor="keyName">Key Name *</Label>
+                    <Label htmlFor="keyName" className="text-sm">
+                      Key Name *
+                    </Label>
                     <Input
                       id="keyName"
                       placeholder="e.g., Production API Key"
@@ -477,6 +466,7 @@ export default function APIKeysPage() {
                         setFormData({ ...formData, name: e.target.value })
                       }
                       required
+                      className="h-11"
                     />
                     <p className="text-xs text-muted-foreground">
                       A descriptive name to help you identify this key
@@ -484,14 +474,16 @@ export default function APIKeysPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="keyType">Key Type *</Label>
+                    <Label htmlFor="keyType" className="text-sm">
+                      Key Type *
+                    </Label>
                     <Select
                       value={formData.type}
                       onValueChange={(value: "test" | "live") =>
                         setFormData({ ...formData, type: value })
                       }
                     >
-                      <SelectTrigger id="keyType">
+                      <SelectTrigger id="keyType" className="h-11">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -506,61 +498,55 @@ export default function APIKeysPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label>Permissions</Label>
+                    <Label className="text-sm">Permissions</Label>
                     <div className="space-y-2">
-                      <label className="flex items-center gap-2">
-                        <input
-                          type="checkbox"
-                          checked={(formData.permissions ?? []).includes("read")}
-                          onChange={(e) =>
-                            handlePermissionChange("read", e.target.checked)
-                          }
-                          className="rounded"
-                        />
-                        <span className="text-sm">
-                          Read - View transactions and data
-                        </span>
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <input
-                          type="checkbox"
-                          checked={(formData.permissions ?? []).includes("write")}
-                          onChange={(e) =>
-                            handlePermissionChange("write", e.target.checked)
-                          }
-                          className="rounded"
-                        />
-                        <span className="text-sm">
-                          Write - Create payments and charges
-                        </span>
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <input
-                          type="checkbox"
-                          checked={(formData.permissions ?? []).includes("refund")}
-                          onChange={(e) =>
-                            handlePermissionChange("refund", e.target.checked)
-                          }
-                          className="rounded"
-                        />
-                        <span className="text-sm">Refund - Process refunds</span>
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <input
-                          type="checkbox"
-                          checked={(formData.permissions ?? []).includes("webhook")}
-                          onChange={(e) =>
-                            handlePermissionChange("webhook", e.target.checked)
-                          }
-                          className="rounded"
-                        />
-                        <span className="text-sm">Webhook - Manage webhooks</span>
-                      </label>
+                      {[
+                        {
+                          id: "read",
+                          label: "Read - View transactions and data",
+                        },
+                        {
+                          id: "write",
+                          label: "Write - Create payments and charges",
+                        },
+                        { id: "refund", label: "Refund - Process refunds" },
+                        { id: "webhook", label: "Webhook - Manage webhooks" },
+                      ].map((perm) => (
+                        <label
+                          key={perm.id}
+                          className="flex items-start gap-2 cursor-pointer"
+                        >
+                          <input
+                            type="checkbox"
+                            checked={(formData.permissions ?? []).includes(
+                              perm.id
+                            )}
+                            onChange={(e) =>
+                              handlePermissionChange(perm.id, e.target.checked)
+                            }
+                            className="rounded mt-0.5"
+                          />
+                          <span className="text-sm">{perm.label}</span>
+                        </label>
+                      ))}
                     </div>
                   </div>
 
-                  <div className="flex gap-3">
-                    <Button type="submit" className="flex-1" disabled={creating}>
+                  <div className="flex flex-col-reverse sm:flex-row gap-2 sm:gap-3">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={closeDialog}
+                      disabled={creating}
+                      className="flex-1"
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      type="submit"
+                      className="flex-1"
+                      disabled={creating}
+                    >
                       {creating ? (
                         <>
                           <Loader2 className="w-4 h-4 mr-2 animate-spin" />
@@ -569,14 +555,6 @@ export default function APIKeysPage() {
                       ) : (
                         "Generate Key"
                       )}
-                    </Button>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      onClick={closeDialog}
-                      disabled={creating}
-                    >
-                      Cancel
                     </Button>
                   </div>
                 </form>
@@ -589,7 +567,7 @@ export default function APIKeysPage() {
       {/* Warning */}
       <Alert>
         <AlertCircle className="h-4 w-4" />
-        <AlertDescription>
+        <AlertDescription className="text-xs sm:text-sm">
           Keep your API keys secure. Never share them publicly or commit them to
           version control.
         </AlertDescription>
@@ -598,22 +576,36 @@ export default function APIKeysPage() {
       {/* Empty State */}
       {filteredKeys.length === 0 ? (
         <Card>
-          <CardContent className="py-12">
+          <CardContent className="py-8 sm:py-12">
             <div className="text-center space-y-4">
-              <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mx-auto">
-                <Plus className="w-8 h-8 text-muted-foreground" />
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-muted rounded-full flex items-center justify-center mx-auto">
+                <Plus className="w-6 h-6 sm:w-8 sm:h-8 text-muted-foreground" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold mb-2">{showLive ? "No Live API Keys Found" : "No Test API Keys Found"}</h3>
-                <p className="text-muted-foreground mb-4">
-                  {showLive ? "Switch to test mode or create a new live API key to get started." : "Switch to live mode or create a new test API key to get started."}
+                <h3 className="text-base sm:text-lg font-semibold mb-2">
+                  {showLive
+                    ? "No Live API Keys Found"
+                    : "No Test API Keys Found"}
+                </h3>
+                <p className="text-sm text-muted-foreground mb-4 px-4">
+                  {showLive
+                    ? "Switch to test mode or create a new live API key to get started."
+                    : "Switch to live mode or create a new test API key to get started."}
                 </p>
-                <div className="flex gap-2 justify-center">
-                  <Button onClick={() => setShowNewKeyDialog(true)}>
+                <div className="flex flex-col sm:flex-row gap-2 justify-center px-4">
+                  <Button
+                    onClick={() => setShowNewKeyDialog(true)}
+                    className="w-full sm:w-auto"
+                  >
                     <Plus className="w-4 h-4 mr-2" />
                     Create API Key
                   </Button>
-                  <Button variant="outline" onClick={loadApiKeys} disabled={loading}>
+                  <Button
+                    variant="outline"
+                    onClick={loadApiKeys}
+                    disabled={loading}
+                    className="w-full sm:w-auto"
+                  >
                     {loading ? (
                       <>
                         <Loader2 className="w-4 h-4 mr-2 animate-spin" />
@@ -635,23 +627,28 @@ export default function APIKeysPage() {
             const keyId = key.id || key._id || "";
             return (
               <Card key={keyId}>
-                <CardHeader>
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <CardTitle className="text-lg">{key.name}</CardTitle>
+                <CardHeader className="pb-3">
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex flex-wrap items-center gap-2 mb-1">
+                        <CardTitle className="text-base sm:text-lg truncate">
+                          {key.name}
+                        </CardTitle>
                         <Badge
                           variant={
                             key.type === "live" ? "default" : "secondary"
                           }
+                          className="text-xs"
                         >
                           {key.type}
                         </Badge>
                         {!key.isActive && (
-                          <Badge variant="destructive">Inactive</Badge>
+                          <Badge variant="destructive" className="text-xs">
+                            Inactive
+                          </Badge>
                         )}
                       </div>
-                      <CardDescription>
+                      <CardDescription className="text-xs sm:text-sm">
                         Created {new Date(key.createdAt).toLocaleDateString()} •
                         Last used{" "}
                         {key.lastUsed
@@ -667,36 +664,38 @@ export default function APIKeysPage() {
                     <Label className="text-xs text-muted-foreground">
                       API Key
                     </Label>
-                    <div className="flex items-center gap-2">
-                      <div className="flex-1 px-3 py-2 bg-muted rounded-lg font-mono text-sm">
-                        {visibleKeys.has(keyId)
-                          ? `${key.keyPrefix}${"•".repeat(40)}`
-                          : `${key.keyPrefix}${"•".repeat(40)}`}
+                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                      <div className="flex-1 px-3 py-2 bg-muted rounded-lg font-mono text-xs sm:text-sm break-all">
+                        {`${key.keyPrefix}${"•".repeat(40)}`}
                       </div>
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        onClick={() => toggleVisibility(keyId)}
-                        title="Full key cannot be displayed"
-                      >
-                        {visibleKeys.has(keyId) ? (
-                          <EyeOff className="w-4 h-4" />
-                        ) : (
-                          <Eye className="w-4 h-4" />
-                        )}
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        onClick={() => handleCopy(key.keyPrefix, keyId)}
-                        title="Copy key prefix"
-                      >
-                        {copied === keyId ? (
-                          <Check className="w-4 h-4" />
-                        ) : (
-                          <Copy className="w-4 h-4" />
-                        )}
-                      </Button>
+                      <div className="flex gap-2 sm:flex-col">
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          onClick={() => toggleVisibility(keyId)}
+                          title="Full key cannot be displayed"
+                          className="flex-1 sm:flex-none"
+                        >
+                          {visibleKeys.has(keyId) ? (
+                            <EyeOff className="w-4 h-4" />
+                          ) : (
+                            <Eye className="w-4 h-4" />
+                          )}
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          onClick={() => handleCopy(key.keyPrefix, keyId)}
+                          title="Copy key prefix"
+                          className="flex-1 sm:flex-none"
+                        >
+                          {copied === keyId ? (
+                            <Check className="w-4 h-4" />
+                          ) : (
+                            <Copy className="w-4 h-4" />
+                          )}
+                        </Button>
+                      </div>
                     </div>
                     <p className="text-xs text-muted-foreground">
                       The full key cannot be displayed. Rotate the key to
@@ -705,29 +704,29 @@ export default function APIKeysPage() {
                   </div>
 
                   {/* Stats */}
-                  <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
                     <div>
-                      <p className="text-sm text-muted-foreground">Usage</p>
-                      <p className="text-lg font-semibold">
+                      <p className="text-xs text-muted-foreground">Usage</p>
+                      <p className="text-base sm:text-lg font-semibold">
                         {key.usageCount.toLocaleString()}
                       </p>
                       <p className="text-xs text-muted-foreground">requests</p>
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-xs text-muted-foreground">
                         Permissions
                       </p>
-                      <p className="text-lg font-semibold">
+                      <p className="text-base sm:text-lg font-semibold">
                         {key.permissions.length}
                       </p>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-xs text-muted-foreground truncate">
                         {key.permissions.join(", ")}
                       </p>
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">Status</p>
+                      <p className="text-xs text-muted-foreground">Status</p>
                       <p
-                        className={`text-lg font-semibold ${
+                        className={`text-base sm:text-lg font-semibold ${
                           key.isActive ? "text-green-600" : "text-red-600"
                         }`}
                       >
@@ -738,8 +737,8 @@ export default function APIKeysPage() {
                       </p>
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">Expires</p>
-                      <p className="text-lg font-semibold">
+                      <p className="text-xs text-muted-foreground">Expires</p>
+                      <p className="text-base sm:text-lg font-semibold">
                         {key.expiresAt ? (
                           <span className="text-orange-600">
                             {new Date(key.expiresAt).toLocaleDateString()}
@@ -755,11 +754,11 @@ export default function APIKeysPage() {
                   </div>
 
                   {/* Actions */}
-                  <div className="flex gap-2">
+                  <div className="flex flex-col sm:flex-row gap-2">
                     <Button
                       variant="outline"
                       size="sm"
-                      className="gap-2"
+                      className="gap-2 w-full sm:w-auto text-sm"
                       onClick={() => handleRotateKey(keyId, key.name)}
                     >
                       <RefreshCcw className="w-4 h-4" />
@@ -768,7 +767,7 @@ export default function APIKeysPage() {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="gap-2 text-red-600 hover:text-red-700"
+                      className="gap-2 w-full sm:w-auto text-sm text-red-600 hover:text-red-700"
                       onClick={() => handleDeleteKey(keyId, key.name)}
                     >
                       <Trash2 className="w-4 h-4" />
@@ -785,25 +784,37 @@ export default function APIKeysPage() {
       {/* Documentation Link */}
       <Card>
         <CardHeader>
-          <CardTitle>Need Help?</CardTitle>
-          <CardDescription>
-            Learn how to integrate PayDeck into your application
+          <CardTitle className="text-base sm:text-lg">Need Help?</CardTitle>
+          <CardDescription className="text-xs sm:text-sm">
+            Learn how to integrate SettleMe into your application
           </CardDescription>
         </CardHeader>
-        <CardContent className="flex gap-3">
-          <Button variant="outline" asChild>
+        <CardContent className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+          <Button
+            variant="outline"
+            asChild
+            className="w-full sm:w-auto text-sm"
+          >
             <a href="/docs" target="_blank">
               View Documentation
             </a>
           </Button>
-          <Button variant="outline" asChild>
+          <Button
+            variant="outline"
+            asChild
+            className="w-full sm:w-auto text-sm"
+          >
             <a href="/api-reference" target="_blank">
               API Reference
             </a>
           </Button>
-          <Button variant="outline" asChild>
+          <Button
+            variant="outline"
+            asChild
+            className="w-full sm:w-auto text-sm"
+          >
             <a
-              href="https://github.com/paydeck/examples"
+              href="https://github.com/settleme/examples"
               target="_blank"
               rel="noopener noreferrer"
             >

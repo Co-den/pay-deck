@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import {
   Card,
   CardContent,
@@ -12,23 +12,22 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
+  Shield,
+  CreditCard,
+  Smartphone,
+  Building2,
+  Bitcoin,
+  CheckCircle,
   Loader2,
   AlertCircle,
-  CheckCircle,
-  CreditCard,
-  Building2,
-  Smartphone,
-  Bitcoin,
 } from "lucide-react";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getPaymentLinkByCode, type PaymentLink } from "@/lib/api/paymentLinks";
 import CustomCheckout from "@/components/custom-checkout";
 
 export default function PaymentLinkPage() {
   const params = useParams();
-  const router = useRouter();
   const shortCode = params.code as string;
 
   const [paymentLink, setPaymentLink] = useState<PaymentLink | null>(null);
@@ -36,7 +35,7 @@ export default function PaymentLinkPage() {
   const [error, setError] = useState<string | null>(null);
   const [processing, setProcessing] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [selectedMethod, setSelectedMethod] = useState("card");
+  const [paymentMethod, setPaymentMethod] = useState("card");
 
   // Customer form data
   const [customerData, setCustomerData] = useState({
@@ -81,11 +80,9 @@ export default function PaymentLinkPage() {
 
     // For card payments, the custom checkout component handles everything
     // For other methods, handle here
-    if (selectedMethod !== "card") {
+    if (paymentMethod !== "card") {
       try {
         setProcessing(true);
-
-        // TODO: Integrate with actual payment processors
         await new Promise((resolve) => setTimeout(resolve, 2000));
 
         const isSuccess = Math.random() > 0.2;
@@ -125,9 +122,10 @@ export default function PaymentLinkPage() {
     alert("Payment failed: " + error);
   }
 
+  // Loading state
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
         <div className="text-center space-y-4">
           <Loader2 className="w-12 h-12 animate-spin mx-auto text-primary" />
           <p className="text-muted-foreground">Loading payment details...</p>
@@ -136,13 +134,16 @@ export default function PaymentLinkPage() {
     );
   }
 
+  // Error state
   if (error || !paymentLink) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 p-4">
-        <Card className="max-w-md w-full">
+      <div className="min-h-screen bg-gradient-to-br from-red-50 to-orange-50 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4">
+        <Card className="w-full max-w-md">
           <CardContent className="pt-6">
             <div className="text-center space-y-4">
-              <AlertCircle className="w-16 h-16 text-red-500 mx-auto" />
+              <div className="w-16 h-16 bg-red-100 dark:bg-red-900 rounded-full flex items-center justify-center mx-auto">
+                <AlertCircle className="w-8 h-8 text-red-600 dark:text-red-400" />
+              </div>
               <div>
                 <h3 className="text-xl font-bold mb-2">
                   Payment Link Not Found
@@ -159,296 +160,424 @@ export default function PaymentLinkPage() {
     );
   }
 
+  // Success state
   if (success) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 p-4">
-        <Card className="max-w-md w-full">
-          <CardContent className="pt-6">
-            <div className="text-center space-y-4">
-              <CheckCircle className="w-16 h-16 text-green-500 mx-auto" />
-              <div>
-                <h3 className="text-2xl font-bold mb-2">Payment Successful!</h3>
-                <p className="text-muted-foreground mb-4">
-                  {paymentLink.settings.successMessage ||
-                    "Your payment has been processed successfully. Thank you!"}
-                </p>
-                <div className="p-4 bg-muted rounded-lg">
-                  <p className="text-sm text-muted-foreground">Amount Paid</p>
-                  <p className="text-2xl font-bold">
-                    {paymentLink.currency} {paymentLink.amount.toLocaleString()}
-                  </p>
-                </div>
-                {paymentLink.settings.redirectUrl && (
-                  <p className="text-sm text-muted-foreground mt-4">
-                    Redirecting you shortly...
-                  </p>
-                )}
+      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4">
+        <Card className="w-full max-w-md">
+          <CardContent className="pt-6 text-center space-y-4">
+            <div className="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto">
+              <CheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold mb-2">Payment Successful!</h2>
+              <p className="text-muted-foreground">
+                {paymentLink.settings.successMessage ||
+                  "Your payment has been processed successfully."}
+              </p>
+            </div>
+            <div className="bg-muted p-4 rounded-lg text-left">
+              <div className="flex justify-between mb-2">
+                <span className="text-sm">Amount Paid</span>
+                <span className="font-semibold">
+                  {paymentLink.currency === "NGN" && "₦"}
+                  {paymentLink.currency === "USD" && "$"}
+                  {paymentLink.currency === "EUR" && "€"}
+                  {paymentLink.currency === "GBP" && "£"}
+                  {!["NGN", "USD", "EUR", "GBP"].includes(
+                    paymentLink.currency
+                  ) && paymentLink.currency + " "}
+                  {paymentLink.amount.toLocaleString()}
+                </span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-sm">Receipt sent to</span>
+                <span className="font-semibold">{customerData.email}</span>
               </div>
             </div>
+            {paymentLink.settings.redirectUrl ? (
+              <p className="text-sm text-muted-foreground">
+                Redirecting you shortly...
+              </p>
+            ) : (
+              <Button className="w-full">Close</Button>
+            )}
           </CardContent>
         </Card>
       </div>
     );
   }
 
+  // Main payment page
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 px-4 sm:px-6 lg:px-8">
-      {/* Wider container with better max-width */}
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-2">
-            Complete Your Payment
-          </h1>
-          <p className="text-sm sm:text-base text-muted-foreground">
-            Powered by SettleMe
-          </p>
-        </div>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4">
+      <div className="w-full max-w-6xl grid gap-6 md:grid-cols-5">
+        {/* Order Summary */}
+        <Card className="md:col-span-2">
+          <CardHeader>
+            <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center mb-4">
+              <span className="text-2xl font-bold text-primary-foreground">
+                S
+              </span>
+            </div>
+            <CardTitle>SettleMe</CardTitle>
+            <CardDescription>
+              Secure checkout powered by SettleMe
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div>
+              <h3 className="font-semibold text-lg mb-1">
+                {paymentLink.title}
+              </h3>
+              {paymentLink.description && (
+                <p className="text-sm text-muted-foreground">
+                  {paymentLink.description}
+                </p>
+              )}
+            </div>
 
-        {/* Main Content - Better horizontal layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
-          {/* Order Summary - Sidebar on desktop, top on mobile */}
-          <div className="lg:col-span-4 xl:col-span-3">
-            <Card className="sticky top-8">
-              <CardHeader>
-                <CardTitle className="text-lg">Order Summary</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <p className="text-sm text-muted-foreground">Item</p>
-                  <p className="font-semibold text-base">{paymentLink.title}</p>
-                  {paymentLink.description && (
-                    <p className="text-sm text-muted-foreground mt-1">
-                      {paymentLink.description}
-                    </p>
-                  )}
-                </div>
+            <div className="border-t pt-4">
+              <div className="flex justify-between text-sm mb-2">
+                <span>Subtotal</span>
+                <span>
+                  {paymentLink.currency === "NGN" && "₦"}
+                  {paymentLink.currency === "USD" && "$"}
+                  {paymentLink.currency === "EUR" && "€"}
+                  {paymentLink.currency === "GBP" && "£"}
+                  {!["NGN", "USD", "EUR", "GBP"].includes(
+                    paymentLink.currency
+                  ) && paymentLink.currency + " "}
+                  {paymentLink.amount.toLocaleString()}
+                </span>
+              </div>
+              <div className="flex justify-between text-sm mb-2">
+                <span>Processing Fee</span>
+                <span>
+                  {paymentLink.currency === "NGN" && "₦"}
+                  {paymentLink.currency === "USD" && "$"}0.00
+                </span>
+              </div>
+              <div className="flex justify-between text-lg font-bold pt-2 border-t">
+                <span>Total</span>
+                <span>
+                  {paymentLink.currency === "NGN" && "₦"}
+                  {paymentLink.currency === "USD" && "$"}
+                  {paymentLink.currency === "EUR" && "€"}
+                  {paymentLink.currency === "GBP" && "£"}
+                  {!["NGN", "USD", "EUR", "GBP"].includes(
+                    paymentLink.currency
+                  ) && paymentLink.currency + " "}
+                  {paymentLink.amount.toLocaleString()}
+                </span>
+              </div>
+            </div>
 
-                <div className="pt-4 border-t">
-                  <div className="flex justify-between items-center">
-                    <p className="text-sm text-muted-foreground">Amount</p>
-                    <p className="text-2xl font-bold">
-                      {paymentLink.currency === "NGN" && "₦"}
-                      {paymentLink.currency === "USD" && "$"}
-                      {paymentLink.currency === "EUR" && "€"}
-                      {paymentLink.currency === "GBP" && "£"}
-                      {!["NGN", "USD", "EUR", "GBP"].includes(
-                        paymentLink.currency
-                      ) && paymentLink.currency + " "}
-                      {paymentLink.amount.toLocaleString()}
-                    </p>
-                  </div>
-                </div>
+            {/* Usage Info */}
+            {paymentLink.maxUses && (
+              <div className="p-3 bg-blue-50 dark:bg-blue-950 rounded-lg">
+                <p className="text-xs text-blue-900 dark:text-blue-100">
+                  <strong>Limited offer:</strong>{" "}
+                  {paymentLink.maxUses - paymentLink.currentUses} uses remaining
+                </p>
+              </div>
+            )}
 
-                {/* Usage Info */}
-                {paymentLink.maxUses && (
-                  <Alert className="mt-4">
-                    <AlertDescription className="text-xs">
-                      <strong>Limited:</strong>{" "}
-                      {paymentLink.maxUses - paymentLink.currentUses} uses
-                      remaining
-                    </AlertDescription>
-                  </Alert>
-                )}
+            <div className="flex items-center gap-2 text-sm text-muted-foreground pt-4">
+              <Shield className="w-4 h-4" />
+              <span>Secure payment • PCI DSS compliant</span>
+            </div>
+          </CardContent>
+        </Card>
 
-                {/* Security Badge */}
-                <div className="pt-4 border-t">
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                    <CheckCircle className="w-4 h-4" />
-                    <span>Secured by SettleMe • SSL Encrypted</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Payment Form - Main content area */}
-          <div className="lg:col-span-8 xl:col-span-9">
-            <Card>
-              <CardHeader>
-                <CardTitle>Payment Information</CardTitle>
-                <CardDescription>
-                  Enter your details to complete payment
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handlePayment} className="space-y-6">
-                  {/* Customer Details - Two columns on larger screens */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="name">Full Name *</Label>
-                      <Input
-                        id="name"
-                        placeholder="John Doe"
-                        value={customerData.name}
-                        onChange={(e) =>
-                          setCustomerData({
-                            ...customerData,
-                            name: e.target.value,
-                          })
-                        }
-                        required
-                        disabled={processing}
-                        className="h-11"
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email Address *</Label>
-                      <Input
-                        id="email"
-                        type="email"
-                        placeholder="john@example.com"
-                        value={customerData.email}
-                        onChange={(e) =>
-                          setCustomerData({
-                            ...customerData,
-                            email: e.target.value,
-                          })
-                        }
-                        required
-                        disabled={processing}
-                        className="h-11"
-                      />
-                    </div>
-
-                    {paymentLink.settings.collectPhone && (
-                      <div className="space-y-2 md:col-span-2">
-                        <Label htmlFor="phone">Phone Number *</Label>
-                        <Input
-                          id="phone"
-                          type="tel"
-                          placeholder="+234 xxx xxx xxxx"
-                          value={customerData.phone}
-                          onChange={(e) =>
-                            setCustomerData({
-                              ...customerData,
-                              phone: e.target.value,
-                            })
-                          }
-                          required
-                          disabled={processing}
-                          className="h-11"
-                        />
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Payment Method Selection */}
-                  <div className="space-y-4">
-                    <Label className="text-base">Payment Method</Label>
-                    <Tabs
-                      value={selectedMethod}
-                      onValueChange={setSelectedMethod}
+        {/* Payment Form */}
+        <Card className="md:col-span-3">
+          <CardHeader>
+            <CardTitle>Payment Details</CardTitle>
+            <CardDescription>
+              Choose your payment method and complete checkout
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handlePayment} className="space-y-6">
+              {/* Payment Method Selection */}
+              <div className="space-y-4">
+                <Label>Payment Method</Label>
+                <RadioGroup
+                  value={paymentMethod}
+                  onValueChange={setPaymentMethod}
+                  className="grid grid-cols-2 gap-4"
+                >
+                  <div>
+                    <RadioGroupItem
+                      value="card"
+                      id="card"
+                      className="peer sr-only"
+                    />
+                    <Label
+                      htmlFor="card"
+                      className="flex flex-col items-center justify-center rounded-lg border-2 border-muted bg-background p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer transition-all"
                     >
-                      <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 h-auto">
-                        <TabsTrigger value="card" className="gap-2 py-3">
-                          <CreditCard className="w-4 h-4" />
-                          <span className="hidden sm:inline">Card</span>
-                        </TabsTrigger>
-                        <TabsTrigger value="bank" className="gap-2 py-3">
-                          <Building2 className="w-4 h-4" />
-                          <span className="hidden sm:inline">Bank</span>
-                        </TabsTrigger>
-                        <TabsTrigger value="ussd" className="gap-2 py-3">
-                          <Smartphone className="w-4 h-4" />
-                          <span className="hidden sm:inline">USSD</span>
-                        </TabsTrigger>
-                        <TabsTrigger value="crypto" className="gap-2 py-3">
-                          <Bitcoin className="w-4 h-4" />
-                          <span className="hidden sm:inline">Crypto</span>
-                        </TabsTrigger>
-                      </TabsList>
-
-                      <TabsContent value="card" className="space-y-4 mt-6">
-                        {customerData.email && customerData.name ? (
-                          <CustomCheckout
-                            amount={paymentLink.amount}
-                            currency={paymentLink.currency}
-                            customerData={customerData}
-                            paymentLinkId={paymentLink.id || paymentLink._id}
-                            shortCode={shortCode}
-                            metadata={{
-                              title: paymentLink.title,
-                              description: paymentLink.description,
-                              shortCode: shortCode,
-                            }}
-                            onSuccess={handlePaymentSuccess}
-                            onError={handlePaymentError}
-                          />
-                        ) : (
-                          <Alert>
-                            <AlertCircle className="h-4 w-4" />
-                            <AlertDescription>
-                              Please fill in your name and email above to
-                              continue with card payment
-                            </AlertDescription>
-                          </Alert>
-                        )}
-                      </TabsContent>
-
-                      <TabsContent value="bank" className="space-y-4 mt-6">
-                        <Alert>
-                          <AlertCircle className="h-4 w-4" />
-                          <AlertDescription>
-                            You'll receive bank account details to transfer to
-                          </AlertDescription>
-                        </Alert>
-                      </TabsContent>
-
-                      <TabsContent value="ussd" className="space-y-4 mt-6">
-                        <Alert>
-                          <AlertCircle className="h-4 w-4" />
-                          <AlertDescription>
-                            You'll receive a USSD code to dial from your phone
-                          </AlertDescription>
-                        </Alert>
-                      </TabsContent>
-
-                      <TabsContent value="crypto" className="space-y-4 mt-6">
-                        <Alert>
-                          <AlertCircle className="h-4 w-4" />
-                          <AlertDescription>
-                            You'll receive a crypto wallet address and QR code
-                          </AlertDescription>
-                        </Alert>
-                      </TabsContent>
-                    </Tabs>
+                      <CreditCard className="w-6 h-6 mb-2" />
+                      <span className="text-sm font-medium">Credit Card</span>
+                    </Label>
                   </div>
 
-                  {/* Submit Button - Only show for non-card payments */}
-                  {selectedMethod !== "card" && (
-                    <Button
-                      type="submit"
-                      className="w-full h-12 text-base"
-                      size="lg"
+                  <div>
+                    <RadioGroupItem
+                      value="bank"
+                      id="bank"
+                      className="peer sr-only"
+                    />
+                    <Label
+                      htmlFor="bank"
+                      className="flex flex-col items-center justify-center rounded-lg border-2 border-muted bg-background p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer transition-all"
+                    >
+                      <Building2 className="w-6 h-6 mb-2" />
+                      <span className="text-sm font-medium">Bank Transfer</span>
+                    </Label>
+                  </div>
+
+                  <div>
+                    <RadioGroupItem
+                      value="ussd"
+                      id="ussd"
+                      className="peer sr-only"
+                    />
+                    <Label
+                      htmlFor="ussd"
+                      className="flex flex-col items-center justify-center rounded-lg border-2 border-muted bg-background p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer transition-all"
+                    >
+                      <Smartphone className="w-6 h-6 mb-2" />
+                      <span className="text-sm font-medium">USSD</span>
+                    </Label>
+                  </div>
+
+                  <div>
+                    <RadioGroupItem
+                      value="crypto"
+                      id="crypto"
+                      className="peer sr-only"
+                    />
+                    <Label
+                      htmlFor="crypto"
+                      className="flex flex-col items-center justify-center rounded-lg border-2 border-muted bg-background p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer transition-all"
+                    >
+                      <Bitcoin className="w-6 h-6 mb-2" />
+                      <span className="text-sm font-medium">
+                        Cryptocurrency
+                      </span>
+                    </Label>
+                  </div>
+                </RadioGroup>
+              </div>
+
+              {/* Customer Information */}
+              <div className="space-y-4">
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div className="space-y-2">
+                    <Label htmlFor="name">Full Name *</Label>
+                    <Input
+                      id="name"
+                      placeholder="John Doe"
+                      value={customerData.name}
+                      onChange={(e) =>
+                        setCustomerData({
+                          ...customerData,
+                          name: e.target.value,
+                        })
+                      }
+                      required
                       disabled={processing}
-                    >
-                      {processing ? (
-                        <>
-                          <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                          Processing Payment...
-                        </>
-                      ) : (
-                        <>
-                          Pay {paymentLink.currency}{" "}
-                          {paymentLink.amount.toLocaleString()}
-                        </>
-                      )}
-                    </Button>
-                  )}
-                </form>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
+                      className="h-11"
+                    />
+                  </div>
 
-        {/* Footer */}
-        <div className="text-center mt-8 text-sm text-muted-foreground">
-          <p>
-            Powered by <strong>SettleMe</strong> Payment Gateway
-          </p>
-        </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Email Address *</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="john@example.com"
+                      value={customerData.email}
+                      onChange={(e) =>
+                        setCustomerData({
+                          ...customerData,
+                          email: e.target.value,
+                        })
+                      }
+                      required
+                      disabled={processing}
+                      className="h-11"
+                    />
+                  </div>
+                </div>
+
+                {paymentLink.settings.collectPhone && (
+                  <div className="space-y-2">
+                    <Label htmlFor="phone">Phone Number *</Label>
+                    <Input
+                      id="phone"
+                      type="tel"
+                      placeholder="+234 xxx xxx xxxx"
+                      value={customerData.phone}
+                      onChange={(e) =>
+                        setCustomerData({
+                          ...customerData,
+                          phone: e.target.value,
+                        })
+                      }
+                      required
+                      disabled={processing}
+                      className="h-11"
+                    />
+                  </div>
+                )}
+              </div>
+
+              {/* Card Payment Form */}
+              {paymentMethod === "card" && (
+                <>
+                  {customerData.email && customerData.name ? (
+                    <CustomCheckout
+                      amount={paymentLink.amount}
+                      currency={paymentLink.currency}
+                      customerData={customerData}
+                      paymentLinkId={paymentLink.id || paymentLink._id}
+                      shortCode={shortCode}
+                      metadata={{
+                        title: paymentLink.title,
+                        description: paymentLink.description,
+                        shortCode: shortCode,
+                      }}
+                      onSuccess={handlePaymentSuccess}
+                      onError={handlePaymentError}
+                    />
+                  ) : (
+                    <div className="p-4 bg-amber-50 dark:bg-amber-950 rounded-lg">
+                      <p className="text-sm text-amber-900 dark:text-amber-100 flex items-center gap-2">
+                        <AlertCircle className="w-4 h-4" />
+                        Please fill in your name and email above to continue
+                      </p>
+                    </div>
+                  )}
+                </>
+              )}
+
+              {/* Bank Transfer */}
+              {paymentMethod === "bank" && (
+                <div className="space-y-4">
+                  <div className="p-4 bg-muted rounded-lg">
+                    <p className="text-sm text-muted-foreground mb-4">
+                      Transfer the exact amount to the following account:
+                    </p>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">
+                          Bank Name:
+                        </span>
+                        <span className="font-medium">SettleMe Bank</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">
+                          Account Number:
+                        </span>
+                        <span className="font-medium">1234567890</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">
+                          Reference:
+                        </span>
+                        <span className="font-medium">
+                          {shortCode.toUpperCase()}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <Button
+                    type="submit"
+                    className="w-full h-12"
+                    disabled={processing}
+                  >
+                    {processing ? (
+                      <>
+                        <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                        Confirming...
+                      </>
+                    ) : (
+                      "I've Made the Transfer"
+                    )}
+                  </Button>
+                </div>
+              )}
+
+              {/* USSD */}
+              {paymentMethod === "ussd" && (
+                <div className="space-y-4">
+                  <div className="p-4 bg-muted rounded-lg text-center">
+                    <p className="text-sm text-muted-foreground mb-4">
+                      Dial the following USSD code from your phone:
+                    </p>
+                    <p className="text-3xl font-bold mb-2">*737*1234#</p>
+                    <p className="text-xs text-muted-foreground">
+                      Follow the prompts to complete your payment
+                    </p>
+                  </div>
+                  <Button
+                    type="submit"
+                    className="w-full h-12"
+                    disabled={processing}
+                  >
+                    {processing ? (
+                      <>
+                        <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                        Confirming...
+                      </>
+                    ) : (
+                      "I've Completed the Payment"
+                    )}
+                  </Button>
+                </div>
+              )}
+
+              {/* Cryptocurrency */}
+              {paymentMethod === "crypto" && (
+                <div className="space-y-4">
+                  <div className="p-4 bg-muted rounded-lg text-center">
+                    <div className="w-48 h-48 bg-white dark:bg-gray-800 mx-auto mb-4 rounded-lg flex items-center justify-center border-2 border-dashed">
+                      <Bitcoin className="w-16 h-16 text-muted-foreground" />
+                    </div>
+                    <p className="font-mono text-sm break-all bg-background p-3 rounded">
+                      bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-2">
+                      Send exactly {(paymentLink.amount / 50000).toFixed(8)} BTC
+                      to this address
+                    </p>
+                  </div>
+                  <Button
+                    type="submit"
+                    className="w-full h-12"
+                    disabled={processing}
+                  >
+                    {processing ? (
+                      <>
+                        <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                        Confirming...
+                      </>
+                    ) : (
+                      "I've Sent the Crypto"
+                    )}
+                  </Button>
+                </div>
+              )}
+
+              <p className="text-xs text-center text-muted-foreground">
+                By completing this payment, you agree to our terms of service
+              </p>
+            </form>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

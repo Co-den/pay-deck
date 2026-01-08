@@ -96,14 +96,14 @@ export function Header() {
         <div className="fixed inset-0 z-50 md:hidden">
           {/* Backdrop */}
           <div
-            className="absolute inset-0 bg-black/50 animate-in fade-in duration-200"
+            className="absolute inset-0 bg-black/50"
             onClick={() => setMobileMenuOpen(false)}
           />
           
           {/* Menu Panel */}
-          <div className="absolute right-0 top-0 bottom-0 w-full max-w-sm bg-background shadow-xl animate-in slide-in-from-right duration-300 flex flex-col">
+          <div className="absolute right-0 top-0 bottom-0 w-full max-w-sm bg-background shadow-xl flex flex-col">
             {/* Menu Header */}
-            <div className="flex items-center justify-between p-4 border-b border-border shrink-0">
+            <div className="flex items-center justify-between p-4 border-b border-border">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-lg bg-green-500 text-primary-foreground flex items-center justify-center font-bold text-lg">
                   S
@@ -120,63 +120,8 @@ export function Header() {
               </Button>
             </div>
 
-            {/* Scrollable Navigation Links */}
-            <nav className="flex-1 overflow-y-auto p-6">
-              <div className="space-y-1">
-                <Link
-                  href="/#features"
-                  className="block text-base font-medium hover:text-primary hover:bg-accent transition-colors py-3 px-4 rounded-lg"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Features
-                </Link>
-                <Link
-                  href="/#pricing"
-                  className="block text-base font-medium hover:text-primary hover:bg-accent transition-colors py-3 px-4 rounded-lg"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Pricing
-                </Link>
-                <Link
-                  href="/docs"
-                  className="block text-base font-medium hover:text-primary hover:bg-accent transition-colors py-3 px-4 rounded-lg"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Docs
-                </Link>
-                <Link
-                  href="/guides"
-                  className="block text-base font-medium hover:text-primary hover:bg-accent transition-colors py-3 px-4 rounded-lg"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Guides
-                </Link>
-                <Link
-                  href="/integrations"
-                  className="block text-base font-medium hover:text-primary hover:bg-accent transition-colors py-3 px-4 rounded-lg"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Integrations
-                </Link>
-                <Link
-                  href="/blog"
-                  className="block text-base font-medium hover:text-primary hover:bg-accent transition-colors py-3 px-4 rounded-lg"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Blog
-                </Link>
-                <Link
-                  href="/status"
-                  className="block text-base font-medium hover:text-primary hover:bg-accent transition-colors py-3 px-4 rounded-lg"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Status
-                </Link>
-              </div>
-            </nav>
-
-            {/* Fixed Bottom Buttons */}
-            <div className="border-t border-border p-6 space-y-3 shrink-0 bg-background">
+            {/* Action Buttons First */}
+            <div className="p-4 border-b border-border space-y-3 bg-muted/30">
               <Link 
                 href="/auth/login" 
                 onClick={() => setMobileMenuOpen(false)}
@@ -199,6 +144,64 @@ export function Header() {
                 </Button>
               </Link>
             </div>
+
+            {/* Scrollable Navigation Links */}
+            <nav className="flex-1 overflow-y-auto">
+              <div className="p-4 space-y-1">
+                <Link
+                  href="/#features"
+                  className="flex items-center h-12 px-4 text-base font-medium hover:text-primary hover:bg-accent transition-colors rounded-lg"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Features
+                </Link>
+                <Link
+                  href="/#pricing"
+                  className="flex items-center h-12 px-4 text-base font-medium hover:text-primary hover:bg-accent transition-colors rounded-lg"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Pricing
+                </Link>
+                <Link
+                  href="/docs"
+                  className="flex items-center h-12 px-4 text-base font-medium hover:text-primary hover:bg-accent transition-colors rounded-lg"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Docs
+                </Link>
+                <Link
+                  href="/guides"
+                  className="flex items-center h-12 px-4 text-base font-medium hover:text-primary hover:bg-accent transition-colors rounded-lg"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Guides
+                </Link>
+                <Link
+                  href="/integrations"
+                  className="flex items-center h-12 px-4 text-base font-medium hover:text-primary hover:bg-accent transition-colors rounded-lg"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Integrations
+                </Link>
+                <Link
+                  href="/blog"
+                  className="flex items-center h-12 px-4 text-base font-medium hover:text-primary hover:bg-accent transition-colors rounded-lg"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Blog
+                </Link>
+                <Link
+                  href="/status"
+                  className="flex items-center h-12 px-4 text-base font-medium hover:text-primary hover:bg-accent transition-colors rounded-lg"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Status
+                </Link>
+              </div>
+            </nav>
+
+            {/* Empty footer space for better scrolling */}
+            <div className="h-4" />
           </div>
         </div>
       )}

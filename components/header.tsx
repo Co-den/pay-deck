@@ -70,7 +70,7 @@ export function Header() {
         {/* Desktop Buttons */}
         <div className="flex items-center gap-3">
           <Link href="/auth/login" className="hidden md:block">
-            <Button variant="outline" size="sm">
+            <Button variant="outline" className="hover:bg-purple-600" size="sm">
               Sign In
             </Button>
           </Link>

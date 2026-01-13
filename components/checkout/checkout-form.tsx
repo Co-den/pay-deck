@@ -98,7 +98,7 @@ export function CheckoutForm({ onStepChange, currentStep }: CheckoutFormProps) {
               onClick={() => setSelectedPaymentMethod("card")}
               className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
                 selectedPaymentMethod === "card"
-                  ? "border-primary bg-purple-500/5"
+                  ? "border-primary bg-purple-500"
                   : "border-border hover:border-primary/50"
               }`}
             >
@@ -116,7 +116,7 @@ export function CheckoutForm({ onStepChange, currentStep }: CheckoutFormProps) {
               onClick={() => setSelectedPaymentMethod("wallet")}
               className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
                 selectedPaymentMethod === "wallet"
-                  ? "border-primary bg-purple-500/5"
+                  ? "border-primary bg-purple-500"
                   : "border-border hover:border-primary/50"
               }`}
             >
@@ -134,7 +134,7 @@ export function CheckoutForm({ onStepChange, currentStep }: CheckoutFormProps) {
               onClick={() => setSelectedPaymentMethod("bank")}
               className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
                 selectedPaymentMethod === "bank"
-                  ? "border-primary bg-purple-500/5"
+                  ? "border-primary bg-purple-500"
                   : "border-border hover:border-primary/50"
               }`}
             >
@@ -152,7 +152,7 @@ export function CheckoutForm({ onStepChange, currentStep }: CheckoutFormProps) {
               onClick={() => setSelectedPaymentMethod("crypto")}
               className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
                 selectedPaymentMethod === "crypto"
-                  ? "border-primary bg-purple-500/5"
+                  ? "border-primary bg-purple-500"
                   : "border-border hover:border-primary/50"
               }`}
             >

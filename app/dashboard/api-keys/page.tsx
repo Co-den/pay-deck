@@ -727,7 +727,7 @@ export default function APIKeysPage() {
                       <p className="text-xs text-muted-foreground">Status</p>
                       <p
                         className={`text-base sm:text-lg font-semibold ${
-                          key.isActive ? "text-green-600" : "text-red-600"
+                          key.isActive ? "text-purple-600" : "text-red-600"
                         }`}
                       >
                         {key.isActive ? "Active" : "Inactive"}

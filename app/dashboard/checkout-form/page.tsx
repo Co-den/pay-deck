@@ -52,7 +52,7 @@ export default function CheckoutPage() {
         <Card className="w-full max-w-md">
           <CardContent className="pt-6 text-center space-y-4">
             <div className="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto">
-              <CheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
+              <CheckCircle className="w-8 h-8 text-purple-600 dark:text-green-400" />
             </div>
             <div>
               <h2 className="text-2xl font-bold mb-2">Payment Successful!</h2>

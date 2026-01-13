@@ -137,14 +137,14 @@ export default function ReportsPage() {
             </div>
             <div className="flex items-center gap-1 text-sm mt-1">
               {metrics.revenue.trend === "up" ? (
-                <TrendingUp className="w-4 h-4 text-green-500" />
+                <TrendingUp className="w-4 h-4 text-purple-500" />
               ) : (
                 <TrendingDown className="w-4 h-4 text-red-500" />
               )}
               <span
                 className={
                   metrics.revenue.trend === "up"
-                    ? "text-green-500"
+                    ? "text-purple-500"
                     : "text-red-500"
                 }
               >
@@ -167,8 +167,8 @@ export default function ReportsPage() {
               {metrics.transactions.current.toLocaleString()}
             </div>
             <div className="flex items-center gap-1 text-sm mt-1">
-              <TrendingUp className="w-4 h-4 text-green-500" />
-              <span className="text-green-500">
+              <TrendingUp className="w-4 h-4 text-purple-500" />
+              <span className="text-purple-500">
                 {metrics.transactions.change}%
               </span>
               <span className="text-muted-foreground">from last period</span>
@@ -188,8 +188,8 @@ export default function ReportsPage() {
               {metrics.customers.current.toLocaleString()}
             </div>
             <div className="flex items-center gap-1 text-sm mt-1">
-              <TrendingUp className="w-4 h-4 text-green-500" />
-              <span className="text-green-500">
+              <TrendingUp className="w-4 h-4 text-purple-500" />
+              <span className="text-purple-500">
                 {metrics.customers.change}%
               </span>
               <span className="text-muted-foreground">from last period</span>
@@ -209,8 +209,8 @@ export default function ReportsPage() {
               ${metrics.avgTransaction.current.toFixed(2)}
             </div>
             <div className="flex items-center gap-1 text-sm mt-1">
-              <TrendingUp className="w-4 h-4 text-green-500" />
-              <span className="text-green-500">
+              <TrendingUp className="w-4 h-4 text-purple-500" />
+              <span className="text-purple-500">
                 {metrics.avgTransaction.change}%
               </span>
               <span className="text-muted-foreground">from last period</span>
@@ -292,7 +292,7 @@ export default function ReportsPage() {
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-green-500" />
+                    <div className="w-3 h-3 rounded-full bg-purple-500" />
                     <span className="text-sm">Successful</span>
                   </div>
                   <span className="font-medium">1,212</span>

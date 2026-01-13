@@ -513,7 +513,7 @@ export default function SettingsPage() {
                       </p>
                     </div>
                     <div className="flex items-center gap-3">
-                      <span className="text-sm text-green-600">
+                      <span className="text-sm text-purple-600">
                         {invoice.status}
                       </span>
                       <Button variant="ghost" size="sm">

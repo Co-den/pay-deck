@@ -205,7 +205,7 @@ export default function TransactionsPage() {
                       {transaction.date}
                     </p>
                     {transaction.status === "success" && (
-                      <p className="text-xs text-green-600 dark:text-green-400">
+                      <p className="text-xs text-purple-600 dark:text-green-400">
                         Net: ${transaction.net.toFixed(2)}
                       </p>
                     )}
@@ -294,7 +294,7 @@ export default function TransactionsPage() {
                   </div>
                   <div className="flex justify-between border-t pt-2">
                     <span className="font-semibold">Net Amount</span>
-                    <span className="font-bold text-green-600">
+                    <span className="font-bold text-purple-600">
                       ${selectedTransaction.net.toFixed(2)}
                     </span>
                   </div>

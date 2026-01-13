@@ -371,7 +371,7 @@ export default function PaymentMethodsPage() {
                         <Icon
                           className={`w-5 h-5 sm:w-6 sm:h-6 ${
                             method.enabled
-                              ? "text-green-600 dark:text-green-400"
+                              ? "text-purple-600 dark:text-green-400"
                               : "text-muted-foreground"
                           }`}
                         />

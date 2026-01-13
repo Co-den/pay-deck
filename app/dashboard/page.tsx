@@ -107,11 +107,11 @@ export default function DashboardPage() {
             <div className="text-2xl font-bold">${stats.revenue.current.toLocaleString()}</div>
             <div className="flex items-center gap-1 text-sm">
               {stats.revenue.trend === "up" ? (
-                <ArrowUpRight className="w-4 h-4 text-green-500" />
+                <ArrowUpRight className="w-4 h-4 text-purple-600" />
               ) : (
                 <ArrowDownRight className="w-4 h-4 text-red-500" />
               )}
-              <span className={stats.revenue.trend === "up" ? "text-green-500" : "text-red-500"}>
+              <span className={stats.revenue.trend === "up" ? "text-purple-600" : "text-red-500"}>
                 {stats.revenue.change}%
               </span>
               <span className="text-muted-foreground">from yesterday</span>
@@ -127,8 +127,8 @@ export default function DashboardPage() {
           <CardContent>
             <div className="text-2xl font-bold">{stats.transactions.current}</div>
             <div className="flex items-center gap-1 text-sm">
-              <ArrowUpRight className="w-4 h-4 text-green-500" />
-              <span className="text-green-500">{stats.transactions.change}%</span>
+              <ArrowUpRight className="w-4 h-4 text-purple-600" />
+              <span className="text-purple-600">{stats.transactions.change}%</span>
               <span className="text-muted-foreground">from yesterday</span>
             </div>
           </CardContent>
@@ -157,8 +157,8 @@ export default function DashboardPage() {
           <CardContent>
             <div className="text-2xl font-bold">${stats.avgOrder.current}</div>
             <div className="flex items-center gap-1 text-sm">
-              <ArrowUpRight className="w-4 h-4 text-green-500" />
-              <span className="text-green-500">{stats.avgOrder.change}%</span>
+              <ArrowUpRight className="w-4 h-4 text-purple-600" />
+              <span className="text-purple-600">{stats.avgOrder.change}%</span>
               <span className="text-muted-foreground">from yesterday</span>
             </div>
           </CardContent>

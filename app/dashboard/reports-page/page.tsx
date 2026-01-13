@@ -264,7 +264,7 @@ export default function ReportsPage() {
             <div className="space-y-4">
               <div className="flex items-center justify-center">
                 <div className="relative w-40 h-40">
-                  <svg viewBox="0 0 100 100" className="transform -rotate-90 bg-purple-500">
+                  <svg viewBox="0 0 100 100" className="transform -rotate-90">
                     <circle
                       cx="50"
                       cy="50"
@@ -272,6 +272,7 @@ export default function ReportsPage() {
                       fill="none"
                       stroke="#e5e7eb"
                       strokeWidth="12"
+                      
                     />
                     <circle
                       cx="50"

@@ -173,10 +173,10 @@ export default function DashboardPage() {
             <CardTitle>Revenue Overview</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="h-[300px] flex items-end justify-between gap-2">
+            <div className="h-75 flex items-end justify-between gap-2">
               {[65, 45, 80, 55, 70, 85, 60, 75, 90, 70, 85, 95, 100, 85].map((height, i) => (
                 <div key={i} className="flex-1 bg-primary/20 rounded-t" style={{ height: `${height}%` }}>
-                  <div className="h-full bg-primary rounded-t" style={{ height: "70%" }} />
+                  <div className="h-full bg-purple-500 rounded-t" style={{ height: "70%" }} />
                 </div>
               ))}
             </div>
@@ -229,7 +229,7 @@ export default function DashboardPage() {
               <div key={transaction.id} className="flex items-center justify-between p-4 rounded-lg border border-border">
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                    <CreditCard className="w-5 h-5 text-primary" />
+                    <CreditCard className="w-5 h-5 text-purple-600" />
                   </div>
                   <div>
                     <p className="font-medium">{transaction.customer}</p>

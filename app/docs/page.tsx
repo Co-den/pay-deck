@@ -323,7 +323,7 @@ export default function DocsPage() {
                   return (
                     <div key={section.id}>
                       <div className="flex items-center gap-2 mb-4">
-                        <Icon className="w-5 h-5 text-green-500" />
+                        <Icon className="w-5 h-5 text-purple-500" />
                         <h3 className="font-semibold text-sm">
                           {section.title}
                         </h3>
@@ -335,7 +335,7 @@ export default function DocsPage() {
                             onClick={() => setActiveSection(item.id)}
                             className={`w-full text-left text-sm px-3 py-2 rounded-lg transition-colors ${
                               activeSection === item.id
-                                ? "bg-green-500 text-primary-foreground font-medium"
+                                ? "bg-purple-500 text-primary-foreground font-medium"
                                 : "text-muted-foreground hover:text-foreground hover:bg-muted"
                             }`}
                           >

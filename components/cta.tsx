@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export function CTA() {
   return (
-    <section className="cta-section section-centered bg-gradient-to-br from-teal-600 to-teal-800 text-white">
+    <section className="cta-section section-centered bg-linear-to-br from-purple-600 to-purple-800 text-white">
       <div className="cta-content">
         <h2 className="text-4xl md:text-5xl font-bold mb-6 text-balance">
           Ready to get started?

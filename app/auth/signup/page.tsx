@@ -428,7 +428,7 @@ export default function SignUp() {
                 )}
               </div>
 
-              <Button type="submit" className="w-full" disabled={loading}>
+              <Button type="submit" className="w-full bg-purple-600 hover:bg-purple-700" disabled={loading}>
                 {loading ? (
                   <>
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
@@ -669,7 +669,7 @@ export default function SignUp() {
                 )}
               </div>
 
-              <Button type="submit" className="w-full" disabled={loading}>
+              <Button type="submit" className="w-full bg-purple-600 hover:bg-purple-700" disabled={loading}>
                 {loading ? (
                   <>
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
@@ -689,7 +689,7 @@ export default function SignUp() {
             Already have an account?{" "}
             <Link
               href="/auth/login"
-              className="font-semibold text-green-500 hover:underline"
+              className="font-semibold text-purple-600 hover:underline"
             >
               Sign in
             </Link>

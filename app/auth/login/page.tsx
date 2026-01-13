@@ -118,7 +118,7 @@ export default function Login() {
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <Label htmlFor="password">Password</Label>
-              <Link href="/auth/forgot-password" className="text-sm text-green-500 hover:underline">
+              <Link href="/auth/forgot-password" className="text-sm text-purple-600 hover:underline">
                 Forgot?
               </Link>
             </div>
@@ -143,7 +143,7 @@ export default function Login() {
             {errors.password && <p className="text-sm text-red-500">{errors.password}</p>}
           </div>
 
-          <Button type="submit" className="w-full" disabled={loading}>
+          <Button type="submit" className="w-full bg-purple-600 hover:bg-purple-700" disabled={loading}>
             {loading ? "Signing in..." : "Sign In"}
           </Button>
         </form>
@@ -151,7 +151,7 @@ export default function Login() {
         <div className="mt-6 text-center text-sm">
           <p className="text-muted-foreground">
             Don't have an account?{" "}
-            <Link href="/auth/signup" className="font-semibold text-green-500 hover:underline">
+            <Link href="/auth/signup" className="font-semibold text-purple-600 hover:underline">
               Sign up
             </Link>
           </p>

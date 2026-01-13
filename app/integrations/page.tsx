@@ -149,7 +149,7 @@ export default function IntegrationsPage() {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="w-full bg-transparent"
+                      className="w-full bg-transparent hover:bg-purple-500 hover:text-white"
                     >
                       {integration.status === "Available"
                         ? "Install"

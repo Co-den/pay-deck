@@ -15,7 +15,7 @@ export function Header() {
           href="/"
           className="flex items-center gap-2 hover:opacity-80 transition-opacity"
         >
-          <div className="w-8 h-8 rounded-lg bg-green-500 text-primary-foreground flex items-center justify-center font-bold text-lg">
+          <div className="w-8 h-8 rounded-lg bg-purple-500 text-primary-foreground flex items-center justify-center font-bold text-lg">
             S
           </div>
           <span className="font-bold text-lg">SettleMe</span>
@@ -24,43 +24,43 @@ export function Header() {
         <nav className="hidden md:flex items-center gap-8">
           <Link
             href="/#features"
-            className="text-sm font-medium hover:text-primary transition-colors"
+            className="text-sm font-medium hover:text-purple-500 transition-colors"
           >
             Features
           </Link>
           <Link
             href="/#pricing"
-            className="text-sm font-medium hover:text-primary transition-colors"
+            className="text-sm font-medium hover:text-purple-500 transition-colors"
           >
             Pricing
           </Link>
           <Link
             href="/docs"
-            className="text-sm font-medium hover:text-primary transition-colors"
+            className="text-sm font-medium hover:text-purple-500 transition-colors"
           >
             Docs
           </Link>
           <Link
             href="/guides"
-            className="text-sm font-medium hover:text-primary transition-colors"
+            className="text-sm font-medium hover:text-purple-500 transition-colors"
           >
             Guides
           </Link>
           <Link
             href="/integrations"
-            className="text-sm font-medium hover:text-primary transition-colors"
+            className="text-sm font-medium hover:text-purple-500 transition-colors"
           >
             Integrations
           </Link>
           <Link
             href="/blog"
-            className="text-sm font-medium hover:text-primary transition-colors"
+            className="text-sm font-medium hover:text-purple-500 transition-colors"
           >
             Blog
           </Link>
           <Link
             href="/status"
-            className="text-sm font-medium hover:text-primary transition-colors"
+            className="text-sm font-medium hover:text-purple-500 transition-colors"
           >
             Status
           </Link>
@@ -73,7 +73,7 @@ export function Header() {
             </Button>
           </Link>
           <Link href="/auth/signup">
-            <Button size="sm">Get Started</Button>
+            <Button size="sm" className="bg-purple-600 hover:bg-purple-700">Get Started</Button>
           </Link>
           <Button
             variant="ghost"

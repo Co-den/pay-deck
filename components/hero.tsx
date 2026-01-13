@@ -19,7 +19,7 @@ export function Hero() {
 
           <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 text-balance">
             Accept payments with
-            <span className="block text-green-500">confidence and speed</span>
+            <span className="block text-purple-600">confidence and speed</span>
           </h1>
 
           <p className="text-xl text-muted-foreground mb-8 text-balance">
@@ -29,12 +29,12 @@ export function Hero() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/auth/signup">
-              <Button size="lg" className="gap-2">
+              <Button size="lg" className="gap-2 bg-purple-600 hover:bg-purple-700">
                 Get Started Free <ArrowRight className="w-4 h-4" />
               </Button>
             </Link>
             <Link href="/docs">
-              <Button size="lg" variant="outline">
+              <Button size="lg" className="hover:bg-purple-700" variant="outline">
                 View Documentation
               </Button>
             </Link>
@@ -42,18 +42,18 @@ export function Hero() {
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             <div className="flex flex-col gap-2">
-              <div className="flex items-center gap-2 text-sm font-semibold text-green-500 justify-center">
+              <div className="flex items-center gap-2 text-sm font-semibold text-purple-500 justify-center">
                 <Lock className="w-4 h-4" />
                 Bank-level Security
               </div>
               <p className="text-sm text-muted-foreground">PCI DSS compliant with end-to-end encryption</p>
             </div>
             <div className="flex flex-col gap-2">
-              <div className="text-sm font-semibold text-green-500 text-center">{"<"} 1 Second</div>
+              <div className="text-sm font-semibold text-purple-500 text-center">{"<"} 1 Second</div>
               <p className="text-sm text-muted-foreground">Processing time for transactions</p>
             </div>
             <div className="flex flex-col gap-2">
-              <div className="text-sm font-semibold text-green-500 text-center">25+ Methods</div>
+              <div className="text-sm font-semibold text-purple-500 text-center">25+ Methods</div>
               <p className="text-sm text-muted-foreground">Payment methods globally supported</p>
             </div>
           </div>

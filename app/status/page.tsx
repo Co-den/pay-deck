@@ -56,9 +56,9 @@ export default function StatusPage() {
           </div>
 
           {/* Overall Status */}
-          <div className="bg-gradient-to-br from-green-500/10 to-green-500/5 border border-green-500/20 rounded-lg p-6 mb-12">
+          <div className="bg-linear-to-br from-purple-500/10 to-purple-500/5 border border-purple-500/20 rounded-lg p-6 mb-12">
             <div className="flex items-center gap-3 mb-4">
-              <CheckCircle className="w-8 h-8 text-green-500" />
+              <CheckCircle className="w-8 h-8 text-purple-500" />
               <h2 className="text-2xl font-bold">All Systems Operational</h2>
             </div>
             <p className="text-muted-foreground">
@@ -79,7 +79,7 @@ export default function StatusPage() {
                   <div className="flex items-center justify-between mb-2">
                     <h4 className="font-semibold">{component.service}</h4>
                     <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-green-500" />
+                      <div className="w-3 h-3 rounded-full bg-purple-500" />
                       <span className="text-sm text-muted-foreground">
                         Operational
                       </span>
@@ -114,8 +114,8 @@ export default function StatusPage() {
                     <div className="flex items-center gap-2">
                       {incident.status === "resolved" && (
                         <>
-                          <div className="w-3 h-3 rounded-full bg-green-500" />
-                          <span className="text-sm font-medium text-green-600 dark:text-green-400">
+                          <div className="w-3 h-3 rounded-full bg-purple-500" />
+                          <span className="text-sm font-medium text-purple-600 dark:text-purple-400">
                             Resolved
                           </span>
                         </>

@@ -95,16 +95,16 @@ export default function GuidesPage() {
               const Icon = guide.icon;
               return (
                 <Link key={idx} href={guide.link} className="group">
-                  <div className="h-full p-6 rounded-lg border border-border bg-card hover:border-primary hover:bg-accent/5 transition-all">
+                  <div className="h-full p-6 rounded-lg border border-border bg-card hover:border-purple-500 hover:bg-accent/5 transition-all">
                     <div className="flex items-start justify-between mb-3">
-                      <Icon className="w-8 h-8 text-green-500" />
+                      <Icon className="w-8 h-8 text-purple-500" />
                       <span className="text-xs font-medium text-muted-foreground">
                         {guide.readTime}
                       </span>
                     </div>
 
                     <div className="mb-3">
-                      <p className="text-xs font-semibold text-green-500 uppercase tracking-wide">
+                      <p className="text-xs font-semibold text-purple-500 uppercase tracking-wide">
                         {guide.category}
                       </p>
                       <h3 className="text-lg font-semibold mt-2 group-hover:text-primary transition-colors">
@@ -119,7 +119,7 @@ export default function GuidesPage() {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="w-full bg-transparent group-hover:bg-green-500 group-hover:text-white transition-colors"
+                      className="w-full bg-transparent hover:bg-purple-600 group-hover:text-purple-600 transition-colors"
                     >
                       Read Guide
                     </Button>
@@ -140,7 +140,7 @@ export default function GuidesPage() {
                 <Button>View API Docs</Button>
               </Link>
               <Link href="/support">
-                <Button variant="outline">Contact Support</Button>
+                <Button className="hover:bg-purple-600" variant="outline">Contact Support</Button>
               </Link>
             </div>
           </div>

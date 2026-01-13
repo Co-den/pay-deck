@@ -67,19 +67,19 @@ export function Trust() {
 
         <div className="flex flex-wrap gap-8 justify-center items-center">
           <div className="text-center">
-            <div className="text-3xl font-bold text-green-500">99.99%</div>
+            <div className="text-3xl font-bold text-purple-500">99.99%</div>
             <div className="text-sm text-muted-foreground">Uptime SLA</div>
           </div>
           <div className="w-px h-12 bg-border" />
           <div className="text-center">
-            <div className="text-3xl font-bold text-green-500">{"<"}100ms</div>
+            <div className="text-3xl font-bold text-purple-500">{"<"}100ms</div>
             <div className="text-sm text-muted-foreground">
               Avg Response Time
             </div>
           </div>
           <div className="w-px h-12 bg-border" />
           <div className="text-center">
-            <div className="text-3xl font-bold text-green-500">195+</div>
+            <div className="text-3xl font-bold text-purple-500">195+</div>
             <div className="text-sm text-muted-foreground">
               Countries Supported
             </div>

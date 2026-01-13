@@ -74,15 +74,10 @@ export function Header() {
               Sign In
             </Button>
           </Link>
-<<<<<<< HEAD
+
           <Link href="/auth/signup">
             <Button size="sm" className="bg-purple-600 hover:bg-purple-700">Get Started</Button>
-=======
-          <Link href="/auth/signup" className="hidden md:block">
-            <Button size="sm">Get Started</Button>
->>>>>>> 69a2ba3b8a80c33a5d42f967f69b7ce4b2532989
-          </Link>
-          
+          </Link>          
           {/* Mobile Menu Button */}
           <Button
             variant="ghost"

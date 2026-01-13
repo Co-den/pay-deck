@@ -19,9 +19,9 @@ export function CheckoutProgress({ currentStep }: CheckoutProgressProps) {
             <div
               className={`relative flex items-center justify-center w-10 h-10 rounded-full border-2 font-bold ${
                 step.number < currentStep
-                  ? "bg-primary border-primary text-primary-foreground"
+                  ? "bg-purple-500 border-primary text-primary-foreground"
                   : step.number === currentStep
-                    ? "bg-primary/20 border-primary text-primary"
+                    ? "bg-purple-500/20 border-primary text-primary"
                     : "bg-muted border-muted-foreground text-muted-foreground"
               }`}
             >
@@ -36,7 +36,7 @@ export function CheckoutProgress({ currentStep }: CheckoutProgressProps) {
             </p>
             {idx < steps.length - 1 && (
               <div
-                className={`flex-1 h-1 mx-4 rounded-full ${step.number < currentStep ? "bg-primary" : "bg-muted"}`}
+                className={`flex-1 h-1 mx-4 rounded-full ${step.number < currentStep ? "bg-purple-500" : "bg-muted"}`}
               />
             )}
           </div>

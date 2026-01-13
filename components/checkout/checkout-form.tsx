@@ -98,7 +98,7 @@ export function CheckoutForm({ onStepChange, currentStep }: CheckoutFormProps) {
               onClick={() => setSelectedPaymentMethod("card")}
               className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
                 selectedPaymentMethod === "card"
-                  ? "border-primary bg-primary/5"
+                  ? "border-primary bg-purple-500/5"
                   : "border-border hover:border-primary/50"
               }`}
             >
@@ -116,7 +116,7 @@ export function CheckoutForm({ onStepChange, currentStep }: CheckoutFormProps) {
               onClick={() => setSelectedPaymentMethod("wallet")}
               className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
                 selectedPaymentMethod === "wallet"
-                  ? "border-primary bg-primary/5"
+                  ? "border-primary bg-purple-500/5"
                   : "border-border hover:border-primary/50"
               }`}
             >
@@ -134,7 +134,7 @@ export function CheckoutForm({ onStepChange, currentStep }: CheckoutFormProps) {
               onClick={() => setSelectedPaymentMethod("bank")}
               className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
                 selectedPaymentMethod === "bank"
-                  ? "border-primary bg-primary/5"
+                  ? "border-primary bg-purple-500/5"
                   : "border-border hover:border-primary/50"
               }`}
             >
@@ -152,7 +152,7 @@ export function CheckoutForm({ onStepChange, currentStep }: CheckoutFormProps) {
               onClick={() => setSelectedPaymentMethod("crypto")}
               className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
                 selectedPaymentMethod === "crypto"
-                  ? "border-primary bg-primary/5"
+                  ? "border-primary bg-purple-500/5"
                   : "border-border hover:border-primary/50"
               }`}
             >
@@ -262,7 +262,7 @@ export function CheckoutForm({ onStepChange, currentStep }: CheckoutFormProps) {
           )}
 
           {selectedPaymentMethod === "bank" && (
-            <div className="mt-6 p-4 rounded-lg bg-primary/5 border border-primary/20">
+            <div className="mt-6 p-4 rounded-lg bg-purple-500/5 border border-primary/20">
               <p className="text-sm text-foreground">
                 You'll be redirected to your bank to complete the transaction securely.
               </p>
@@ -390,7 +390,7 @@ export function CheckoutForm({ onStepChange, currentStep }: CheckoutFormProps) {
         <div className={currentStep === 3 ? "" : "opacity-50 pointer-events-none"}>
           <h2 className="text-lg font-semibold mb-6">Confirm & Pay</h2>
 
-          <div className="p-4 rounded-lg bg-primary/5 border border-primary/20 space-y-3">
+          <div className="p-4 rounded-lg bg-purple-500/5 border border-primary/20 space-y-3">
             <div className="flex justify-between">
               <span className="text-muted-foreground">Card ending in</span>
               <span className="font-medium">4321</span>

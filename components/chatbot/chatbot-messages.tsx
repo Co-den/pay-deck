@@ -79,7 +79,7 @@ export function ChatbotMessages() {
           <Button
             onClick={handleSend}
             size="icon"
-            className="flex-shrink-0"
+            className="shrink-0"
             disabled={!input.trim()}
           >
             <Send className="w-4 h-4" />

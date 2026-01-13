@@ -26,7 +26,7 @@ export function ChatbotWidget() {
       {/* Chatbot Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-40 flex items-center justify-center w-14 h-14 rounded-full bg-green-500 text-primary-foreground shadow-lg hover:shadow-xl transition-shadow hover:scale-110 duration-200"
+        className="fixed bottom-6 right-6 z-40 flex items-center justify-center w-14 h-14 rounded-full bg-purple-500 text-primary-foreground shadow-lg hover:shadow-xl transition-shadow hover:scale-110 duration-200"
         aria-label="Open chat support"
       >
         {isOpen ? (
@@ -40,9 +40,9 @@ export function ChatbotWidget() {
       {isOpen && (
         <div className="fixed bottom-24 right-6 w-[400px] h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col z-50 overflow-hidden">
           {/* Header */}
-          <div className="p-4 border-b border-border bg-green-900 text-primary-foreground">
+          <div className="p-4 border-b border-border bg-purple-900 text-primary-foreground">
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-8 h-8 rounded-full bg-green-500 text-primary-foreground flex items-center justify-center text-sm font-bold">
+              <div className="w-8 h-8 rounded-full bg-purple-500 text-primary-foreground flex items-center justify-center text-sm font-bold">
                 P
               </div>
               <h3 className="font-semibold">PayDeck Support</h3>
@@ -116,10 +116,9 @@ export function ChatbotWidget() {
           <div className="border-t border-border bg-muted/30 grid grid-cols-3">
             <button
               onClick={() => setActiveTab("home")}
-              className={`flex flex-col items-center gap-1 py-3 px-2 text-xs font-medium transition-colors ${
-                activeTab === "home"
-                  ? "text-primary border-t-2 border-primary"
-                  : "text-muted-foreground hover:text-foreground"
+              className={`flex flex-col items-center gap-1 py-3 px-2 text-xs font-medium transition-colors ${activeTab === "home"
+                ? "text-primary border-t-2 border-primary"
+                : "text-muted-foreground hover:text-foreground"
               }`}
             >
               <Home className="w-5 h-5" />
@@ -127,10 +126,9 @@ export function ChatbotWidget() {
             </button>
             <button
               onClick={() => setActiveTab("messages")}
-              className={`flex flex-col items-center gap-1 py-3 px-2 text-xs font-medium transition-colors ${
-                activeTab === "messages"
-                  ? "text-primary border-t-2 border-primary"
-                  : "text-muted-foreground hover:text-foreground"
+              className={`flex flex-col items-center gap-1 py-3 px-2 text-xs font-medium transition-colors ${activeTab === "messages"
+                ? "text-primary border-t-2 border-primary"
+                : "text-muted-foreground hover:text-foreground"
               }`}
             >
               <MessageSquare className="w-5 h-5" />
@@ -138,10 +136,9 @@ export function ChatbotWidget() {
             </button>
             <button
               onClick={() => setActiveTab("help")}
-              className={`flex flex-col items-center gap-1 py-3 px-2 text-xs font-medium transition-colors ${
-                activeTab === "help"
-                  ? "text-primary border-t-2 border-primary"
-                  : "text-muted-foreground hover:text-foreground"
+              className={`flex flex-col items-center gap-1 py-3 px-2 text-xs font-medium transition-colors ${activeTab === "help"
+                ? "text-primary border-t-2 border-primary"
+                : "text-muted-foreground hover:text-foreground"
               }`}
             >
               <HelpCircle className="w-5 h-5" />

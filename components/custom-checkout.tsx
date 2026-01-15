@@ -72,7 +72,7 @@ export default function CheckoutPage() {
                 <span className="font-semibold">john@example.com</span>
               </div>
             </div>
-            <Button className="w-full">Return to Merchant</Button>
+            <Button className="w-full bg-purple-500">Return to Merchant</Button>
           </CardContent>
         </Card>
       </div>
@@ -85,7 +85,7 @@ export default function CheckoutPage() {
         {/* Order Summary */}
         <Card className="md:col-span-2">
           <CardHeader>
-            <div className="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center mb-4">
+            <div className="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center mb-4">
               <span className="text-2xl font-bold text-primary-foreground">
                 P
               </span>

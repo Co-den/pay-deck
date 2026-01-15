@@ -24,7 +24,7 @@ export function Hero() {
 
           <p className="text-xl text-muted-foreground mb-8 text-balance">
             SettleMe makes it effortless to accept payments from anywhere in the world. Secure, reliable, and built for
-            modern merchants.
+            modern Nigerian merchants .
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

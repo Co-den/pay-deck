@@ -193,7 +193,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             <Button 
               variant="outline" 
               size="sm" 
-              className="w-full gap-2"
+              className="w-full gap-2 hover:bg-purple-500 hover:text-white"
               onClick={handleLogout}
               disabled={loggingOut}
             >

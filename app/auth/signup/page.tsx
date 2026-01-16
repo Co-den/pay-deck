@@ -341,7 +341,7 @@ export default function SignUp() {
         <Card className="border-0 shadow-xl max-w-md w-full">
           <CardContent className="pt-8 text-center">
             <CheckCircle className="w-16 h-16 text-green-600 mx-auto mb-4" />
-            <h2 className="text-2xl font-bold mb-2">Welcome to PayDeck!</h2>
+            <h2 className="text-2xl font-bold mb-2">Welcome to PayPort!</h2>
             <p className="text-muted-foreground mb-6">
               {accountType === "business"
                 ? "Your business account has been created. We'll verify your documents and activate your account within 24-48 hours."
@@ -359,9 +359,9 @@ export default function SignUp() {
     <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-purple-50 to-blue-50">
       <Card className="border-0 shadow-xl max-w-2xl w-full">
         <CardHeader>
-          <CardTitle>Create your PayDeck account</CardTitle>
+          <CardTitle>Create your PayPort account</CardTitle>
           <CardDescription>
-            Join PayDeck and start accepting payments in minutes
+            Join PayPort and start accepting payments in minutes
           </CardDescription>
         </CardHeader>
         <CardContent>

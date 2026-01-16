@@ -30,9 +30,9 @@ const blogPosts = [
   },
   {
     id: 3,
-    title: "PayDeck Security: Protecting Your Customer Data",
+    title: "PayPort Security: Protecting Your Customer Data",
     excerpt:
-      "An in-depth look at how PayDeck implements bank-level security to protect sensitive payment information.",
+      "An in-depth look at how PayPort implements bank-level security to protect sensitive payment information.",
     author: "Emma Williams",
     date: "2024-12-22",
     readTime: "7 min read",
@@ -52,9 +52,9 @@ const blogPosts = [
   },
   {
     id: 5,
-    title: "Integrating PayDeck: Step-by-Step Tutorial",
+    title: "Integrating PayPort: Step-by-Step Tutorial",
     excerpt:
-      "A comprehensive guide to integrating PayDeck into your e-commerce platform in under 30 minutes.",
+      "A comprehensive guide to integrating PayPort into your e-commerce platform in under 30 minutes.",
     author: "Lisa Anderson",
     date: "2024-12-16",
     readTime: "9 min read",
@@ -108,10 +108,10 @@ function BlogContent() {
         {/* Header */}
         <div className="mb-12">
           <h1 className="text-4xl font-bold tracking-tight mb-2">
-            PayDeck Blog
+            PayPort Blog
           </h1>
           <p className="text-lg text-muted-foreground">
-            Industry insights, best practices, and updates from the PayDeck team
+            Industry insights, best practices, and updates from the PayPort team
           </p>
         </div>
 

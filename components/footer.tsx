@@ -9,9 +9,9 @@ export function Footer() {
           <div className="col-span-2 md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 rounded-lg bg-purple-500 text-primary-foreground flex items-center justify-center font-bold text-lg">
-                S
+                P
               </div>
-              <span className="font-bold">SettleMe</span>
+              <span className="font-bold">PayPort</span>
             </div>
             <p className="text-sm text-muted-foreground">
               Modern payment processing for merchants worldwide.
@@ -69,7 +69,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/docs/api-reference"
+                  href="/api-reference"
                   className="hover:text-foreground transition-colors"
                 >
                   API Reference
@@ -129,6 +129,14 @@ export function Footer() {
                   Terms
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/testimonials"
+                  className="hover:text-foreground transition-colors"
+                >
+                  Testimonials
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
@@ -136,7 +144,7 @@ export function Footer() {
         <div className="border-t border-border pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <p className="text-sm text-muted-foreground">
-              © 2025 PayDeck. All rights reserved.
+              © 2025 PayPort. All rights reserved.
             </p>
             <div className="flex items-center gap-4">
               <Link

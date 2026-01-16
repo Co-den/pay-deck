@@ -12,9 +12,9 @@ import {
 import { Button } from "@/components/ui/button";
 
 export const metadata = {
-  title: "Guides - PayDeck",
+  title: "Guides - PayPort",
   description:
-    "Comprehensive guides and tutorials for integrating and using PayDeck",
+    "Comprehensive guides and tutorials for integrating and using PayPort",
 };
 
 export default function GuidesPage() {
@@ -24,7 +24,7 @@ export default function GuidesPage() {
       category: "Getting Started",
       title: "Quick Start Guide",
       description:
-        "Get your PayDeck account set up and start accepting payments in 30 minutes",
+        "Get your PayPort account set up and start accepting payments in 30 minutes",
       link: "#",
       readTime: "10 min",
     },
@@ -33,7 +33,7 @@ export default function GuidesPage() {
       category: "Integration",
       title: "API Integration Guide",
       description:
-        "Step-by-step guide to integrating PayDeck API into your application",
+        "Step-by-step guide to integrating PayPort API into your application",
       link: "#",
       readTime: "15 min",
     },
@@ -69,7 +69,7 @@ export default function GuidesPage() {
       category: "Advanced",
       title: "Building Recurring Payments",
       description:
-        "Implementation guide for subscriptions and recurring billing with PayDeck",
+        "Implementation guide for subscriptions and recurring billing with PayPort",
       link: "#",
       readTime: "18 min",
     },
@@ -86,7 +86,7 @@ export default function GuidesPage() {
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Comprehensive guides to help you integrate, configure, and
-              optimize PayDeck for your business
+              optimize PayPort for your business
             </p>
           </div>
 

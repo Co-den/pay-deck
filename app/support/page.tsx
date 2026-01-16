@@ -21,8 +21,8 @@ const faqItems = [
     category: "Getting Started",
     items: [
       {
-        q: "How do I create a PayDeck account?",
-        a: "Visit PayDeck.io and click 'Get Started'. Fill in your email and password, verify your email address, and complete your merchant profile. You'll have access to your dashboard immediately.",
+        q: "How do I create a PayPort account?",
+        a: "Visit PayPort.io and click 'Get Started'. Fill in your email and password, verify your email address, and complete your merchant profile. You'll have access to your dashboard immediately.",
       },
       {
         q: "How long does it take to get approved?",
@@ -30,7 +30,7 @@ const faqItems = [
       },
       {
         q: "What payment methods can I accept?",
-        a: "PayDeck supports 25+ payment methods including credit cards, digital wallets (Apple Pay, Google Pay), bank transfers, and local payment methods in 50+ countries.",
+        a: "PayPort supports 25+ payment methods including credit cards, digital wallets (Apple Pay, Google Pay), bank transfers, and local payment methods in 50+ countries.",
       },
     ],
   },
@@ -55,8 +55,8 @@ const faqItems = [
     category: "Security & Compliance",
     items: [
       {
-        q: "Is PayDeck PCI compliant?",
-        a: "Yes, PayDeck is PCI DSS Level 1 compliant. We handle all sensitive payment data encryption and security requirements, so you don't have to.",
+        q: "Is PayPort PCI compliant?",
+        a: "Yes, PayPort is PCI DSS Level 1 compliant. We handle all sensitive payment data encryption and security requirements, so you don't have to.",
       },
       {
         q: "How is my data protected?",
@@ -64,7 +64,7 @@ const faqItems = [
       },
       {
         q: "What security features are included?",
-        a: "PayDeck includes fraud detection, 3D Secure support, PCI compliance, and 24/7 security monitoring. Your account also includes two-factor authentication.",
+        a: "PayPort includes fraud detection, 3D Secure support, PCI compliance, and 24/7 security monitoring. Your account also includes two-factor authentication.",
       },
     ],
   },
@@ -72,12 +72,12 @@ const faqItems = [
     category: "Technical Issues",
     items: [
       {
-        q: "How do I integrate PayDeck with my website?",
+        q: "How do I integrate PayPort with my website?",
         a: "We provide REST APIs, pre-built SDKs for popular languages, and hosted checkout pages. Check our documentation for step-by-step integration guides.",
       },
       {
         q: "Do you offer webhooks?",
-        a: "Yes, PayDeck provides webhooks for all transaction events. You can configure them in your dashboard settings and receive real-time notifications.",
+        a: "Yes, PayPort provides webhooks for all transaction events. You can configure them in your dashboard settings and receive real-time notifications.",
       },
       {
         q: "What's your API uptime guarantee?",
@@ -92,7 +92,7 @@ const supportChannels = [
     icon: Mail,
     title: "Email Support",
     description: "Get help within 24 hours",
-    detail: "support@paydeck.io",
+    detail: "support@PayPort.io",
   },
   {
     icon: MessageSquare,
@@ -110,7 +110,7 @@ const supportChannels = [
     icon: FileText,
     title: "Knowledge Base",
     description: "Browse detailed documentation",
-    detail: "docs.paydeck.io",
+    detail: "docs.PayPort.io",
   },
 ];
 
@@ -161,12 +161,12 @@ export default function SupportPage() {
                   key={channel.title}
                   className="border border-border rounded-lg p-6 text-center hover:border-primary transition-colors"
                 >
-                  <Icon className="w-8 h-8 text-green-500 mx-auto mb-4" />
+                  <Icon className="w-8 h-8 text-purple-500 mx-auto mb-4" />
                   <h3 className="font-semibold mb-2">{channel.title}</h3>
                   <p className="text-sm text-muted-foreground mb-3">
                     {channel.description}
                   </p>
-                  <p className="text-sm font-medium text-green-500">
+                  <p className="text-sm font-medium text-purple-500">
                     {channel.detail}
                   </p>
                 </div>
@@ -254,7 +254,7 @@ export default function SupportPage() {
               <div className="space-y-4">
                 {faqItems.map((category) => (
                   <div key={category.category}>
-                    <h3 className="font-semibold text-lg mb-4 text-green-500">
+                    <h3 className="font-semibold text-lg mb-4 text-purple-500">
                       {category.category}
                     </h3>
                     <div className="space-y-3 mb-6">

@@ -12,7 +12,7 @@ export function Trust() {
             Trusted by Industry Leaders
           </h2>
           <p className="text-lg text-muted-foreground text-balance">
-            PayDeck is trusted by thousands of merchants worldwide with billions
+            PayPort is trusted by thousands of merchants worldwide with billions
             in annual transaction volume
           </p>
         </div>

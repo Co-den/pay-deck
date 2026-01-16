@@ -52,8 +52,8 @@ const docSections = [
 
 const contentMap: Record<string, { title: string; content: string }> = {
   introduction: {
-    title: "Introduction to PayDeck",
-    content: `PayDeck is a modern payment gateway designed for merchants who want to accept payments globally with ease and security. Our platform supports multiple payment methods and provides comprehensive tools for managing transactions.
+    title: "Introduction to PayPort",
+    content: `PayPort is a modern payment gateway designed for merchants who want to accept payments globally with ease and security. Our platform supports multiple payment methods and provides comprehensive tools for managing transactions.
 
 Key Features:
 - Accept payments from 190+ countries
@@ -65,13 +65,13 @@ Key Features:
   },
   installation: {
     title: "Installation & Setup",
-    content: `Getting started with PayDeck is simple:
+    content: `Getting started with PayPort is simple:
 
-1. Create your account at PayDeck
+1. Create your account at PayPort
 2. Navigate to your dashboard
 3. Generate API keys in Settings > API Keys
 4. Use your Live or Test API key depending on your environment
-5. Install our SDK: npm install paydeck-sdk
+5. Install our SDK: npm install PayPort-sdk
 6. Initialize the SDK with your API key
 
 Your test environment is ready to use immediately with our sandbox mode.`,
@@ -91,9 +91,9 @@ OAuth:
   },
   "api-overview": {
     title: "API Overview",
-    content: `PayDeck API is built on REST principles and returns JSON responses. All API endpoints support standard HTTP methods (GET, POST, PUT, DELETE).
+    content: `PayPort API is built on REST principles and returns JSON responses. All API endpoints support standard HTTP methods (GET, POST, PUT, DELETE).
 
-Base URL: https://api.paydeck.io/v1
+Base URL: https://api.payport.io/v1
 
 Rate Limits:
 - Standard: 1000 requests per minute
@@ -106,7 +106,7 @@ Response Format:
   },
   "rest-api": {
     title: "REST API Reference",
-    content: `The PayDeck REST API provides endpoints for:
+    content: `The PayPort REST API provides endpoints for:
 
 Transactions:
 - POST /transactions - Create a payment
@@ -124,7 +124,7 @@ All endpoints require authentication and return JSON.`,
   },
   webhooks: {
     title: "Webhooks",
-    content: `Webhooks allow you to receive real-time notifications about events in your PayDeck account.
+    content: `Webhooks allow you to receive real-time notifications about events in your PayPort account.
 
 Webhook Events:
 - transaction.created
@@ -140,29 +140,29 @@ Setup:
 3. Select events to subscribe to
 4. Verify webhook signatures using HMAC SHA256
 
-PayDeck will retry failed deliveries for up to 3 days.`,
+PayPort will retry failed deliveries for up to 3 days.`,
   },
   sdks: {
     title: "SDKs",
     content: `Official SDKs are available for popular languages:
 
 JavaScript/Node.js:
-npm install paydeck-sdk
+npm install PayPort-sdk
 
 Python:
-pip install paydeck
+pip install PayPort
 
 Go:
-go get github.com/paydeck/paydeck-go
+go get github.com/PayPort/PayPort-go
 
 Ruby:
-gem install paydeck
+gem install PayPort
 
 All SDKs handle authentication, serialization, and error handling automatically.`,
   },
   "payment-methods": {
     title: "Payment Methods",
-    content: `PayDeck supports multiple payment methods globally:
+    content: `PayPort supports multiple payment methods globally:
 
 Cards:
 - Visa, Mastercard, American Express
@@ -215,14 +215,14 @@ Test Card Numbers:
 - Amex: 3782 822463 10005
 
 Test API:
-- Base URL: https://sandbox-api.paydeck.io/v1
+- Base URL: https://sandbox-api.PayPort.io/v1
 - Use your test API key from dashboard
 
 All transactions in test mode are simulated and won't charge actual accounts.`,
   },
   deployment: {
     title: "Deployment",
-    content: `Best practices for deploying your PayDeck integration:
+    content: `Best practices for deploying your PayPort integration:
 
 1. Secure your API keys:
    - Never commit API keys to version control
@@ -244,7 +244,7 @@ All transactions in test mode are simulated and won't charge actual accounts.`,
   },
   "best-practices": {
     title: "Security Best Practices",
-    content: `Ensure your PayDeck integration is secure:
+    content: `Ensure your PayPort integration is secure:
 
 1. Use HTTPS everywhere
 2. Validate all user inputs
@@ -259,7 +259,7 @@ All transactions in test mode are simulated and won't charge actual accounts.`,
   },
   "pci-compliance": {
     title: "PCI DSS Compliance",
-    content: `PayDeck is PCI DSS Level 1 compliant, meaning you can accept payments safely.
+    content: `PayPort is PCI DSS Level 1 compliant, meaning you can accept payments safely.
 
 Your Responsibilities:
 - Never transmit raw card data to your servers
@@ -268,7 +268,7 @@ Your Responsibilities:
 - Monitor and log access to payment data
 - Conduct regular security assessments
 
-PayDeck handles:
+PayPort handles:
 - Card data encryption
 - Secure storage and processing
 - PCI compliance audits
@@ -276,7 +276,7 @@ PayDeck handles:
   },
   "data-protection": {
     title: "Data Protection",
-    content: `PayDeck implements comprehensive data protection measures:
+    content: `PayPort implements comprehensive data protection measures:
 
 Encryption:
 - AES-256 for data at rest
@@ -310,7 +310,7 @@ export default function DocsPage() {
               Documentation
             </h1>
             <p className="text-lg text-muted-foreground">
-              Everything you need to integrate PayDeck into your application
+              Everything you need to integrate PayPort into your application
             </p>
           </div>
 

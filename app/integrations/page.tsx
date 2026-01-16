@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Integrations - PayDeck",
-  description: "Pre-built integrations and plugins for PayDeck payment gateway",
+  title: "Integrations - PayPort",
+  description: "Pre-built integrations and plugins for PayPort payment gateway",
 };
 
 export default function IntegrationsPage() {
@@ -14,7 +14,7 @@ export default function IntegrationsPage() {
     {
       name: "Shopify",
       category: "E-commerce",
-      description: "Accept PayDeck payments on your Shopify store",
+      description: "Accept PayPort payments on your Shopify store",
       image: "Shopify",
       status: "Available",
       link: "#",
@@ -22,7 +22,7 @@ export default function IntegrationsPage() {
     {
       name: "WooCommerce",
       category: "E-commerce",
-      description: "WordPress/WooCommerce payment plugin for PayDeck",
+      description: "WordPress/WooCommerce payment plugin for PayPort",
       image: "WooCommerce",
       status: "Available",
       link: "#",
@@ -31,7 +31,7 @@ export default function IntegrationsPage() {
       name: "Stripe Connect",
       category: "Payments",
       description:
-        "Connect your Stripe account with PayDeck for unified reporting",
+        "Connect your Stripe account with PayPort for unified reporting",
       image: "Stripe",
       status: "Available",
       link: "#",
@@ -39,7 +39,7 @@ export default function IntegrationsPage() {
     {
       name: "Zapier",
       category: "Automation",
-      description: "Automate workflows with PayDeck payment events",
+      description: "Automate workflows with PayPort payment events",
       image: "Zapier",
       status: "Available",
       link: "#",
@@ -47,7 +47,7 @@ export default function IntegrationsPage() {
     {
       name: "QuickBooks Online",
       category: "Accounting",
-      description: "Automatically sync PayDeck transactions with QuickBooks",
+      description: "Automatically sync PayPort transactions with QuickBooks",
       image: "QuickBooks",
       status: "Coming Soon",
       link: "#",
@@ -71,7 +71,7 @@ export default function IntegrationsPage() {
     {
       name: "Google Sheets",
       category: "Data",
-      description: "Export and analyze PayDeck data in Google Sheets",
+      description: "Export and analyze PayPort data in Google Sheets",
       image: "Google Sheets",
       status: "Available",
       link: "#",
@@ -99,7 +99,7 @@ export default function IntegrationsPage() {
               Integrations
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Connect PayDeck with your favorite tools and platforms to
+              Connect PayPort with your favorite tools and platforms to
               streamline your payment workflow
             </p>
           </div>

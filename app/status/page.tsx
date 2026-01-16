@@ -48,7 +48,7 @@ export default function StatusPage() {
         <div className="container-centered py-12">
           <div className="mb-12">
             <h1 className="text-4xl font-bold tracking-tight mb-2">
-              PayDeck Status
+              PayPort Status
             </h1>
             <p className="text-lg text-muted-foreground">
               System performance and incident history

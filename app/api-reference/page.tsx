@@ -14,7 +14,7 @@ const apiEndpoints = [
     requestBody: JSON.stringify(
       {
         amount: 9999,
-        currency: "USD",
+        currency: "NGN",
         customer_id: "cust_12345",
         payment_method: "card",
         description: "Order #12345",
@@ -26,9 +26,9 @@ const apiEndpoints = [
       {
         id: "txn_abc123",
         amount: 9999,
-        currency: "USD",
+        currency: "NGN",
         status: "succeeded",
-        created_at: "2024-12-28T10:30:00Z",
+        created_at: "2026-01-16T10:30:00Z",
       },
       null,
       2
@@ -44,12 +44,12 @@ const apiEndpoints = [
       {
         id: "txn_abc123",
         amount: 9999,
-        currency: "USD",
+        currency: "NGN",
         status: "succeeded",
         customer_id: "cust_12345",
         payment_method: "card",
-        created_at: "2024-12-28T10:30:00Z",
-        updated_at: "2024-12-28T10:30:15Z",
+        created_at: "2026-01-16T10:30:00Z",
+        updated_at: "2026-01-16T10:30:15Z",
       },
       null,
       2
@@ -67,9 +67,9 @@ const apiEndpoints = [
           {
             id: "txn_abc123",
             amount: 9999,
-            currency: "USD",
+            currency: "NGN",
             status: "succeeded",
-            created_at: "2024-12-28T10:30:00Z",
+            created_at: "2026-01-16T10:30:00Z",
           },
         ],
         total: 1,
@@ -99,7 +99,7 @@ const apiEndpoints = [
         transaction_id: "txn_abc123",
         amount: 9999,
         status: "succeeded",
-        created_at: "2024-12-28T10:35:00Z",
+        created_at: "2026-01-16T10:35:00Z",
       },
       null,
       2
@@ -114,7 +114,7 @@ const apiEndpoints = [
       {
         email: "john@example.com",
         name: "John Doe",
-        phone: "+1234567890",
+        phone: "+234 xxx xxx xxxx",
         metadata: {
           tier: "gold",
         },
@@ -127,8 +127,8 @@ const apiEndpoints = [
         id: "cust_12345",
         email: "john@example.com",
         name: "John Doe",
-        phone: "+1234567890",
-        created_at: "2024-12-28T10:25:00Z",
+        phone: "+234 xxx xxx xxxx",
+        created_at: "2026-01-16T10:25:00Z",
       },
       null,
       2
@@ -145,9 +145,9 @@ const apiEndpoints = [
         id: "cust_12345",
         email: "john@example.com",
         name: "John Doe",
-        phone: "+1234567890",
-        created_at: "2024-12-28T10:25:00Z",
-        updated_at: "2024-12-28T10:30:00Z",
+        phone: "+234 xxx xxx xxxx",
+        created_at: "2026-01-16T10:25:00Z",
+        updated_at: "2026-01-16T10:30:00Z",
       },
       null,
       2
@@ -204,23 +204,23 @@ export default function APIReferencePage() {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-background">
-        <div className="container-centered py-12">
+      <div className="min-h-screen bg-background py-12">
+        <div className="container max-w-7xl mx-auto px-6">
           {/* Header */}
-          <div className="mb-12">
+          <div className="text-center mb-12">
             <h1 className="text-4xl font-bold tracking-tight mb-4">
               API Reference
             </h1>
-            <p className="text-lg text-muted-foreground">
-              Complete documentation for the PayDeck REST API. Base URL:{" "}
-              <code className="bg-muted px-2 py-1 rounded">
-                https://api.paydeck.io/v1
-              </code>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-4">
+              Complete documentation for the PayDeck REST API
             </p>
+            <code className="bg-muted px-4 py-2 rounded text-sm">
+              https://api.paydeck.io/v1
+            </code>
           </div>
 
           {/* Authentication Info */}
-          <div className="bg-card border border-border rounded-lg p-6 mb-12">
+          <div className="bg-card border border-border rounded-lg p-6 mb-12 max-w-4xl mx-auto">
             <h2 className="text-2xl font-bold mb-4">Authentication</h2>
             <p className="text-muted-foreground mb-4">
               All API requests require authentication using your API key.
@@ -232,31 +232,36 @@ export default function APIReferencePage() {
             />
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Endpoint List */}
-            <div className="lg:col-span-1">
+            <div className="lg:col-span-3">
               <div className="sticky top-20 space-y-2">
+                <h3 className="text-sm font-semibold text-muted-foreground mb-3 px-4">
+                  ENDPOINTS
+                </h3>
                 {apiEndpoints.map((ep, index) => (
                   <button
                     key={index}
                     onClick={() => setSelectedEndpoint(index)}
                     className={`w-full text-left px-4 py-3 rounded-lg transition-colors text-sm ${
                       selectedEndpoint === index
-                        ? "bg-green-500 text-primary-foreground"
+                        ? "bg-purple-600 text-white"
                         : "bg-muted text-muted-foreground hover:bg-muted/80"
                     }`}
                   >
                     <div className="font-bold mb-1">{ep.method}</div>
-                    <div className="text-xs opacity-75">{ep.endpoint}</div>
+                    <div className="text-xs opacity-75 truncate">
+                      {ep.title}
+                    </div>
                   </button>
                 ))}
               </div>
             </div>
 
             {/* Endpoint Details */}
-            <div className="lg:col-span-3 space-y-8">
-              <div>
-                <div className="flex items-center gap-4 mb-4">
+            <div className="lg:col-span-9 space-y-8">
+              <div className="bg-card border border-border rounded-lg p-6">
+                <div className="flex flex-wrap items-center gap-3 mb-4">
                   <span
                     className={`px-3 py-1 rounded font-bold text-sm ${
                       endpoint.method === "POST"
@@ -268,7 +273,7 @@ export default function APIReferencePage() {
                   >
                     {endpoint.method}
                   </span>
-                  <code className="bg-muted px-3 py-1 rounded text-sm font-mono">
+                  <code className="bg-muted px-3 py-1 rounded text-sm font-mono flex-1">
                     {endpoint.endpoint}
                   </code>
                 </div>
@@ -308,6 +313,30 @@ export default function APIReferencePage() {
   }`}
                   label="cURL"
                 />
+              </div>
+
+              {/* SDK Examples */}
+              <div className="bg-purple-500/5 border border-purple-500/20 rounded-lg p-6">
+                <h3 className="text-lg font-bold mb-3">Need Help?</h3>
+                <p className="text-muted-foreground mb-4">
+                  Check out our SDKs and libraries for easier integration in
+                  your preferred language.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="px-3 py-1 bg-muted rounded text-sm">
+                    Node.js
+                  </span>
+                  <span className="px-3 py-1 bg-muted rounded text-sm">
+                    Python
+                  </span>
+                  <span className="px-3 py-1 bg-muted rounded text-sm">
+                    PHP
+                  </span>
+                  <span className="px-3 py-1 bg-muted rounded text-sm">
+                    Ruby
+                  </span>
+                  <span className="px-3 py-1 bg-muted rounded text-sm">Go</span>
+                </div>
               </div>
             </div>
           </div>

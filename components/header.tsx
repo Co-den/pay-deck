@@ -16,9 +16,9 @@ export function Header() {
           className="flex items-center gap-2 hover:opacity-80 transition-opacity"
         >
           <div className="w-8 h-8 rounded-lg bg-purple-500 text-primary-foreground flex items-center justify-center font-bold text-lg">
-            S
+            P
           </div>
-          <span className="font-bold text-lg">SettleMe</span>
+          <span className="font-bold text-lg">PayPort</span>
         </Link>
 
         {/* Desktop Navigation */}

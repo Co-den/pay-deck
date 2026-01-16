@@ -10,13 +10,13 @@ export function ChatbotStatus() {
   });
 
   return (
-    <div className="bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-900 rounded-lg p-3 flex items-start gap-3">
-      <CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
+    <div className="bg-purple-50 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-900 rounded-lg p-3 flex items-start gap-3">
+      <CheckCircle2 className="w-5 h-5 text-purple-600 dark:text-purple-400 flex-shrink-0 mt-0.5" />
       <div>
-        <p className="font-semibold text-sm text-green-900 dark:text-green-200">
+        <p className="font-semibold text-sm text-purple-900 dark:text-purple-200">
           Status: All Systems Operational
         </p>
-        <p className="text-xs text-green-700 dark:text-green-300">
+        <p className="text-xs text-purple-700 dark:text-purple-300">
           Updated {currentTime} UTC
         </p>
       </div>

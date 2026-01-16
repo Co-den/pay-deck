@@ -48,10 +48,10 @@ export function ChatbotMessages() {
             }`}
           >
             <div
-              className={`max-w-xs px-3 py-2 rounded-lg text-sm ${
+              className={`max-w-[80%] md:max-w-xs px-3 py-2 rounded-lg text-sm ${
                 msg.role === "user"
-                  ? "bg-primary text-primary-foreground rounded-br-none"
-                  : "bg-muted text-muted-foreground rounded-bl-none"
+                  ? "bg-purple-600 text-white rounded-br-none"
+                  : "bg-muted text-foreground rounded-bl-none"
               }`}
             >
               {msg.content}
@@ -61,7 +61,7 @@ export function ChatbotMessages() {
       </div>
 
       {/* Input — pinned to bottom */}
-      <div className="border-t p-3">
+      <div className="border-t p-3 bg-background">
         <div className="flex gap-2">
           <Textarea
             placeholder="Type your message..."
@@ -79,7 +79,7 @@ export function ChatbotMessages() {
           <Button
             onClick={handleSend}
             size="icon"
-            className="shrink-0"
+            className="shrink-0 bg-purple-600 hover:bg-purple-700"
             disabled={!input.trim()}
           >
             <Send className="w-4 h-4" />

@@ -3,7 +3,14 @@
  * Authentication API functions
  */
 
-import { api, ApiResponse, setAuthToken, setMerchantData, clearAuthToken } from './client';
+import {
+  api,
+  ApiResponse,
+  setAuthToken,
+  sendEmail,
+  setMerchantData,
+  clearAuthToken,
+} from "./client";
 
 // Types
 export interface RegisterRequest {
@@ -15,12 +22,15 @@ export interface RegisterRequest {
   rcNumber?: string;
   nin?: string;
   taxId?: string;
-  accountType: 'individual' | 'business';
+  accountType: "individual" | "business";
 }
 
 export interface LoginRequest {
   email: string;
   password: string;
+}
+export interface ResetRequest {
+  eamil: string;
 }
 
 export interface MerchantData {
@@ -43,8 +53,10 @@ export const authApi = {
   /**
    * Register a new merchant
    */
-  register: async (data: RegisterRequest): Promise<ApiResponse<AuthResponseData>> => {
-    const response = await api.post<AuthResponseData>('/auth/register', data);
+  register: async (
+    data: RegisterRequest,
+  ): Promise<ApiResponse<AuthResponseData>> => {
+    const response = await api.post<AuthResponseData>("/auth/register", data);
 
     if (response.status === "success" && response.data?.token) {
       setAuthToken(response.data.token);
@@ -60,7 +72,7 @@ export const authApi = {
    * Login merchant
    */
   login: async (data: LoginRequest): Promise<ApiResponse<AuthResponseData>> => {
-    const response = await api.post<AuthResponseData>('/auth/login', data);
+    const response = await api.post<AuthResponseData>("/auth/login", data);
 
     if (response.status === "success" && response.data?.token) {
       setAuthToken(response.data.token);
@@ -72,18 +84,28 @@ export const authApi = {
     return response;
   },
 
+  passwordReset: async (
+    data: ResetRequest,
+  ): Promise<ApiResponse<AuthResponseData>> => {
+    const response = await api.post<AuthResponseData>("/passwordReset", data);
+    if (response.status === "success" && response.data) {
+      sendEmail(response.data);
+    }
+    return response;
+  },
+
   /**
    * Get current merchant
    */
   getMe: async (): Promise<ApiResponse<{ merchant: any }>> => {
-    return api.get<{ merchant: any }>('/auth/me');
+    return api.get<{ merchant: any }>("/auth/me");
   },
 
   /**
    * Logout merchant
    */
   logout: async (): Promise<ApiResponse<{}>> => {
-    const response = await api.post<{}>('/auth/logout');
+    const response = await api.post<{}>("/auth/logout");
     if (response.status === "success") {
       clearAuthToken();
       if (typeof window !== "undefined") {
@@ -96,8 +118,11 @@ export const authApi = {
   /**
    * Update password
    */
-  updatePassword: async (data: { currentPassword: string; newPassword: string }): Promise<ApiResponse<{ token: string }>> => {
-    return api.put<{ token: string }>('/auth/updatepassword', data);
+  updatePassword: async (data: {
+    currentPassword: string;
+    newPassword: string;
+  }): Promise<ApiResponse<{ token: string }>> => {
+    return api.put<{ token: string }>("/auth/updatepassword", data);
   },
 };
 
@@ -107,3 +132,4 @@ export const login = authApi.login;
 export const getMe = authApi.getMe;
 export const logout = authApi.logout;
 export const updatePassword = authApi.updatePassword;
+export const passwordReset =authApi.passwordReset;

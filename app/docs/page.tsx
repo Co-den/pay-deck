@@ -96,7 +96,7 @@ OAuth:
 Base URL: https://api.payport.io/v1
 
 Rate Limits:
-- Standard: 1000 requests per minute
+- Standard: 100 requests per minute
 - Enterprise: Custom limits
 
 Response Format:

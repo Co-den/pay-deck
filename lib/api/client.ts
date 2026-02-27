@@ -1,4 +1,3 @@
-// lib/api/client.ts
 /**
  * API Client - Base client for all API requests
  * Handles authentication, error handling, and request formatting
@@ -47,6 +46,10 @@ export function setMerchantData(merchant: any): void {
   localStorage.setItem("paydeck_merchant", JSON.stringify(merchant));
 }
 
+export function sendEmail(merchant: any): void {
+  if (typeof window === "undefined") return;
+  localStorage.setItem("paydeck_merchant", JSON.stringify(merchant));
+}
 /**
  * API Response structure from backend
  */
@@ -61,7 +64,7 @@ export interface ApiResponse<T = any> {
  */
 async function apiRequest<T = any>(
   endpoint: string,
-  options: RequestInit = {}
+  options: RequestInit = {},
 ): Promise<ApiResponse<T>> {
   const token = getAuthToken();
 
@@ -81,7 +84,7 @@ async function apiRequest<T = any>(
     // If response is not ok, throw error with backend message
     if (!response.ok) {
       throw new Error(
-        data.message || `HTTP ${response.status}: ${response.statusText}`
+        data.message || `HTTP ${response.status}: ${response.statusText}`,
       );
     }
 
@@ -153,7 +156,14 @@ export const auth = {
 
     return response;
   },
-
+  //password reset
+  passwordReset: async (email: string) => {
+    const response = await api.post("/auth/passwordReset", { email });
+    if (response.status === "success" && response.data) {
+      sendEmail(response.data);
+    }
+    return response;
+  },
   /**
    * Register
    */

@@ -89,7 +89,7 @@ export function Hero() {
             }}>
               <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#00e5a0", animation: "pulseDot 2s infinite", flexShrink: 0 }} />
               <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, fontWeight: 500, letterSpacing: "0.06em", color: "#00e5a0", whiteSpace: "nowrap" }}>
-                Now processing $1B+ monthly
+                Now processing N1B+ monthly
               </span>
             </div>
 

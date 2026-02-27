@@ -115,7 +115,7 @@ export function Hero() {
               animation: "fadeUp 0.7s 0.3s both",
               maxWidth: "100%",
             }}>
-              Paydeck is the all-in-one payments platform for modern businesses — payroll, invoices, global transfers, and expense management in one unified dashboard.
+              PayPort is the all-in-one payments platform for modern businesses — payroll, invoices, global transfers, and expense management in one unified dashboard.
             </p>
 
             {/* CTAs — stack on very small screens */}

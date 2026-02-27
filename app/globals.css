@@ -1,49 +1,167 @@
+/* ─── Google Fonts — MUST be first ─────────────────────────────────────────── */
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&display=swap");
+
+/* ─── Tailwind ──────────────────────────────────────────────────────────────── */
 @import "tailwindcss";
 @import "tw-animate-css";
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+@custom-variant dark (&:is(.dark *));
 
-/* Paydeck design tokens */
+/* ─── Paydeck design tokens ─────────────────────────────────────────────────── */
 :root {
-  --bg: #080c10;
-  --bg2: #0d1218;
-  --bg3: #121820;
-  --surface: #161e28;
-  --surface2: #1c2636;
-  --border: rgba(255, 255, 255, 0.07);
-  --border2: rgba(255, 255, 255, 0.12);
-  --green: #00e5a0;
-  --green-dim: rgba(0, 229, 160, 0.12);
-  --green-glow: rgba(0, 229, 160, 0.25);
-  --blue: #2dd4f5;
-  --red: #ff4d6a;
-  --text: #e8edf2;
-  --text2: #8a98a8;
-  --text3: #4a5568;
+  /* Raw palette */
+  --bg:        #080c10;
+  --bg2:       #0d1218;
+  --bg3:       #121820;
+  --surface:   #161e28;
+  --surface2:  #1c2636;
+  --border:    rgba(255,255,255,0.07);
+  --border2:   rgba(255,255,255,0.12);
+  --green:     #00e5a0;
+  --green-dim: rgba(0,229,160,0.12);
+  --green-glow:rgba(0,229,160,0.25);
+  --blue:      #2dd4f5;
+  --red:       #ff4d6a;
+  --text:      #e8edf2;
+  --text2:     #8a98a8;
+  --text3:     #4a5568;
+
+  /* shadcn/Tailwind tokens — mapped to Paydeck palette */
+  --background:            oklch(0.07 0.005 220);   /* ≈ #080c10 */
+  --foreground:            oklch(0.92 0.005 220);   /* ≈ #e8edf2 */
+  --card:                  oklch(0.10 0.005 220);   /* ≈ #0d1218 */
+  --card-foreground:       oklch(0.92 0.005 220);
+  --popover:               oklch(0.10 0.005 220);
+  --popover-foreground:    oklch(0.92 0.005 220);
+  --primary:               oklch(0.83 0.17 160);    /* ≈ #00e5a0 */
+  --primary-foreground:    oklch(0.07 0.005 220);   /* dark text on green */
+  --secondary:             oklch(0.13 0.005 220);   /* ≈ #161e28 */
+  --secondary-foreground:  oklch(0.92 0.005 220);
+  --muted:                 oklch(0.15 0.005 220);
+  --muted-foreground:      oklch(0.58 0.005 220);   /* ≈ #8a98a8 */
+  --accent:                oklch(0.13 0.005 220);
+  --accent-foreground:     oklch(0.92 0.005 220);
+  --destructive:           oklch(0.60 0.22 15);     /* ≈ #ff4d6a */
+  --destructive-foreground:oklch(0.92 0.005 220);
+  --border:                oklch(0.20 0.005 220);   /* ≈ rgba(255,255,255,0.07) equiv */
+  --input:                 oklch(0.13 0.005 220);
+  --ring:                  oklch(0.83 0.17 160);
+  --chart-1:               oklch(0.83 0.17 160);
+  --chart-2:               oklch(0.78 0.16 190);
+  --chart-3:               oklch(0.72 0.14 200);
+  --chart-4:               oklch(0.65 0.12 210);
+  --chart-5:               oklch(0.60 0.22 15);
+  --radius: 0.625rem;
+  --sidebar:               oklch(0.10 0.005 220);
+  --sidebar-foreground:    oklch(0.92 0.005 220);
+  --sidebar-primary:       oklch(0.83 0.17 160);
+  --sidebar-primary-foreground: oklch(0.07 0.005 220);
+  --sidebar-accent:        oklch(0.13 0.005 220);
+  --sidebar-accent-foreground: oklch(0.92 0.005 220);
+  --sidebar-border:        oklch(0.20 0.005 220);
+  --sidebar-ring:          oklch(0.83 0.17 160);
 }
 
-/* Dark base — prevents white flash */
-html {
-  background-color: #080c10;
-  color-scheme: dark;
-}
-html,
-body {
-  background-color: #080c10 !important;
-  color: #e8edf2;
+/* Dark mode = same as :root since Paydeck is always dark */
+.dark {
+  --background:            oklch(0.07 0.005 220);
+  --foreground:            oklch(0.92 0.005 220);
+  --card:                  oklch(0.10 0.005 220);
+  --card-foreground:       oklch(0.92 0.005 220);
+  --popover:               oklch(0.10 0.005 220);
+  --popover-foreground:    oklch(0.92 0.005 220);
+  --primary:               oklch(0.83 0.17 160);
+  --primary-foreground:    oklch(0.07 0.005 220);
+  --secondary:             oklch(0.13 0.005 220);
+  --secondary-foreground:  oklch(0.92 0.005 220);
+  --muted:                 oklch(0.15 0.005 220);
+  --muted-foreground:      oklch(0.58 0.005 220);
+  --accent:                oklch(0.13 0.005 220);
+  --accent-foreground:     oklch(0.92 0.005 220);
+  --destructive:           oklch(0.60 0.22 15);
+  --destructive-foreground:oklch(0.92 0.005 220);
+  --border:                oklch(0.20 0.005 220);
+  --input:                 oklch(0.13 0.005 220);
+  --ring:                  oklch(0.83 0.17 160);
+  --chart-1:               oklch(0.83 0.17 160);
+  --chart-2:               oklch(0.78 0.16 190);
+  --chart-3:               oklch(0.72 0.14 200);
+  --chart-4:               oklch(0.65 0.12 210);
+  --chart-5:               oklch(0.60 0.22 15);
+  --sidebar:               oklch(0.10 0.005 220);
+  --sidebar-foreground:    oklch(0.92 0.005 220);
+  --sidebar-primary:       oklch(0.83 0.17 160);
+  --sidebar-primary-foreground: oklch(0.07 0.005 220);
+  --sidebar-accent:        oklch(0.13 0.005 220);
+  --sidebar-accent-foreground: oklch(0.92 0.005 220);
+  --sidebar-border:        oklch(0.20 0.005 220);
+  --sidebar-ring:          oklch(0.83 0.17 160);
 }
 
-/* Syne as primary font */
-body {
-  font-family: "Syne", sans-serif;
-  overflow-x: hidden;
+/* ─── Tailwind theme wiring ─────────────────────────────────────────────────── */
+@theme inline {
+  --font-sans:  "Syne", "Syne Fallback";
+  --font-mono:  "JetBrains Mono", "JetBrains Mono Fallback";
+  --color-background:            var(--background);
+  --color-foreground:            var(--foreground);
+  --color-card:                  var(--card);
+  --color-card-foreground:       var(--card-foreground);
+  --color-popover:               var(--popover);
+  --color-popover-foreground:    var(--popover-foreground);
+  --color-primary:               var(--primary);
+  --color-primary-foreground:    var(--primary-foreground);
+  --color-secondary:             var(--secondary);
+  --color-secondary-foreground:  var(--secondary-foreground);
+  --color-muted:                 var(--muted);
+  --color-muted-foreground:      var(--muted-foreground);
+  --color-accent:                var(--accent);
+  --color-accent-foreground:     var(--accent-foreground);
+  --color-destructive:           var(--destructive);
+  --color-destructive-foreground:var(--destructive-foreground);
+  --color-border:                var(--border);
+  --color-input:                 var(--input);
+  --color-ring:                  var(--ring);
+  --color-chart-1:               var(--chart-1);
+  --color-chart-2:               var(--chart-2);
+  --color-chart-3:               var(--chart-3);
+  --color-chart-4:               var(--chart-4);
+  --color-chart-5:               var(--chart-5);
+  --radius-sm:  calc(var(--radius) - 4px);
+  --radius-md:  calc(var(--radius) - 2px);
+  --radius-lg:  var(--radius);
+  --radius-xl:  calc(var(--radius) + 4px);
+  --color-sidebar:                    var(--sidebar);
+  --color-sidebar-foreground:         var(--sidebar-foreground);
+  --color-sidebar-primary:            var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent:             var(--sidebar-accent);
+  --color-sidebar-accent-foreground:  var(--sidebar-accent-foreground);
+  --color-sidebar-border:             var(--sidebar-border);
+  --color-sidebar-ring:               var(--sidebar-ring);
 }
 
-/* Noise texture overlay */
+/* ─── Base layer ────────────────────────────────────────────────────────────── */
+@layer base {
+  /* Kill white flash — painted before any JS or Tailwind loads */
+  html {
+    background-color: #080c10;
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: #080c10;
+    color: #e8edf2;
+    font-family: "Syne", sans-serif;
+    overflow-x: hidden;
+  }
+
+  * {
+    @apply border-border outline-ring/50;
+    box-sizing: border-box;
+  }
+}
+
+/* ─── Noise overlay (applied after base so z-index is respected) ────────────── */
 body::before {
   content: "";
   position: fixed;
@@ -54,12 +172,20 @@ body::before {
   opacity: 0.4;
 }
 
-/* Smooth scroll */
-html {
-  scroll-behavior: smooth;
+/* ─── Component utilities ───────────────────────────────────────────────────── */
+@layer components {
+  .container-centered {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  .section-centered {
+    @apply flex flex-col items-center justify-center text-center;
+  }
+  .cta-section  { @apply py-16 sm:py-20 lg:py-24; }
+  .cta-content  { @apply max-w-4xl mx-auto space-y-6; }
+  .cta-buttons  { @apply flex flex-col sm:flex-row gap-4 justify-center items-center mt-8; }
 }
 
-/* Landing page responsive */
+/* ─── Landing page responsive overrides ─────────────────────────────────────── */
 @media (max-width: 960px) {
   /* Hero two-col → single col */
   section[style*="grid-template-columns: 1fr 1fr"] {
@@ -71,106 +197,15 @@ html {
   [style*="repeat(4, 1fr)"] {
     grid-template-columns: 1fr 1fr !important;
   }
-  /* Features bento → single col */
+  /* Features bento → 1-col */
   [style*="grid-template-columns: 2fr 1fr 1fr"] {
     grid-template-columns: 1fr !important;
   }
-  /* Testimonials/pricing → single col */
+  /* Testimonials / Pricing → 1-col */
   [style*="repeat(3, 1fr)"] {
     grid-template-columns: 1fr !important;
   }
   nav {
     padding: 0 24px !important;
   }
-}
-
-@custom-variant dark (&:is(.dark *));
-
-@theme inline {
-  --font-sans: "Geist", "Geist Fallback";
-  --font-mono: "Geist Mono", "Geist Mono Fallback";
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
-}
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-
-  /* Ensure all sections have proper horizontal spacing */
-  section {
-    @apply px-4 sm:px-6 lg:px-8;
-  }
-}
-
-/* Add component utilities for common patterns */
-@layer components {
-  /* Centered container with max-width */
-  .container-centered {
-    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-  }
-
-  /* Section with centered content */
-  .section-centered {
-    @apply flex flex-col items-center justify-center text-center;
-  }
-
-  /* CTA section wrapper */
-  .cta-section {
-    @apply py-16 sm:py-20 lg:py-24;
-  }
-
-  /* CTA content container */
-  .cta-content {
-    @apply max-w-4xl mx-auto space-y-6;
-  }
-
-  /* CTA buttons container */
-  .cta-buttons {
-    @apply flex flex-col sm:flex-row gap-4 justify-center items-center mt-8;
-  }
-}
-
-html,
-body {
-  background-color: #080c10;
-  color: #e8edf2;
 }

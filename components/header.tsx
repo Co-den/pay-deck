@@ -44,7 +44,7 @@ export function Header() {
           <div style={{ width: 32, height: 32, background: "#00e5a0", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
             <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 14, fontWeight: 600, color: "#080c10" }}>₿</span>
           </div>
-          <span style={{ color: "#e8edf2" }}>Pay<span style={{ color: "#00e5a0" }}>deck</span></span>
+          <span style={{ color: "#e8edf2" }}>Pay<span style={{ color: "#00e5a0" }}>Port</span></span>
         </Link>
 
         {/* Desktop nav — hidden on mobile */}

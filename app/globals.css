@@ -173,3 +173,91 @@ body {
   background-color: #080c10;
   color: #e8edf2;
 }
+/* Add these to the TOP of your existing globals.css */
+
+/* Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&display=swap");
+
+/* Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Paydeck design tokens */
+:root {
+  --bg: #080c10;
+  --bg2: #0d1218;
+  --bg3: #121820;
+  --surface: #161e28;
+  --surface2: #1c2636;
+  --border: rgba(255, 255, 255, 0.07);
+  --border2: rgba(255, 255, 255, 0.12);
+  --green: #00e5a0;
+  --green-dim: rgba(0, 229, 160, 0.12);
+  --green-glow: rgba(0, 229, 160, 0.25);
+  --blue: #2dd4f5;
+  --red: #ff4d6a;
+  --text: #e8edf2;
+  --text2: #8a98a8;
+  --text3: #4a5568;
+}
+
+/* Dark base — prevents white flash */
+html {
+  background-color: #080c10;
+  color-scheme: dark;
+}
+html,
+body {
+  background-color: #080c10 !important;
+  color: #e8edf2;
+}
+
+/* Syne as primary font */
+body {
+  font-family: "Syne", sans-serif;
+  overflow-x: hidden;
+}
+
+/* Noise texture overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.4;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Landing page responsive */
+@media (max-width: 960px) {
+  /* Hero two-col → single col */
+  section[style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+    padding: 100px 24px 60px !important;
+    gap: 48px !important;
+  }
+  /* Steps 4-col → 2-col */
+  [style*="repeat(4, 1fr)"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  /* Features bento → single col */
+  [style*="grid-template-columns: 2fr 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+  /* Testimonials/pricing → single col */
+  [style*="repeat(3, 1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+  nav {
+    padding: 0 24px !important;
+  }
+}

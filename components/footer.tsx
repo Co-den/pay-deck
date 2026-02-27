@@ -1,178 +1,170 @@
 import Link from "next/link";
-import { Facebook, Twitter, Linkedin, Github } from "lucide-react";
+
+const FOOTER_COLS = [
+  {
+    head: "Product",
+    links: [
+      "Payroll",
+      "Invoicing",
+      "Expense Cards",
+      "Global Transfers",
+      "Analytics",
+    ].map((l) => ({ label: l, href: "/" })),
+  },
+  {
+    head: "Company",
+    links: ["About", "Careers", "Blog", "Press"].map((l) => ({
+      label: l,
+      href: l.toLowerCase(),
+    })),
+  },
+  {
+    head: "Developers",
+    links: ["API Docs", "Status", "Changelog", "SDKs"].map((l) => ({
+      label: l,
+      href: l.toLowerCase(),
+    })),
+  },
+  {
+    head: "Legal",
+    links: ["Privacy", "Terms", "Security", "Licenses"].map((l) => ({
+      label: l,
+      href: l.toLowerCase(),
+    })),
+  },
+];
 
 export function Footer() {
   return (
-    <footer className="bg-card border-t border-border">
-      <div className="container-centered py-16">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
-          <div className="col-span-2 md:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-purple-500 text-primary-foreground flex items-center justify-center font-bold text-lg">
-                P
-              </div>
-              <span className="font-bold">PayPort</span>
+    <footer
+      style={{
+        padding: "60px 48px 32px",
+        borderTop: "1px solid rgba(255,255,255,0.07)",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          gap: 64,
+          marginBottom: 48,
+          paddingBottom: 48,
+          borderBottom: "1px solid rgba(255,255,255,0.07)",
+          flexWrap: "wrap" as const,
+        }}
+      >
+        {/* Brand */}
+        <div style={{ maxWidth: 260 }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 10,
+              fontSize: 18,
+              fontWeight: 800,
+              marginBottom: 12,
+            }}
+          >
+            <div
+              style={{
+                width: 28,
+                height: 28,
+                borderRadius: 7,
+                background: "#00e5a0",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: 12,
+                fontWeight: 700,
+                color: "#080c10",
+                flexShrink: 0,
+              }}
+            >
+              P
             </div>
-            <p className="text-sm text-muted-foreground">
-              Modern payment processing for merchants worldwide.
-            </p>
+            Paydeck
           </div>
-
-          <div>
-            <h4 className="font-semibold mb-4 text-sm">Product</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>
-                <Link
-                  href="#features"
-                  className="hover:text-foreground transition-colors"
-                >
-                  Features
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#pricing"
-                  className="hover:text-foreground transition-colors"
-                >
-                  Pricing
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/security"
-                  className="hover:text-foreground transition-colors"
-                >
-                  Security
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/status"
-                  className="hover:text-foreground transition-colors"
-                >
-                  Status
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-semibold mb-4 text-sm">Resources</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>
-                <Link
-                  href="/docs"
-                  className="hover:text-foreground transition-colors"
-                >
-                  Documentation
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/api-reference"
-                  className="hover:text-foreground transition-colors"
-                >
-                  API Reference
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/blog"
-                  className="hover:text-foreground transition-colors"
-                >
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/support"
-                  className="hover:text-foreground transition-colors"
-                >
-                  Support
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-semibold mb-4 text-sm">Company</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>
-                <Link
-                  href="/about"
-                  className="hover:text-foreground transition-colors"
-                >
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/careers"
-                  className="hover:text-foreground transition-colors"
-                >
-                  Careers
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/privacy"
-                  className="hover:text-foreground transition-colors"
-                >
-                  Privacy
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/terms"
-                  className="hover:text-foreground transition-colors"
-                >
-                  Terms
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/testimonials"
-                  className="hover:text-foreground transition-colors"
-                >
-                  Testimonials
-                </Link>
-              </li>
-            </ul>
-          </div>
+          <p style={{ fontSize: 13, color: "#8a98a8", lineHeight: 1.6 }}>
+            The all-in-one payments platform for businesses that move fast.
+          </p>
         </div>
 
-        <div className="border-t border-border pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <p className="text-sm text-muted-foreground">
-              © 2025 PayPort. All rights reserved.
-            </p>
-            <div className="flex items-center gap-4">
-              <Link
-                href="#"
-                className="text-muted-foreground hover:text-foreground transition-colors"
+        {/* Columns */}
+        <div style={{ display: "flex", gap: 64, flexWrap: "wrap" as const }}>
+          {FOOTER_COLS.map(({ head, links }) => (
+            <div key={head}>
+              <div
+                style={{
+                  fontFamily: "'JetBrains Mono', monospace",
+                  fontSize: 10,
+                  letterSpacing: "0.14em",
+                  textTransform: "uppercase" as const,
+                  color: "#4a5568",
+                  marginBottom: 16,
+                }}
               >
-                <Twitter className="w-5 h-5" />
-              </Link>
-              <Link
-                href="#"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <Facebook className="w-5 h-5" />
-              </Link>
-              <Link
-                href="#"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <Linkedin className="w-5 h-5" />
-              </Link>
-              <Link
-                href="#"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <Github className="w-5 h-5" />
-              </Link>
+                {head}
+              </div>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                {links.map(({ label, href }) => (
+                  <li key={label} style={{ marginBottom: 10 }}>
+                    <Link
+                      href={href}
+                      style={{
+                        fontSize: 13,
+                        color: "#8a98a8",
+                        textDecoration: "none",
+                        transition: "color 0.2s",
+                      }}
+                      
+                    >
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Bottom */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexWrap: "wrap" as const,
+          gap: 16,
+        }}
+      >
+        <div
+          style={{
+            fontFamily: "'JetBrains Mono', monospace",
+            fontSize: 11,
+            color: "#4a5568",
+          }}
+        >
+          © 2025 Paydeck Technologies Inc. All rights reserved.
+        </div>
+        <div style={{ display: "flex", gap: 12 }}>
+          {["PCI DSS", "SOC 2", "NDPR", "ISO 27001"].map((b) => (
+            <span
+              key={b}
+              style={{
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: 10,
+                letterSpacing: "0.06em",
+                color: "#4a5568",
+                border: "1px solid rgba(255,255,255,0.07)",
+                padding: "4px 10px",
+                borderRadius: 4,
+              }}
+            >
+              {b}
+            </span>
+          ))}
         </div>
       </div>
     </footer>

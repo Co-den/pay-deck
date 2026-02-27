@@ -1,210 +1,331 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+const NAV_LINKS = [
+  { label: "Product", href: "#" },
+  { label: "Payroll", href: "#" },
+  { label: "Pricing", href: "#pricing" },
+  { label: "Docs", href: "/docs" },
+  { label: "Blog", href: "/blog" },
+];
 
 export function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 border-b border-border">
-      <div className="container-centered flex h-16 items-center justify-between">
+    <>
+      <nav
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 200,
+          padding: "0 48px",
+          height: 64,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          borderBottom: scrolled
+            ? "1px solid rgba(255,255,255,0.07)"
+            : "1px solid transparent",
+          background: scrolled ? "rgba(8,12,16,0.85)" : "transparent",
+          backdropFilter: scrolled ? "blur(20px)" : "none",
+          transition: "all 0.4s",
+        }}
+      >
+        {/* Logo */}
         <Link
           href="/"
-          className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 10,
+            textDecoration: "none",
+            fontSize: 20,
+            fontWeight: 800,
+            letterSpacing: "-0.5px",
+          }}
         >
-          <div className="w-8 h-8 rounded-lg bg-purple-500 text-primary-foreground flex items-center justify-center font-bold text-lg">
-            P
+          <div
+            style={{
+              width: 32,
+              height: 32,
+              background: "#00e5a0",
+              borderRadius: 8,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexShrink: 0,
+            }}
+          >
+            <span
+              style={{
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: 14,
+                fontWeight: 600,
+                color: "#080c10",
+              }}
+            >
+              ₿
+            </span>
           </div>
-          <span className="font-bold text-lg">PayPort</span>
+          <span style={{ color: "#e8edf2" }}>
+            Pay<span style={{ color: "#00e5a0" }}>deck</span>
+          </span>
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8">
-          <Link
-            href="/#features"
-            className="text-sm font-medium hover:text-purple-500 transition-colors"
-          >
-            Features
-          </Link>
-          <Link
-            href="/#pricing"
-            className="text-sm font-medium hover:text-purple-500 transition-colors"
-          >
-            Pricing
-          </Link>
-          <Link
-            href="/docs"
-            className="text-sm font-medium hover:text-purple-500 transition-colors"
-          >
-            Docs
-          </Link>
-          <Link
-            href="/guides"
-            className="text-sm font-medium hover:text-purple-500 transition-colors"
-          >
-            Guides
-          </Link>
-          <Link
-            href="/integrations"
-            className="text-sm font-medium hover:text-purple-500 transition-colors"
-          >
-            Integrations
-          </Link>
-          <Link
-            href="/blog"
-            className="text-sm font-medium hover:text-purple-500 transition-colors"
-          >
-            Blog
-          </Link>
-          <Link
-            href="/status"
-            className="text-sm font-medium hover:text-purple-500 transition-colors"
-          >
-            Status
-          </Link>
-        </nav>
+        {/* Desktop nav */}
+        <ul
+          style={{
+            display: "flex",
+            gap: 32,
+            listStyle: "none",
+            margin: 0,
+            padding: 0,
+          }}
+          className="hidden md:flex"
+        >
+          {NAV_LINKS.map(({ label, href }) => (
+            <li key={label}>
+              <Link
+                href={href}
+                style={{
+                  fontFamily: "'JetBrains Mono', monospace",
+                  fontSize: 12,
+                  fontWeight: 400,
+                  letterSpacing: "0.05em",
+                  color: "#8a98a8",
+                  textDecoration: "none",
+                  transition: "color 0.2s",
+                }}
+                onMouseEnter={(e) =>
+                  ((e.currentTarget as HTMLElement).style.color = "#e8edf2")
+                }
+                onMouseLeave={(e) =>
+                  ((e.currentTarget as HTMLElement).style.color = "#8a98a8")
+                }
+              >
+                {label}
+              </Link>
+            </li>
+          ))}
+        </ul>
 
-        {/* Desktop Buttons */}
-        <div className="flex items-center gap-3">
-          <Link href="/auth/login" className="hidden md:block">
-            <Button variant="outline" className="hover:bg-purple-600" size="sm">
-              Sign In
-            </Button>
+        {/* Desktop right */}
+        <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+          <Link
+            href="/auth/login"
+            className="hidden md:block"
+            style={{
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: 12,
+              letterSpacing: "0.05em",
+              color: "#8a98a8",
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              textDecoration: "none",
+              transition: "color 0.2s",
+            }}
+            onMouseEnter={(e) =>
+              ((e.currentTarget as HTMLElement).style.color = "#e8edf2")
+            }
+            onMouseLeave={(e) =>
+              ((e.currentTarget as HTMLElement).style.color = "#8a98a8")
+            }
+          >
+            Sign in
+          </Link>
+          <Link href="/auth/signup" className="hidden md:block">
+            <button
+              style={{
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: 12,
+                letterSpacing: "0.05em",
+                background: "#00e5a0",
+                color: "#080c10",
+                border: "none",
+                padding: "9px 20px",
+                borderRadius: 6,
+                cursor: "pointer",
+                fontWeight: 600,
+                transition: "opacity 0.2s, transform 0.2s",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.opacity = "0.88";
+                (e.currentTarget as HTMLElement).style.transform =
+                  "translateY(-1px)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.opacity = "1";
+                (e.currentTarget as HTMLElement).style.transform = "";
+              }}
+            >
+              Get started free →
+            </button>
           </Link>
 
-          <Link href="/auth/signup">
-            <Button size="sm" className="bg-purple-600 hover:bg-purple-700">Get Started</Button>
-          </Link>          
-          {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="icon"
+          {/* Hamburger */}
+          <button
             className="md:hidden"
-            onClick={() => setMobileMenuOpen(true)}
-            aria-label="Open menu"
+            onClick={() => setMobileOpen(true)}
+            style={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              display: "flex",
+              flexDirection: "column",
+              gap: 5,
+              padding: 4,
+            }}
           >
-            <Menu className="w-5 h-5" />
-          </Button>
+            <span
+              style={{
+                display: "block",
+                width: 20,
+                height: 1,
+                background: "#8a98a8",
+              }}
+            />
+            <span
+              style={{
+                display: "block",
+                width: 20,
+                height: 1,
+                background: "#8a98a8",
+              }}
+            />
+            <span
+              style={{
+                display: "block",
+                width: 14,
+                height: 1,
+                background: "#8a98a8",
+              }}
+            />
+          </button>
         </div>
-      </div>
+      </nav>
 
-      {/* Mobile Menu Overlay */}
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 md:hidden">
-          {/* Backdrop */}
+      {/* Mobile overlay */}
+      {mobileOpen && (
+        <div style={{ position: "fixed", inset: 0, zIndex: 300 }}>
           <div
-            className="absolute inset-0 bg-black/50"
-            onClick={() => setMobileMenuOpen(false)}
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: "rgba(8,12,16,0.9)",
+              backdropFilter: "blur(20px)",
+            }}
+            onClick={() => setMobileOpen(false)}
           />
-          
-          {/* Menu Panel */}
-          <div className="absolute right-0 top-0 bottom-0 w-full max-w-sm bg-background shadow-xl flex flex-col">
-            {/* Menu Header */}
-            <div className="flex items-center justify-between p-4 border-b border-border">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-green-500 text-primary-foreground flex items-center justify-center font-bold text-lg">
-                  S
-                </div>
-                <span className="font-bold text-lg">SettleMe</span>
-              </div>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setMobileMenuOpen(false)}
-                aria-label="Close menu"
+          <div
+            style={{
+              position: "absolute",
+              right: 0,
+              top: 0,
+              bottom: 0,
+              width: 280,
+              background: "#0d1218",
+              borderLeft: "1px solid rgba(255,255,255,0.07)",
+              display: "flex",
+              flexDirection: "column",
+              padding: 24,
+              gap: 24,
+            }}
+          >
+            <div style={{ display: "flex", justifyContent: "flex-end" }}>
+              <button
+                onClick={() => setMobileOpen(false)}
+                style={{
+                  background: "none",
+                  border: "none",
+                  color: "#8a98a8",
+                  fontSize: 24,
+                  cursor: "pointer",
+                  lineHeight: 1,
+                }}
               >
-                <X className="w-5 h-5" />
-              </Button>
+                ×
+              </button>
             </div>
-
-            {/* Action Buttons First */}
-            <div className="p-4 border-b border-border space-y-3 bg-muted/30">
-              <Link 
-                href="/auth/login" 
-                onClick={() => setMobileMenuOpen(false)}
-                className="block"
-              >
-                <Button 
-                  variant="outline" 
-                  className="w-full h-12 text-base font-medium"
-                >
-                  Sign In
-                </Button>
-              </Link>
-              <Link 
-                href="/auth/signup" 
-                onClick={() => setMobileMenuOpen(false)}
-                className="block"
-              >
-                <Button className="w-full h-12 text-base font-medium">
-                  Get Started
-                </Button>
-              </Link>
-            </div>
-
-            {/* Scrollable Navigation Links */}
-            <nav className="flex-1 overflow-y-auto">
-              <div className="p-4 space-y-1">
+            <nav style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+              {NAV_LINKS.map(({ label, href }) => (
                 <Link
-                  href="/#features"
-                  className="flex items-center h-12 px-4 text-base font-medium hover:text-primary hover:bg-accent transition-colors rounded-lg"
-                  onClick={() => setMobileMenuOpen(false)}
+                  key={label}
+                  href={href}
+                  onClick={() => setMobileOpen(false)}
+                  style={{
+                    fontFamily: "'JetBrains Mono', monospace",
+                    fontSize: 14,
+                    color: "#8a98a8",
+                    textDecoration: "none",
+                    padding: "10px 0",
+                    borderBottom: "1px solid rgba(255,255,255,0.05)",
+                  }}
                 >
-                  Features
+                  {label}
                 </Link>
-                <Link
-                  href="/#pricing"
-                  className="flex items-center h-12 px-4 text-base font-medium hover:text-primary hover:bg-accent transition-colors rounded-lg"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Pricing
-                </Link>
-                <Link
-                  href="/docs"
-                  className="flex items-center h-12 px-4 text-base font-medium hover:text-primary hover:bg-accent transition-colors rounded-lg"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Docs
-                </Link>
-                <Link
-                  href="/guides"
-                  className="flex items-center h-12 px-4 text-base font-medium hover:text-primary hover:bg-accent transition-colors rounded-lg"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Guides
-                </Link>
-                <Link
-                  href="/integrations"
-                  className="flex items-center h-12 px-4 text-base font-medium hover:text-primary hover:bg-accent transition-colors rounded-lg"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Integrations
-                </Link>
-                <Link
-                  href="/blog"
-                  className="flex items-center h-12 px-4 text-base font-medium hover:text-primary hover:bg-accent transition-colors rounded-lg"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Blog
-                </Link>
-                <Link
-                  href="/status"
-                  className="flex items-center h-12 px-4 text-base font-medium hover:text-primary hover:bg-accent transition-colors rounded-lg"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Status
-                </Link>
-              </div>
+              ))}
             </nav>
-
-            {/* Empty footer space for better scrolling */}
-            <div className="h-4" />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 10,
+                marginTop: "auto",
+              }}
+            >
+              <Link href="/auth/login" onClick={() => setMobileOpen(false)}>
+                <button
+                  style={{
+                    width: "100%",
+                    padding: 12,
+                    borderRadius: 8,
+                    background: "none",
+                    border: "1px solid rgba(255,255,255,0.12)",
+                    color: "#e8edf2",
+                    fontFamily: "'Syne', sans-serif",
+                    fontSize: 15,
+                    fontWeight: 600,
+                    cursor: "pointer",
+                  }}
+                >
+                  Sign in
+                </button>
+              </Link>
+              <Link href="/auth/signup" onClick={() => setMobileOpen(false)}>
+                <button
+                  style={{
+                    width: "100%",
+                    padding: 12,
+                    borderRadius: 8,
+                    background: "#00e5a0",
+                    border: "none",
+                    color: "#080c10",
+                    fontFamily: "'Syne', sans-serif",
+                    fontSize: 15,
+                    fontWeight: 700,
+                    cursor: "pointer",
+                  }}
+                >
+                  Get started free →
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
       )}
-    </header>
+    </>
   );
 }

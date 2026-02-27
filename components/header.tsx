@@ -76,11 +76,11 @@ export function Header() {
                 color: "#080c10",
               }}
             >
-              ₿
+              P
             </span>
           </div>
           <span style={{ color: "#e8edf2" }}>
-            Pay<span style={{ color: "#00e5a0" }}>deck</span>
+            Pay<span style={{ color: "#00e5a0" }}>Port</span>
           </span>
         </Link>
 

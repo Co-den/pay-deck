@@ -212,7 +212,7 @@ export function Hero() {
             animation: "fadeUp 0.7s 0.3s both",
           }}
         >
-          Paydeck is the all-in-one payments platform for modern businesses —
+          PayPort is the all-in-one payments platform for modern businesses
           payroll, invoices, global transfers, and expense management in one
           unified dashboard.
         </p>
@@ -407,7 +407,7 @@ export function Hero() {
                 textAlign: "center",
               }}
             >
-              paydeck.io/dashboard
+              PayPort.io/dashboard
             </span>
           </div>
 

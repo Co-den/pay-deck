@@ -83,7 +83,7 @@ export function Footer() {
             >
               P
             </div>
-            Paydeck
+            PayPort
           </div>
           <p style={{ fontSize: 13, color: "#8a98a8", lineHeight: 1.6 }}>
             The all-in-one payments platform for businesses that move fast.
@@ -146,7 +146,7 @@ export function Footer() {
             color: "#4a5568",
           }}
         >
-          © 2025 Paydeck Technologies Inc. All rights reserved.
+          © 2025 PayPort Technologies Inc. All rights reserved.
         </div>
         <div style={{ display: "flex", gap: 12 }}>
           {["PCI DSS", "SOC 2", "NDPR", "ISO 27001"].map((b) => (

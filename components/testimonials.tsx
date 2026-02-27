@@ -10,7 +10,7 @@ const TESTIMONIALS = [
         <strong style={{ color: "#e8edf2", fontWeight: 600 }}>
           3 days every month
         </strong>{" "}
-        on payroll. With Paydeck it's done in 20 minutes. The automation is
+        on payroll. With PayPort it's done in 20 minutes. The automation is
         genuinely insane.
       </>
     ),
@@ -22,7 +22,7 @@ const TESTIMONIALS = [
   {
     text: (
       <>
-        Our team is spread across 8 countries. Paydeck handles{" "}
+        Our team is spread across 8 countries. PayPort handles{" "}
         <strong style={{ color: "#e8edf2", fontWeight: 600 }}>
           every currency, every time zone
         </strong>{" "}

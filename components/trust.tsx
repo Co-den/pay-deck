@@ -37,7 +37,7 @@ export function Trust() {
             Trusted by industry leaders
           </h2>
           <p className="text-base font-mono text-[#8a98a8] leading-relaxed">
-            Paydeck is trusted by thousands of merchants worldwide with billions
+            PayPort is trusted by thousands of merchants worldwide with billions
             in annual transaction volume
           </p>
         </div>

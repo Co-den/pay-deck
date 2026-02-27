@@ -1,89 +1,90 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
+/* Paydeck design tokens */
 :root {
-  /* PayDeck Fintech Color Palette */
-  /* Primary: Professional teal/blue for trust and security */
-  --background: oklch(0.98 0 0);
-  --foreground: oklch(0.15 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0 0);
-
-  /* Primary color changed to fintech teal */
-  --primary: oklch(0.42 0.18 200);
-  --primary-foreground: oklch(0.98 0 0);
-
-  --secondary: oklch(0.95 0 0);
-  --secondary-foreground: oklch(0.42 0.18 200);
-  --muted: oklch(0.92 0 0);
-  --muted-foreground: oklch(0.5 0 0);
-
-  /* Accent color for highlights and CTAs */
-  --accent: oklch(0.48 0.16 180);
-  --accent-foreground: oklch(0.98 0 0);
-
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(0.92 0 0);
-  --input: oklch(0.96 0 0);
-  --ring: oklch(0.42 0.18 200);
-
-  /* Chart colors for dashboard analytics */
-  --chart-1: oklch(0.42 0.18 200);
-  --chart-2: oklch(0.48 0.16 180);
-  --chart-3: oklch(0.52 0.15 170);
-  --chart-4: oklch(0.6 0.12 160);
-  --chart-5: oklch(0.65 0.1 150);
-
-  --radius: 0.625rem;
-  --sidebar: oklch(0.98 0 0);
-  --sidebar-foreground: oklch(0.15 0 0);
-  --sidebar-primary: oklch(0.42 0.18 200);
-  --sidebar-primary-foreground: oklch(0.98 0 0);
-  --sidebar-accent: oklch(0.48 0.16 180);
-  --sidebar-accent-foreground: oklch(0.98 0 0);
-  --sidebar-border: oklch(0.92 0 0);
-  --sidebar-ring: oklch(0.42 0.18 200);
+  --bg: #080c10;
+  --bg2: #0d1218;
+  --bg3: #121820;
+  --surface: #161e28;
+  --surface2: #1c2636;
+  --border: rgba(255, 255, 255, 0.07);
+  --border2: rgba(255, 255, 255, 0.12);
+  --green: #00e5a0;
+  --green-dim: rgba(0, 229, 160, 0.12);
+  --green-glow: rgba(0, 229, 160, 0.25);
+  --blue: #2dd4f5;
+  --red: #ff4d6a;
+  --text: #e8edf2;
+  --text2: #8a98a8;
+  --text3: #4a5568;
 }
 
-.dark {
-  --background: oklch(0.12 0 0);
-  --foreground: oklch(0.95 0 0);
-  --card: oklch(0.15 0 0);
-  --card-foreground: oklch(0.95 0 0);
-  --popover: oklch(0.15 0 0);
-  --popover-foreground: oklch(0.95 0 0);
-  --primary: oklch(0.55 0.18 200);
-  --primary-foreground: oklch(0.12 0 0);
-  --secondary: oklch(0.25 0 0);
-  --secondary-foreground: oklch(0.95 0 0);
-  --muted: oklch(0.28 0 0);
-  --muted-foreground: oklch(0.7 0 0);
-  --accent: oklch(0.6 0.16 180);
-  --accent-foreground: oklch(0.12 0 0);
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.28 0 0);
-  --input: oklch(0.2 0 0);
-  --ring: oklch(0.55 0.18 200);
-  --chart-1: oklch(0.55 0.18 200);
-  --chart-2: oklch(0.6 0.16 180);
-  --chart-3: oklch(0.65 0.15 170);
-  --chart-4: oklch(0.7 0.12 160);
-  --chart-5: oklch(0.75 0.1 150);
-  --sidebar: oklch(0.15 0 0);
-  --sidebar-foreground: oklch(0.95 0 0);
-  --sidebar-primary: oklch(0.55 0.18 200);
-  --sidebar-primary-foreground: oklch(0.95 0 0);
-  --sidebar-accent: oklch(0.6 0.16 180);
-  --sidebar-accent-foreground: oklch(0.95 0 0);
-  --sidebar-border: oklch(0.28 0 0);
-  --sidebar-ring: oklch(0.55 0.18 200);
+/* Dark base — prevents white flash */
+html {
+  background-color: #080c10;
+  color-scheme: dark;
 }
+html,
+body {
+  background-color: #080c10 !important;
+  color: #e8edf2;
+}
+
+/* Syne as primary font */
+body {
+  font-family: "Syne", sans-serif;
+  overflow-x: hidden;
+}
+
+/* Noise texture overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.4;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Landing page responsive */
+@media (max-width: 960px) {
+  /* Hero two-col → single col */
+  section[style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+    padding: 100px 24px 60px !important;
+    gap: 48px !important;
+  }
+  /* Steps 4-col → 2-col */
+  [style*="repeat(4, 1fr)"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  /* Features bento → single col */
+  [style*="grid-template-columns: 2fr 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+  /* Testimonials/pricing → single col */
+  [style*="repeat(3, 1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+  nav {
+    padding: 0 24px !important;
+  }
+}
+
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --font-sans: "Geist", "Geist Fallback";
@@ -172,92 +173,4 @@ html,
 body {
   background-color: #080c10;
   color: #e8edf2;
-}
-/* Add these to the TOP of your existing globals.css */
-
-/* Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&display=swap");
-
-/* Reset */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-/* Paydeck design tokens */
-:root {
-  --bg: #080c10;
-  --bg2: #0d1218;
-  --bg3: #121820;
-  --surface: #161e28;
-  --surface2: #1c2636;
-  --border: rgba(255, 255, 255, 0.07);
-  --border2: rgba(255, 255, 255, 0.12);
-  --green: #00e5a0;
-  --green-dim: rgba(0, 229, 160, 0.12);
-  --green-glow: rgba(0, 229, 160, 0.25);
-  --blue: #2dd4f5;
-  --red: #ff4d6a;
-  --text: #e8edf2;
-  --text2: #8a98a8;
-  --text3: #4a5568;
-}
-
-/* Dark base — prevents white flash */
-html {
-  background-color: #080c10;
-  color-scheme: dark;
-}
-html,
-body {
-  background-color: #080c10 !important;
-  color: #e8edf2;
-}
-
-/* Syne as primary font */
-body {
-  font-family: "Syne", sans-serif;
-  overflow-x: hidden;
-}
-
-/* Noise texture overlay */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 1000;
-  opacity: 0.4;
-}
-
-/* Smooth scroll */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Landing page responsive */
-@media (max-width: 960px) {
-  /* Hero two-col → single col */
-  section[style*="grid-template-columns: 1fr 1fr"] {
-    grid-template-columns: 1fr !important;
-    padding: 100px 24px 60px !important;
-    gap: 48px !important;
-  }
-  /* Steps 4-col → 2-col */
-  [style*="repeat(4, 1fr)"] {
-    grid-template-columns: 1fr 1fr !important;
-  }
-  /* Features bento → single col */
-  [style*="grid-template-columns: 2fr 1fr 1fr"] {
-    grid-template-columns: 1fr !important;
-  }
-  /* Testimonials/pricing → single col */
-  [style*="repeat(3, 1fr)"] {
-    grid-template-columns: 1fr !important;
-  }
-  nav {
-    padding: 0 24px !important;
-  }
 }

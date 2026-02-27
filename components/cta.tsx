@@ -50,7 +50,7 @@ export function CTA() {
           zIndex: 1,
         }}
       >
-        Join 40,000+ businesses already running on Paydeck.
+        Join 40,000+ businesses already running on PayPort.
       </p>
 
       <Link href="/auth/signup">

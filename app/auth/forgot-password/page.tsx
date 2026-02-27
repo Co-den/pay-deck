@@ -3,7 +3,13 @@
 import type React from "react";
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, CheckCircle, Mail, Loader2, AlertCircle } from "lucide-react";
+import {
+  ArrowLeft,
+  CheckCircle,
+  Mail,
+  Loader2,
+  AlertCircle,
+} from "lucide-react";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -38,11 +44,15 @@ export default function ForgotPassword() {
         <div className="w-16 h-16 rounded-2xl bg-[rgba(0,229,160,0.1)] border border-[rgba(0,229,160,0.2)] flex items-center justify-center mx-auto mb-6">
           <CheckCircle className="w-8 h-8 text-[#00e5a0]" />
         </div>
-        <h2 className="text-2xl font-bold tracking-tight mb-3">Check your email</h2>
+        <h2 className="text-2xl font-bold tracking-tight mb-3">
+          Check your email
+        </h2>
         <p className="text-sm font-mono text-[#8a98a8] leading-relaxed mb-2">
           We've sent a password reset link to
         </p>
-        <p className="text-sm font-mono font-semibold text-[#00e5a0] mb-8">{email}</p>
+        <p className="text-sm font-mono font-semibold text-[#00e5a0] mb-8">
+          {email}
+        </p>
         <p className="text-xs font-mono text-[#4a5568] mb-6">
           Didn't receive it? Check your spam folder or{" "}
           <button
@@ -50,7 +60,8 @@ export default function ForgotPassword() {
             className="text-[#00e5a0] hover:text-[#00e5a0]/70 transition-colors underline"
           >
             try again
-          </button>.
+          </button>
+          .
         </p>
         <Link href="/auth/login">
           <button className="w-full h-11 rounded-lg border border-[rgba(255,255,255,0.07)] bg-[#161e28] hover:bg-[#1c2636] hover:border-[rgba(255,255,255,0.12)] flex items-center justify-center gap-2 text-sm font-semibold text-[#e8edf2] transition-all">
@@ -76,7 +87,9 @@ export default function ForgotPassword() {
         <Mail className="w-6 h-6 text-[#00e5a0]" />
       </div>
 
-      <h1 className="text-2xl font-bold tracking-tight mb-1">Reset your password</h1>
+      <h1 className="text-2xl font-bold tracking-tight mb-1">
+        Reset your password
+      </h1>
       <p className="text-sm font-mono text-[#8a98a8] mb-8">
         Enter your email and we'll send you a link to reset your password.
       </p>
@@ -91,7 +104,10 @@ export default function ForgotPassword() {
               type="email"
               placeholder="you@company.com"
               value={email}
-              onChange={e => { setEmail(e.target.value); if (error) setError(""); }}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                if (error) setError("");
+              }}
               disabled={loading}
               className={[
                 "w-full h-11 rounded-lg border bg-[#161e28] pl-10 pr-4 text-sm text-[#e8edf2]",
@@ -105,7 +121,8 @@ export default function ForgotPassword() {
           </div>
           {error && (
             <p className="flex items-center gap-1 text-xs font-mono text-[#ff4d6a] mt-1.5">
-              <AlertCircle className="w-3 h-3 flex-shrink-0" />{error}
+              <AlertCircle className="w-3 h-3 flex-shrink-0" />
+              {error}
             </p>
           )}
         </div>
@@ -115,10 +132,13 @@ export default function ForgotPassword() {
           disabled={loading}
           className="w-full h-12 rounded-lg bg-[#00e5a0] text-[#080c10] font-bold text-sm flex items-center justify-center gap-2 transition-all hover:bg-[#00e5a0]/90 shadow-[0_0_24px_rgba(0,229,160,0.2)] hover:shadow-[0_0_40px_rgba(0,229,160,0.35)] disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {loading
-            ? <><Loader2 className="w-4 h-4 animate-spin" /> Sending…</>
-            : "Send Reset Link"
-          }
+          {loading ? (
+            <>
+              <Loader2 className="w-4 h-4 animate-spin" /> Sending…
+            </>
+          ) : (
+            "Send Reset Link"
+          )}
         </button>
       </form>
     </div>

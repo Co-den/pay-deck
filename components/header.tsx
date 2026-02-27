@@ -21,6 +21,14 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Lock body scroll when menu open
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
+
   return (
     <>
       <nav
@@ -30,15 +38,15 @@ export function Header() {
           left: 0,
           right: 0,
           zIndex: 200,
-          padding: "0 48px",
           height: 64,
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
+          padding: "0 24px",
           borderBottom: scrolled
             ? "1px solid rgba(255,255,255,0.07)"
             : "1px solid transparent",
-          background: scrolled ? "rgba(8,12,16,0.85)" : "transparent",
+          background: scrolled ? "rgba(8,12,16,0.9)" : "transparent",
           backdropFilter: scrolled ? "blur(20px)" : "none",
           transition: "all 0.4s",
         }}
@@ -54,6 +62,7 @@ export function Header() {
             fontSize: 20,
             fontWeight: 800,
             letterSpacing: "-0.5px",
+            flexShrink: 0,
           }}
         >
           <div
@@ -76,7 +85,7 @@ export function Header() {
                 color: "#080c10",
               }}
             >
-              P
+              ₿
             </span>
           </div>
           <span style={{ color: "#e8edf2" }}>
@@ -84,15 +93,9 @@ export function Header() {
           </span>
         </Link>
 
-        {/* Desktop nav */}
+        {/* Desktop nav — hidden on mobile */}
         <ul
-          style={{
-            display: "flex",
-            gap: 32,
-            listStyle: "none",
-            margin: 0,
-            padding: 0,
-          }}
+          style={{ gap: 32, listStyle: "none", margin: 0, padding: 0 }}
           className="hidden md:flex"
         >
           {NAV_LINKS.map(({ label, href }) => (
@@ -106,7 +109,6 @@ export function Header() {
                   letterSpacing: "0.05em",
                   color: "#8a98a8",
                   textDecoration: "none",
-                  transition: "color 0.2s",
                 }}
                 onMouseEnter={(e) =>
                   ((e.currentTarget as HTMLElement).style.color = "#e8edf2")
@@ -121,32 +123,26 @@ export function Header() {
           ))}
         </ul>
 
-        {/* Desktop right */}
-        <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+        {/* Desktop buttons — hidden on mobile */}
+        {/* FIX: Removed `display: "flex"` from inline style — it was overriding the Tailwind
+            `hidden` class, causing this div to always be visible and crowd out the hamburger */}
+        <div
+          className="hidden md:flex"
+          style={{ gap: 12, alignItems: "center" }}
+        >
           <Link
             href="/auth/login"
-            className="hidden md:block"
             style={{
               fontFamily: "'JetBrains Mono', monospace",
               fontSize: 12,
               letterSpacing: "0.05em",
               color: "#8a98a8",
-              background: "none",
-              border: "none",
-              cursor: "pointer",
               textDecoration: "none",
-              transition: "color 0.2s",
             }}
-            onMouseEnter={(e) =>
-              ((e.currentTarget as HTMLElement).style.color = "#e8edf2")
-            }
-            onMouseLeave={(e) =>
-              ((e.currentTarget as HTMLElement).style.color = "#8a98a8")
-            }
           >
             Sign in
           </Link>
-          <Link href="/auth/signup" className="hidden md:block">
+          <Link href="/auth/signup">
             <button
               style={{
                 fontFamily: "'JetBrains Mono', monospace",
@@ -159,107 +155,125 @@ export function Header() {
                 borderRadius: 6,
                 cursor: "pointer",
                 fontWeight: 600,
-                transition: "opacity 0.2s, transform 0.2s",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.opacity = "0.88";
-                (e.currentTarget as HTMLElement).style.transform =
-                  "translateY(-1px)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.opacity = "1";
-                (e.currentTarget as HTMLElement).style.transform = "";
               }}
             >
               Get started free →
             </button>
           </Link>
-
-          {/* Hamburger */}
-          <button
-            className="md:hidden"
-            onClick={() => setMobileOpen(true)}
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              display: "flex",
-              flexDirection: "column",
-              gap: 5,
-              padding: 4,
-            }}
-          >
-            <span
-              style={{
-                display: "block",
-                width: 20,
-                height: 1,
-                background: "#8a98a8",
-              }}
-            />
-            <span
-              style={{
-                display: "block",
-                width: 20,
-                height: 1,
-                background: "#8a98a8",
-              }}
-            />
-            <span
-              style={{
-                display: "block",
-                width: 14,
-                height: 1,
-                background: "#8a98a8",
-              }}
-            />
-          </button>
         </div>
+
+        {/* Hamburger — visible only on mobile */}
+        <button
+          className="md:hidden"
+          onClick={() => setMobileOpen(true)}
+          aria-label="Open menu"
+          style={{
+            background: "none",
+            border: "1px solid rgba(255,255,255,0.12)",
+            borderRadius: 8,
+            cursor: "pointer",
+            padding: "8px 10px",
+            display: "flex",
+            flexDirection: "column",
+            gap: 5,
+            flexShrink: 0,
+          }}
+        >
+          <span
+            style={{
+              display: "block",
+              width: 18,
+              height: 1.5,
+              background: "#8a98a8",
+              borderRadius: 2,
+            }}
+          />
+          <span
+            style={{
+              display: "block",
+              width: 18,
+              height: 1.5,
+              background: "#8a98a8",
+              borderRadius: 2,
+            }}
+          />
+          <span
+            style={{
+              display: "block",
+              width: 12,
+              height: 1.5,
+              background: "#8a98a8",
+              borderRadius: 2,
+            }}
+          />
+        </button>
       </nav>
 
-      {/* Mobile overlay */}
+      {/* Mobile drawer */}
       {mobileOpen && (
         <div style={{ position: "fixed", inset: 0, zIndex: 300 }}>
+          {/* Backdrop */}
           <div
             style={{
               position: "absolute",
               inset: 0,
-              background: "rgba(8,12,16,0.9)",
-              backdropFilter: "blur(20px)",
+              background: "rgba(8,12,16,0.85)",
+              backdropFilter: "blur(12px)",
             }}
             onClick={() => setMobileOpen(false)}
           />
+          {/* Panel */}
           <div
             style={{
               position: "absolute",
               right: 0,
               top: 0,
               bottom: 0,
-              width: 280,
+              width: "min(300px, 85vw)",
               background: "#0d1218",
               borderLeft: "1px solid rgba(255,255,255,0.07)",
               display: "flex",
               flexDirection: "column",
               padding: 24,
-              gap: 24,
             }}
           >
-            <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            {/* Close */}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                marginBottom: 32,
+              }}
+            >
               <button
                 onClick={() => setMobileOpen(false)}
                 style={{
                   background: "none",
-                  border: "none",
+                  border: "1px solid rgba(255,255,255,0.12)",
+                  borderRadius: 8,
                   color: "#8a98a8",
-                  fontSize: 24,
+                  fontSize: 18,
                   cursor: "pointer",
-                  lineHeight: 1,
+                  width: 36,
+                  height: 36,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
                 ×
               </button>
             </div>
-            <nav style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+
+            {/* Nav links */}
+            <nav
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 2,
+                flex: 1,
+              }}
+            >
               {NAV_LINKS.map(({ label, href }) => (
                 <Link
                   key={label}
@@ -267,30 +281,33 @@ export function Header() {
                   onClick={() => setMobileOpen(false)}
                   style={{
                     fontFamily: "'JetBrains Mono', monospace",
-                    fontSize: 14,
+                    fontSize: 15,
                     color: "#8a98a8",
                     textDecoration: "none",
-                    padding: "10px 0",
+                    padding: "12px 8px",
                     borderBottom: "1px solid rgba(255,255,255,0.05)",
+                    display: "block",
                   }}
                 >
                   {label}
                 </Link>
               ))}
             </nav>
+
+            {/* CTAs at bottom */}
             <div
               style={{
                 display: "flex",
                 flexDirection: "column",
                 gap: 10,
-                marginTop: "auto",
+                paddingTop: 24,
               }}
             >
               <Link href="/auth/login" onClick={() => setMobileOpen(false)}>
                 <button
                   style={{
                     width: "100%",
-                    padding: 12,
+                    padding: "13px",
                     borderRadius: 8,
                     background: "none",
                     border: "1px solid rgba(255,255,255,0.12)",
@@ -308,7 +325,7 @@ export function Header() {
                 <button
                   style={{
                     width: "100%",
-                    padding: 12,
+                    padding: "13px",
                     borderRadius: 8,
                     background: "#00e5a0",
                     border: "none",
@@ -317,6 +334,7 @@ export function Header() {
                     fontSize: 15,
                     fontWeight: 700,
                     cursor: "pointer",
+                    boxShadow: "0 0 24px rgba(0,229,160,0.2)",
                   }}
                 >
                   Get started free →

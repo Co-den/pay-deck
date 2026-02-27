@@ -2,8 +2,8 @@ import type React from "react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Authentication - Paydeck",
-  description: "Sign in or create your Paydeck account",
+  title: "Authentication - PayPort",
+  description: "Sign in or create your PayPort account",
 };
 
 export default function AuthLayout({

@@ -167,3 +167,9 @@
     @apply flex flex-col sm:flex-row gap-4 justify-center items-center mt-8;
   }
 }
+
+html,
+body {
+  background-color: #080c10;
+  color: #e8edf2;
+}

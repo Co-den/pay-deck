@@ -9,7 +9,7 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "SettleMe - Modern Payment Gateway",
+  title: "Paydeck - Modern Payment Gateway",
   description: "Secure, fast, and easy payment processing for merchants",
 };
 
@@ -19,8 +19,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`font-sans antialiased`}>
+    <html lang="en" className="dark" style={{ backgroundColor: "#080c10" }}>
+      <body
+        className="font-sans antialiased bg-[#080c10] text-[#e8edf2]"
+        style={{ backgroundColor: "#080c10" }}
+      >
         <PageTransition>{children}</PageTransition>
         <Analytics />
       </body>

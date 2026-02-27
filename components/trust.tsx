@@ -25,39 +25,123 @@ export function Trust() {
   return (
     <section
       id="security"
-      className="py-24 md:py-32 border-t border-[rgba(255,255,255,0.07)] bg-[#0d1218]"
+      style={{
+        padding: "96px 0",
+        borderTop: "1px solid rgba(255,255,255,0.07)",
+        background: "#080c10",
+      }}
     >
-      <div className="max-w-7xl mx-auto px-6">
+      <div style={{ maxWidth: 896, margin: "0 auto", padding: "0 24px" }}>
         {/* Header */}
-        <div className="max-w-2xl mx-auto text-center mb-16">
-          <p className="text-xs font-mono tracking-[0.18em] uppercase text-[#00e5a0] mb-4">
+        <div style={{ textAlign: "center", marginBottom: 64 }}>
+          <p
+            style={{
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: 11,
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              color: "#00e5a0",
+              marginBottom: 16,
+            }}
+          >
             Trust & Security
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-[#e8edf2] mb-4">
+          <h2
+            style={{
+              fontSize: "clamp(32px, 5vw, 48px)",
+              fontWeight: 800,
+              letterSpacing: "-1px",
+              color: "#e8edf2",
+              marginBottom: 16,
+              lineHeight: 1.1,
+            }}
+          >
             Trusted by industry leaders
           </h2>
-          <p className="text-base font-mono text-[#8a98a8] leading-relaxed">
+          <p
+            style={{
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: 13,
+              color: "#8a98a8",
+              lineHeight: 1.8,
+              maxWidth: 480,
+              margin: "0 auto",
+            }}
+          >
             PayPort is trusted by thousands of merchants worldwide with billions
             in annual transaction volume
           </p>
         </div>
 
         {/* Cards */}
-        <div className="grid md:grid-cols-2 gap-4 max-w-3xl mx-auto mb-16">
-          <div className="rounded-2xl border border-[rgba(255,255,255,0.07)] bg-[#161e28] p-6">
-            <div className="flex items-center gap-3 mb-5">
-              <div className="w-9 h-9 rounded-xl bg-[rgba(0,229,160,0.1)] flex items-center justify-center text-[#00e5a0]">
-                <Shield className="w-4 h-4" />
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: 12,
+            marginBottom: 12,
+          }}
+        >
+          {/* Security Certifications */}
+          <div
+            style={{
+              borderRadius: 16,
+              border: "1px solid rgba(255,255,255,0.07)",
+              background: "#0d1218",
+              padding: 24,
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 12,
+                marginBottom: 20,
+              }}
+            >
+              <div
+                style={{
+                  width: 36,
+                  height: 36,
+                  borderRadius: 10,
+                  background: "rgba(0,229,160,0.1)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#00e5a0",
+                  flexShrink: 0,
+                }}
+              >
+                <Shield size={16} />
               </div>
-              <h3 className="font-bold text-[#e8edf2]">
+              <h3
+                style={{
+                  fontWeight: 700,
+                  fontSize: 15,
+                  color: "#e8edf2",
+                  letterSpacing: "-0.3px",
+                }}
+              >
                 Security Certifications
               </h3>
             </div>
-            <div className="space-y-3">
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
               {certifications.map((item) => (
-                <div key={item} className="flex items-center gap-3">
-                  <CheckCircle2 className="w-4 h-4 text-[#00e5a0] flex-shrink-0" />
-                  <span className="text-sm font-mono text-[#8a98a8]">
+                <div
+                  key={item}
+                  style={{ display: "flex", alignItems: "center", gap: 10 }}
+                >
+                  <CheckCircle2
+                    size={15}
+                    style={{ color: "#00e5a0", flexShrink: 0 }}
+                  />
+                  <span
+                    style={{
+                      fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: 12,
+                      color: "#8a98a8",
+                    }}
+                  >
                     {item}
                   </span>
                 </div>
@@ -65,18 +149,66 @@ export function Trust() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-[rgba(255,255,255,0.07)] bg-[#161e28] p-6">
-            <div className="flex items-center gap-3 mb-5">
-              <div className="w-9 h-9 rounded-xl bg-[rgba(45,212,245,0.1)] flex items-center justify-center text-[#2dd4f5]">
-                <TrendingUp className="w-4 h-4" />
+          {/* Trusted By */}
+          <div
+            style={{
+              borderRadius: 16,
+              border: "1px solid rgba(255,255,255,0.07)",
+              background: "#0d1218",
+              padding: 24,
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 12,
+                marginBottom: 20,
+              }}
+            >
+              <div
+                style={{
+                  width: 36,
+                  height: 36,
+                  borderRadius: 10,
+                  background: "rgba(0,229,160,0.08)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#00e5a0",
+                  flexShrink: 0,
+                }}
+              >
+                <TrendingUp size={16} />
               </div>
-              <h3 className="font-bold text-[#e8edf2]">Trusted By</h3>
+              <h3
+                style={{
+                  fontWeight: 700,
+                  fontSize: 15,
+                  color: "#e8edf2",
+                  letterSpacing: "-0.3px",
+                }}
+              >
+                Trusted By
+              </h3>
             </div>
-            <div className="space-y-3">
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
               {trustStats.map((item) => (
-                <div key={item} className="flex items-center gap-3">
-                  <CheckCircle2 className="w-4 h-4 text-[#2dd4f5] flex-shrink-0" />
-                  <span className="text-sm font-mono text-[#8a98a8]">
+                <div
+                  key={item}
+                  style={{ display: "flex", alignItems: "center", gap: 10 }}
+                >
+                  <CheckCircle2
+                    size={15}
+                    style={{ color: "#00e5a0", flexShrink: 0 }}
+                  />
+                  <span
+                    style={{
+                      fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: 12,
+                      color: "#8a98a8",
+                    }}
+                  >
                     {item}
                   </span>
                 </div>
@@ -86,16 +218,48 @@ export function Trust() {
         </div>
 
         {/* Big stats */}
-        <div className="flex flex-wrap gap-px justify-center bg-[rgba(255,255,255,0.06)] rounded-2xl overflow-hidden border border-[rgba(255,255,255,0.07)] max-w-2xl mx-auto">
-          {bigStats.map(({ value, label }, i) => (
+        <div
+          style={{
+            display: "flex",
+            borderRadius: 16,
+            overflow: "hidden",
+            border: "1px solid rgba(255,255,255,0.07)",
+            background: "rgba(255,255,255,0.03)",
+            gap: 1,
+          }}
+        >
+          {bigStats.map(({ value, label }) => (
             <div
               key={label}
-              className="flex-1 min-w-[120px] text-center px-8 py-6 bg-[#161e28]"
+              style={{
+                flex: 1,
+                textAlign: "center",
+                padding: "28px 16px",
+                background: "#0d1218",
+              }}
             >
-              <div className="text-3xl font-bold font-mono text-[#00e5a0] mb-1">
+              <div
+                style={{
+                  fontFamily: "'JetBrains Mono', monospace",
+                  fontSize: "clamp(22px, 4vw, 30px)",
+                  fontWeight: 700,
+                  color: "#00e5a0",
+                  marginBottom: 6,
+                  letterSpacing: "-0.5px",
+                }}
+              >
                 {value}
               </div>
-              <div className="text-xs font-mono text-[#4a5568]">{label}</div>
+              <div
+                style={{
+                  fontFamily: "'JetBrains Mono', monospace",
+                  fontSize: 11,
+                  color: "#4a5568",
+                  letterSpacing: "0.05em",
+                }}
+              >
+                {label}
+              </div>
             </div>
           ))}
         </div>

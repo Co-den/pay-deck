@@ -48,7 +48,7 @@ export function Header() {
         </Link>
 
         {/* Desktop nav — hidden on mobile */}
-        <ul style={{ display: "flex", gap: 32, listStyle: "none", margin: 0, padding: 0 }} className="hidden md:flex">
+        <ul style={{ gap: 32, listStyle: "none", margin: 0, padding: 0 }} className="hidden md:flex">
           {NAV_LINKS.map(({ label, href }) => (
             <li key={label}>
               <Link href={href} style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, fontWeight: 400, letterSpacing: "0.05em", color: "#8a98a8", textDecoration: "none" }}
@@ -61,7 +61,9 @@ export function Header() {
         </ul>
 
         {/* Desktop buttons — hidden on mobile */}
-        <div className="hidden md:flex" style={{ gap: 12, alignItems: "center", display: "flex" }}>
+        {/* FIX: Removed `display: "flex"` from inline style — it was overriding the Tailwind
+            `hidden` class, causing this div to always be visible and crowd out the hamburger */}
+        <div className="hidden md:flex" style={{ gap: 12, alignItems: "center" }}>
           <Link href="/auth/login" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: "0.05em", color: "#8a98a8", textDecoration: "none" }}>
             Sign in
           </Link>

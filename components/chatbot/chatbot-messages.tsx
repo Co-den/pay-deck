@@ -50,8 +50,8 @@ export function ChatbotMessages() {
             <div
               className={`max-w-[80%] md:max-w-xs px-3 py-2 rounded-lg text-sm ${
                 msg.role === "user"
-                  ? "bg-purple-600 text-white rounded-br-none"
-                  : "bg-muted text-foreground rounded-bl-none"
+                  ? "bg-green-600 text-black rounded-br-none"
+                  : "bg-muted text-black rounded-bl-none"
               }`}
             >
               {msg.content}
@@ -79,7 +79,7 @@ export function ChatbotMessages() {
           <Button
             onClick={handleSend}
             size="icon"
-            className="shrink-0 bg-purple-600 hover:bg-purple-700"
+            className="shrink-0 bg-green-600 hover:bg-green-700"
             disabled={!input.trim()}
           >
             <Send className="w-4 h-4" />

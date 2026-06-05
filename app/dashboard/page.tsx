@@ -176,7 +176,7 @@ export default function DashboardPage() {
             <div className="h-75 flex items-end justify-between gap-2">
               {[65, 45, 80, 55, 70, 85, 60, 75, 90, 70, 85, 95, 100, 85].map((height, i) => (
                 <div key={i} className="flex-1 bg-primary/20 rounded-t" style={{ height: `${height}%` }}>
-                  <div className="h-full bg-purple-500 rounded-t" style={{ height: "70%" }} />
+                  <div className="h-full bg-green-500 rounded-t" style={{ height: "70%" }} />
                 </div>
               ))}
             </div>

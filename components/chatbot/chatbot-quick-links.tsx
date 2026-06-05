@@ -23,17 +23,17 @@ const quickLinks = [
 export function ChatbotQuickLinks() {
   return (
     <div className="space-y-2">
-      <h4 className="text-sm font-semibold text-foreground mb-3">
+      <h4 className="text-sm font-semibold text-black mb-3">
         Popular Questions
       </h4>
       {quickLinks.map((link, index) => (
         <a key={index} href={link.href}>
           <Button
             variant="ghost"
-            className="w-full justify-between h-auto py-3 px-3 text-left hover:bg-purple-50 dark:hover:bg-purple-950/30 hover:border-purple-200 dark:hover:border-purple-800 rounded-lg border border-transparent transition-colors"
+            className="w-full justify-between h-auto py-3 px-3 text-left hover:bg-green-50 dark:hover:bg-green-950/30 hover:border-green-200 dark:hover:border-green-800 rounded-lg border border-transparent transition-colors"
           >
-            <span className="text-sm text-foreground pr-2">{link.title}</span>
-            <ChevronRight className="w-4 h-4 text-purple-600 flex-shrink-0" />
+            <span className="text-sm text-black pr-2">{link.title}</span>
+            <ChevronRight className="w-4 h-4 text-green-600 flex-shrink-0" />
           </Button>
         </a>
       ))}
